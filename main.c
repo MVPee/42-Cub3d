@@ -41,19 +41,6 @@ static bool check_map(char **map)
     return (false);
 }
 
-static bool check_extension(char *str)
-{
-    char *temp;
-
-    temp = ft_substr(str, ft_strlen(str) - 4, ft_strlen(str));
-    if (!temp)
-        return (perror("Malloc failed\n"), true);
-    if (ft_strlen(str) < 5 || ft_strcmp(temp, ".cub"))
-        return (ft_free(1, &temp), ft_printf_fd(2, "Error\nInvalid map extension\n"), true);
-    ft_free(1, &temp);
-    return (false);
-}
-
 int main(int ac, char **av)
 {
     char *temp;

@@ -18,4 +18,7 @@
 # include <errno.h>
 # include <stdbool.h>
 
+// PARSING
+bool check_extension(char *str);
+
 #endif

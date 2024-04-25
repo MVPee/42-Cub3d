@@ -2,9 +2,11 @@ NAME = cub3D
 
 LIBFT = srcs/libft
 
-SRCS = 	main.c
+OBJS_DIR = .objs
+SRCS = 	main.c \
+		srcs/cub3d/parsing/check_extension.c
 
-OBJS = $(SRCS:.c=.o)
+OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:%.c=%.o))
 
 CFLAGS = -I $(LIBFT) -g #-Wall -Werror -Wextra #-ggdb3 -fsanitize=address
 LDFLAGS = -lft -L $(LIBFT) -g #-ggdb3 -fsanitize=address
@@ -22,12 +24,15 @@ $(NAME): $(OBJS) $(LIBFT)/libft.a
 	@gcc $(OBJS) $(LDFLAGS) -o $(NAME)
 	@echo   "${GREEN}./${NAME} ${RED}map${NC}"
 
-%.o: %.c
+$(OBJS_DIR)/%.o: %.c | $(OBJS_DIR)
 	@gcc $(CFLAGS) -c $< -o $@
+
+$(OBJS_DIR):
+	mkdir -p $(dir $(OBJS))
 
 clean:
 	$(MAKE) -C $(LIBFT) clean
-	@rm -f $(OBJS)
+	@rm -rf $(OBJS_DIR)
 
 fclean: clean
 	$(MAKE) -C $(LIBFT) fclean
@@ -38,4 +43,4 @@ re: fclean all
 run: all
 	./$(NAME)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re run
