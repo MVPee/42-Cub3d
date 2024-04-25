@@ -38,5 +38,5 @@ char	*ft_read(int fd)
 		line = get_next_line(fd);
 	}
 	close(fd);
-	return (file);
+	return (ft_free(1, &line), file);
 }

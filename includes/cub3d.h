@@ -23,7 +23,7 @@ typedef struct s_data
     char *north;
     char *south;
     char *west;
-    char east;
+    char *east;
 
     int *floor;
     int *ceiling;
