@@ -4,7 +4,8 @@ LIBFT = srcs/libft
 
 OBJS_DIR = .objs
 SRCS = 	main.c \
-		srcs/cub3d/parsing/check_extension.c
+		srcs/cub3d/parsing/check_extension.c \
+		srcs/cub3d/parsing/check_map.c
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:%.c=%.o))
 
@@ -41,6 +42,6 @@ fclean: clean
 re: fclean all
 
 run: all
-	./$(NAME)
+	./$(NAME) maps/cub.cub
 
 .PHONY: all clean fclean re run

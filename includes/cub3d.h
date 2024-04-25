@@ -18,7 +18,21 @@
 # include <errno.h>
 # include <stdbool.h>
 
+typedef struct s_data
+{
+    char *north;
+    char *south;
+    char *west;
+    char east;
+
+    int *floor;
+    int *ceiling;
+
+    char **map;
+}   t_data;
+
 // PARSING
 bool check_extension(char *str);
+bool check_map(char **map);
 
 #endif
