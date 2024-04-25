@@ -16,7 +16,7 @@ void free_data(t_data *data)
 {
     ft_free(4, &data->north, &data->south, &data->west, &data->east);
     ft_free_matrix(2, &data->floor, &data->ceiling);
-    ft_free_matrix(1, &data->map);
+    ft_free_matrix(2, &data->map, &data->file);
 }
 
 void init_data(t_data *data)
@@ -27,6 +27,7 @@ void init_data(t_data *data)
     data->east = NULL;
     data->floor = NULL;
     data->ceiling = NULL;
+    data->file = NULL;
     data->map = NULL;
 }
 
@@ -46,14 +47,18 @@ int main(int ac, char **av)
 
     // Get map
     if (temp = ft_read(open(av[1], O_RDONLY)))
-        data.map = ft_split(temp, "\n");
+        data.file = ft_split(temp, "\n");
     else
         return (free_data(&data), 1);
     ft_free(1, &temp);
 
-    // Check map
-    if (check_map(data.map))
+    // Check file
+    if (check_file(&data))
         return (free_data(&data), 1);
+
+    // Check map
+    // if (check_map(data.map))
+    //     return (free_data(&data), 1);
     
     return (free_data(&data), 0);
 }

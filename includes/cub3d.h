@@ -28,11 +28,13 @@ typedef struct s_data
     int *floor;
     int *ceiling;
 
+    char **file;
     char **map;
 }   t_data;
 
 // PARSING
 bool check_extension(char *str);
+bool check_file(t_data *data);
 bool check_map(char **map);
 
 #endif
