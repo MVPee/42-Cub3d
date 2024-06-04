@@ -19,16 +19,21 @@ void free_data(t_data *data)
     ft_free_matrix(2, &data->map, &data->file);
 }
 
-void init_data(t_data *data)
+int init_data(t_data *data)
 {
+    data->floor = (int *)malloc(sizeof(int) * 3);
+    if (!data->floor)
+        return (1);
+    data->ceiling = (int *)malloc(sizeof(int) * 3);
+    if (!data->ceiling)
+        return (ft_free_matrix(1, &data->floor), 1);
     data->north = NULL;
     data->south = NULL;
     data->west = NULL;
     data->east = NULL;
-    data->floor = NULL;
-    data->ceiling = NULL;
     data->file = NULL;
     data->map = NULL;
+    return (0);
 }
 
 int main(int ac, char **av)
@@ -39,14 +44,15 @@ int main(int ac, char **av)
     if (ac != 2)
         return (ft_printf_fd(2, "Error\nNumber of argument(s)\n"), 1);
 
-    init_data(&data);
+    if (init_data(&data))
+        return (ft_printf_fd(2, "Error\nMalloc failed\n"), 1);
 
     // Extension Check
     if (check_extension(av[1]))
         return (free_data(&data), 1);
 
     // Get map
-    if (temp = ft_read(open(av[1], O_RDONLY)))
+    if ((temp = ft_read(open(av[1], O_RDONLY))))
         data.file = ft_split(temp, "\n");
     else
         return (free_data(&data), 1);
