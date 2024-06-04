@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mvan-pee <mvan-pee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 10:37:05 by mvpee             #+#    #+#             */
-/*   Updated: 2024/04/25 10:45:12 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/04 15:43:41 by mvan-pee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ bool check_map(char **map)
 {
     int y;
     int x;
+    int count = 0;
 
     if (!map)
         return (true);
@@ -38,7 +39,13 @@ bool check_map(char **map)
                 if (ft_isspace(map[y - 1][x]) || ft_isspace(map[y][x - 1]) || ft_isspace(map[y + 1][x]) || ft_isspace(map[y][x + 1]))
                     return (ft_printf_fd(2, "Error\nBad Border\n"), true);
             }
+            if (map[y][x] == 'N')
+                count++;
         }
     }
+    if (count == 0)
+        return (ft_printf_fd(2, "Error\nNo player online\n"), true);
+    else if (count > 1)
+        return (ft_printf_fd(2, "Error\nIt's not a multiplayer game\n"), true);
     return (false);
 }
