@@ -15,7 +15,7 @@
 void free_data(t_data *data)
 {
     ft_free(4, &data->north, &data->south, &data->west, &data->east);
-    ft_free_matrix(2, &data->floor, &data->ceiling);
+    //ft_free_matrix(2, &data->floor, &data->ceiling);
     ft_free_matrix(2, &data->map, &data->file);
 }
 
@@ -60,11 +60,11 @@ int main(int ac, char **av)
 
     // Check file
     if (check_file(&data))
-        return (free_data(&data), 1);
+        return (free_data(&data), ft_printf_fd(2, "Error\nInvalid setting(s)\n"),1);
 
     // Check map
-    // if (check_map(data.map))
-    //     return (free_data(&data), 1);
+    if (check_map(data.map))
+        return (free_data(&data), 1);
     
     return (free_data(&data), 0);
 }
