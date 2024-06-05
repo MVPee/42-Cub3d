@@ -68,7 +68,7 @@ int main(int ac, char **av)
 
     // Check file
     if (check_file(&data))
-        return (free_data(&data), ft_printf_fd(2, "Error\nInvalid setting(s)\n"),1);
+        return (free_data(&data),1);
 
     // Check map
     if (check_map(data.map))

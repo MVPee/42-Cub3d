@@ -6,11 +6,23 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:08:42 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/05 10:17:06 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/05 10:21:54 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+static void find_error(t_data *data)
+{
+    if (!data->north)
+        ft_printf_fd(2, "Error\nCan you put a north texture please?!\n");
+    if (!data->south)
+        ft_printf_fd(2, "Error\nCan you put a south texture please?!\n");
+    if (!data->west)
+        ft_printf_fd(2, "Error\nCan you put a west texture please?!\n");
+    if (!data->east)
+        ft_printf_fd(2, "Error\nCan you put a east texture please?!\n");
+}
 
 static void get_texture(char **texture, char *line)
 {
@@ -59,6 +71,6 @@ bool check_file(t_data *data)
             data->map = ft_splitjoin(data->map, data->file[i]);
     }
     if (!data->north || !data->south || !data->west || !data->east)
-        return (true);
+        return (find_error(data), true);
     return (false);
 }
