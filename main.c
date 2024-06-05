@@ -59,7 +59,7 @@ int main(int ac, char **av)
     if (check_extension(av[1]))
         return (free_data(&data), 1);
 
-    // Get map
+    // Get file
     if ((temp = ft_read(open(av[1], O_RDONLY))))
         data.file = ft_split(temp, "\n");
     else
