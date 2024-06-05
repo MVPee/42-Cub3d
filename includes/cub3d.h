@@ -32,6 +32,12 @@ typedef struct s_data
     char **map;
 }   t_data;
 
+typedef struct s_pos
+{
+	int	x;
+	int y;
+}	t_pos;
+
 // PARSING
 bool check_extension(char *str);
 bool check_file(t_data *data);
