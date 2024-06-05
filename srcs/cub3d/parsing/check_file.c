@@ -6,25 +6,33 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:08:42 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/05 09:19:08 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/05 10:17:06 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-// typedef struct s_data
-// {
-//     char *north;
-//     char *south;
-//     char *west;
-//     char *east;
+static void get_texture(char **texture, char *line)
+{
+    ft_free(1, texture);
+    *texture = ft_substr(line, 3, ft_strlen(line) - 4);
+}
 
-//     int *floor;
-//     int *ceiling;
+static void get_color(int *array, char *line)
+{
+    char **split;
+    int i;
 
-//     char **file;
-//     char **map;
-// }   t_data;
+    i = -1;
+    split = ft_split(line, ", ");
+    if (split)
+    {
+        while (++i < 3 && split[i])
+            array[i] = ft_atoi(split[i]);
+        ft_free_matrix(1, &split);   
+    }
+    ft_free(1, &line);
+}
 
 bool check_file(t_data *data)
 {
@@ -36,42 +44,18 @@ bool check_file(t_data *data)
     while (data->file[++i])
     {
         if (!ft_strncmp(data->file[i], "NO ", 3))
-            data->north = ft_substr(data->file[i], 3, ft_strlen(data->file[i]) - 4);
+            get_texture(&data->north, data->file[i]);
         else if (!ft_strncmp(data->file[i], "SO ", 3))
-            data->south = ft_substr(data->file[i], 3, ft_strlen(data->file[i]) - 4);
+            get_texture(&data->south, data->file[i]);
         else if (!ft_strncmp(data->file[i], "WE ", 3))
-            data->west = ft_substr(data->file[i], 3, ft_strlen(data->file[i]) - 4);
+            get_texture(&data->west, data->file[i]);
         else if (!ft_strncmp(data->file[i], "EA ", 3))
-            data->east = ft_substr(data->file[i], 3, ft_strlen(data->file[i]) - 4);
+            get_texture(&data->east, data->file[i]);
         else if (!ft_strncmp(data->file[i], "F ", 2))
-        {
-            temp = ft_substr(data->file[i], 2, ft_strlen(data->file[i]) - 3);
-            if (!temp)
-                return (true);
-            split = ft_split(temp, ", ");
-            if (!split)
-                return (ft_free(1, &temp), true);
-            data->floor[0] = ft_atoi(split[0]);
-            data->floor[1] = ft_atoi(split[1]);
-            data->floor[2] = ft_atoi(split[2]);
-            ft_free(1, &temp);
-            ft_free_matrix(1, &split);
-        }
+            get_color(data->floor, ft_substr(data->file[i], 2, ft_strlen(data->file[i]) - 3));
         else if (!ft_strncmp(data->file[i], "C ", 2))
-        {
-            temp = ft_substr(data->file[i], 2, ft_strlen(data->file[i]) - 3);
-            if (!temp)
-                return (true);
-            split = ft_split(temp, ", ");
-            if (!split)
-                return (ft_free(1, &temp), true);
-            data->ceiling[0] = ft_atoi(split[0]);
-            data->ceiling[1] = ft_atoi(split[1]);
-            data->ceiling[2] = ft_atoi(split[2]);
-            ft_free(1, &temp);
-            ft_free_matrix(1, &split);
-        }
-        else
+            get_color(data->ceiling, ft_substr(data->file[i], 2, ft_strlen(data->file[i]) - 3));
+        else if (ft_strlen(data->file[i]) > 1)
             data->map = ft_splitjoin(data->map, data->file[i]);
     }
     if (!data->north || !data->south || !data->west || !data->east)

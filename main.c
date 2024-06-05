@@ -21,12 +21,20 @@ void free_data(t_data *data)
 
 int init_data(t_data *data)
 {
+    int i;
+
     data->floor = (int *)malloc(sizeof(int) * 3);
     if (!data->floor)
         return (1);
+    i = -1;
+    while(++i < 3)
+        data->floor[i] = 0;
     data->ceiling = (int *)malloc(sizeof(int) * 3);
     if (!data->ceiling)
         return (ft_free_matrix(1, &data->floor), 1);
+    i = -1;
+    while(++i < 3)
+        data->ceiling[i] = 0;
     data->north = NULL;
     data->south = NULL;
     data->west = NULL;
