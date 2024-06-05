@@ -7,6 +7,7 @@ GREEN=\033[0;32m
 YELLOW=\033[1;33m
 NC=\033[0m
 
+OBJS_DIR = .objs
 LIBFT_SRCS =	srcs/libft/ft_isalpha.c \
 				srcs/libft/ft_isdigit.c \
 				srcs/libft/ft_is_string_number.c \
@@ -81,7 +82,7 @@ PRINTF_SRCS = 	srcs/printf/ft_printf.c \
 
 SRCS = $(LIBFT_SRCS) $(GNL_SRCS) $(PRINTF_SRCS)
 
-OBJS = $(SRCS:.c=.o)
+OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:%.c=%.o))
 
 all: $(NAME)
 	@echo "${GREEN}Compilation complete.${NC}"
@@ -90,12 +91,16 @@ $(NAME): $(OBJS)
 	@ar rcs $(NAME) $(OBJS)
 	@echo "${YELLOW}Library $(NAME) created.${NC}"
 
-%.o: %.c
+$(OBJS_DIR)/%.o: %.c | $(OBJS_DIR)
 	@echo "${RED}Compiling $<...${NC}"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
+$(OBJS_DIR):
+	mkdir -p $(dir $(OBJS))
+
 clean:
 	@rm -f $(OBJS)
+	@rm -rf $(OBJS_DIR)
 	@echo "${GREEN}Object files cleaned.${NC}"
 
 fclean: clean
