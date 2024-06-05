@@ -109,4 +109,7 @@ fclean: clean
 
 re: fclean all
 
+run:
+	./$(NAME) map/cub.cub
+
 .PHONY: all clean fclean re
