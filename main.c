@@ -15,7 +15,7 @@
 void free_data(t_data *data)
 {
     ft_free(4, &data->north, &data->south, &data->west, &data->east);
-    //ft_free_matrix(2, &data->floor, &data->ceiling);
+    ft_free(2, &data->floor, &data->ceiling);
     ft_free_matrix(2, &data->map, &data->file);
 }
 
