@@ -53,7 +53,7 @@ int main(int ac, char **av)
         return (ft_printf_fd(2, "Error\nNumber of argument(s)\n"), 1);
 
     if (init_data(&data))
-        return (ft_printf_fd(2, "Error\nMalloc failed\n"), 1);
+        return (perror("Malloc"), 1);
 
     // Extension Check
     if (check_extension(av[1]))
@@ -73,6 +73,9 @@ int main(int ac, char **av)
     // Check map
     if (check_map(data.map))
         return (free_data(&data), 1);
+    // Display map
+    for(int i = 0; i < ft_splitlen((const char **)data.map); i++)
+        ft_printf("%d.\t%s\n", i, data.map[i]);
 	if (game_loop(&data))
 		return (free_data(&data), 1);
     return (free_data(&data), 0);

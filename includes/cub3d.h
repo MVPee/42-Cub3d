@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvan-pee <mvan-pee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/15 10:06:22 by mvan-pee          #+#    #+#             */
-/*   Updated: 2024/04/15 10:06:22 by mvan-pee         ###   ########.fr       */
+/*   Created: 2024/06/06 11:18:10 by mvpee             #+#    #+#             */
+/*   Updated: 2024/06/06 11:18:10 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdio.h>
 # include <errno.h>
 # include <stdbool.h>
+# include <stdio.h>
 
 typedef mlx_image_t img_t;
 
