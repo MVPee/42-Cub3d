@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:54:33 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/06 11:20:12 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/06 13:10:39 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	get_all_possible_paths(char **map)
 			x = -1;
 			while (map[y][++x])
 				if (map[y][x] == 'N')
-					get_all_direction(map, &flag, y, x);
+					get_all_directions(map, &flag, y, x);
 		}
 	}
 }
