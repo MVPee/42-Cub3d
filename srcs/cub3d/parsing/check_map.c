@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 10:37:05 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/06 14:56:34 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/06/06 19:06:32 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,21 @@ static bool	check_row(char **map, int y, int x, int *count)
 	return (false);
 }
 
-bool	check_map(char **map)
+bool	check_map(char ***map)
 {
 	int	y;
 	int	x;
 	int	count;
 
 	count = 0;
-	if (!map)
+	if (!map || !*map)
 		return (true);
 	y = -1;
-	while (map[++y])
+	while ((*map)[++y])
 	{
 		x = -1;
-		while (map[y][++x])
-			if (check_row(map, y, x, &count))
+		while ((*map)[y][++x])
+			if (check_row(*map, y, x, &count))
 				return (true);
 	}
 	if (count == 0)

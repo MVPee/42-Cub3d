@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   map_optimization.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:54:33 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/06 14:56:52 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/06/06 19:09:46 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
-
+#include <limits.h>
 
 static void	get_all_directions(char **map, bool *flag, int y, int x)
 {
@@ -97,7 +97,7 @@ static void	put_border(char **map)
 		x = -1;
 		while (map[y][++x])
 		{
-			if (map[y][x] == '0')
+			if (map[y][x] == '0' || map[y][x] == 'N')
 			{
 				if (map[y - 1][x] == ' ')
 					map[y - 1][x] = '1';
@@ -112,26 +112,76 @@ static void	put_border(char **map)
 	}
 }
 
-void	map_optimization(char **map)
+void map_optimization(char ***map)
 {
 	int	n[2];
 	int	y;
 	int	x;
 
 	y = -1;
-	while (map[++y])
+	while ((*map)[++y])
 	{
 		x = -1;
-		while (map[y][++x])
+		while ((*map)[y][++x])
 		{
-			if (map[y][x] == 'N')
+			if ((*map)[y][x] == 'N')
 			{
 				n[0] = y;
 				n[1] = x;
 			}
 		}
 	}
-	get_all_possible_paths(map);
-	get_new_map(map, n);
-	put_border(map);
+	get_all_possible_paths(*map);
+	get_new_map(*map, n);
+	put_border(*map);
+
+	y = 0;
+	x = 0;
+	int min = INT_MAX;
+	int max = INT_MIN;
+	for (int i = 0; i < ft_splitlen((const char **)*map); i++)
+		if (ft_ischarin('1', (*map)[i]))
+			y++;
+
+	for (int i = 0; i < ft_splitlen((const char **)*map); i++)
+	{
+		for (int j = 0; j < ft_strlen((*map)[i]); j++)
+		{
+			if ((*map)[i][j] == '1')
+			{
+				if (min > j)
+					min = j;
+				if (max < j)
+					max = j;
+			}
+		}
+	}
+
+	x = max + 1 - min;
+	char **new_map = (char **)malloc(sizeof(char *) * (y + 1));
+	for (int i = 0; i < y; i++)
+	{
+		new_map[i] = (char *)malloc(sizeof(char) * (x + 1));
+		new_map[i][x] = '\0';
+	}
+	new_map[y] = NULL;
+
+	int start = 0;
+
+	for (int i = 0; i < ft_splitlen((const char **)*map); i++)
+	{
+		if (ft_ischarin('1', (*map)[i]))
+		{
+			start = i;
+			break;
+		}
+	}
+
+	for (int i = 0; i < y; i++)
+		for (int j = 0; j < x; j++)
+			new_map[i][j] = (*map)[i + start][j + min];
+
+	ft_free_matrix(1, map);
+	*map = ft_splitdup((const char **)new_map);
+	ft_free_matrix(1, &new_map);
 }

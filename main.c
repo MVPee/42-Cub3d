@@ -71,12 +71,12 @@ int main(int ac, char **av)
         return (free_data(&data),1);
 
     // Check map
-    if (check_map(data.map))
+    if (check_map(&data.map))
         return (free_data(&data), 1);
     // Display map
     for(int i = 0; i < ft_splitlen((const char **)data.map); i++)
         ft_printf("%d.\t%s\n", i, data.map[i]);
-	if (game_loop(&data))
-		return (free_data(&data), 1);
+	// if (game_loop(&data))
+	// 	return (free_data(&data), 1);
     return (free_data(&data), 0);
 }
