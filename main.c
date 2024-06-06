@@ -73,6 +73,7 @@ int main(int ac, char **av)
     // Check map
     if (check_map(data.map))
         return (free_data(&data), 1);
-    
+	if (game_loop(&data))
+		return (free_data(&data), 1);
     return (free_data(&data), 0);
 }
