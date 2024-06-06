@@ -20,7 +20,7 @@
 # define WIN_INIT_FAILED "Windows initialization failed, check MLX"
 
 // RESOLUTION
-# define WIDTH 1980
+# define WIDTH 1920
 # define HEIGHT 1080
 
 // LINUX_KEYS
