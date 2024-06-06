@@ -58,7 +58,7 @@ static void	get_all_possible_paths(char **map)
 	}
 }
 
-static void	map_optimization(char **map, int *n)
+static void	get_new_map(char **map, int *n)
 {
 	int	y;
 	int	x;
@@ -112,7 +112,7 @@ static void	put_border(char **map)
 	}
 }
 
-void	get_new_map(char **map)
+void	map_optimization(char **map)
 {
 	int	n[2];
 	int	y;
@@ -132,6 +132,6 @@ void	get_new_map(char **map)
 		}
 	}
 	get_all_possible_paths(map);
-	map_optimization(map, n);
+	get_new_map(map, n);
 	put_border(map);
 }

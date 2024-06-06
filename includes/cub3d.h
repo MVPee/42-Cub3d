@@ -50,6 +50,7 @@ typedef struct s_pos
 bool    check_extension(char *str);
 bool    check_file(t_data *data);
 bool    check_map(char **map);
+void	map_optimization(char **map);
 
 // GRAPHICS
 int game_loop(t_data *data);

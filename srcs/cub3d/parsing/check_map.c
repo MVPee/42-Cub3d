@@ -57,6 +57,6 @@ bool	check_map(char **map)
 		return (ft_printf_fd(2, "Error\nNo player online\n"), true);
 	else if (count > 1)
 		return (ft_printf_fd(2, "Error\nIt's not a multiplayer game\n"), true);
-	get_new_map(map);
+	map_optimization(map);
 	return (false);
 }
