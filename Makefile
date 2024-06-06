@@ -6,7 +6,8 @@ OBJS_DIR = .objs
 SRCS = 	main.c \
 		srcs/cub3d/parsing/check_extension.c \
 		srcs/cub3d/parsing/check_file.c \
-		srcs/cub3d/parsing/check_map.c
+		srcs/cub3d/parsing/check_map.c \
+		srcs/cub3d/parsing/map_optimization.c
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:%.c=%.o))
 

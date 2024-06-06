@@ -36,5 +36,6 @@ typedef struct s_data
 bool check_extension(char *str);
 bool check_file(t_data *data);
 bool check_map(char **map);
+void get_new_map(char **map);
 
 #endif
