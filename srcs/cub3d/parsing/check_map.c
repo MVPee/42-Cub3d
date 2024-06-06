@@ -6,38 +6,22 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 10:37:05 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/05 21:19:14 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/06 10:45:59 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static void get_new_map(char **map)
+static void get_all_possible_paths(char **map)
 {
     int y;
     int x;
-    int flag;
-    int n[2];
+    bool flag;
 
-    // Get N position
-    y = -1;
-    while (map[++y])
-    {
-        x = -1;
-        while (map[y][++x])
-        {
-            if (map[y][x] == 'N')
-            {
-                n[0] = y;
-                n[1] = x;
-            }
-        }
-    }
-
-    // Get all position possible
+    flag = true;
     while (flag)
     {
-        flag = 0;
+        flag = false;
         y = -1;
         while (map[++y])
         {
@@ -49,29 +33,34 @@ static void get_new_map(char **map)
                     if (map[y - 1][x] == '0')
                     {
                         map[y - 1][x] = 'N';
-                        flag = 1;
+                        flag = true;
                     }
                     if (map[y + 1][x] == '0')
                     {
                         map[y + 1][x] = 'N';
-                        flag = 1;
+                        flag = true;
                     }
                     if (map[y][x - 1] == '0')
                     {
                         map[y][x - 1] = 'N';
-                        flag = 1;
+                        flag = true;
                     }
                     if (map[y][x + 1] == '0')
                     {
                         map[y][x + 1] = 'N';
-                        flag = 1;
+                        flag = true;
                     }
                 }
             }
         }
     }
+}
+
+static void map_optimization(char **map, int *n)
+{
+    int y;
+    int x;
     
-    // Delete all 0 useless and 1
     y = -1;
     while (map[++y])
     {
@@ -82,8 +71,6 @@ static void get_new_map(char **map)
                 map[y][x] = ' ';
         }
     }
-
-    // Put N in is initial position
     y = -1;
     while (map[++y])
     {
@@ -95,8 +82,13 @@ static void get_new_map(char **map)
         }
     }
     map[n[0]][n[1]] = 'N';
+}
 
-    // Put border
+static void put_border(char **map)
+{
+    int y;
+    int x;
+
     y = -1;
     while (map[++y])
     {
@@ -116,11 +108,35 @@ static void get_new_map(char **map)
             }
         }
     }
+}
+
+static void get_new_map(char **map)
+{
+    int n[2];
+    int y;
+    int x;
+
+    y = -1;
+    while (map[++y])
+    {
+        x = -1;
+        while (map[y][++x])
+        {
+            if (map[y][x] == 'N')
+            {
+                n[0] = y;
+                n[1] = x;
+            }
+        }
+    }
+    get_all_possible_paths(map);
+    map_optimization(map, n);
+    put_border(map);
 
     // Display
     int i = -1;
     while (++i < ft_splitlen((const char **)map))
-        ft_printf("%d\t%s\n", i, map[i]);
+        ft_printf("%d.\t%s\n", i, map[i]);
 }
 
 bool check_map(char **map)
