@@ -6,12 +6,11 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:54:33 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/06 19:09:46 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/06 19:26:14 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
-#include <limits.h>
 
 static void	get_all_directions(char **map, bool *flag, int y, int x)
 {

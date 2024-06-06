@@ -20,6 +20,7 @@
 # include <errno.h>
 # include <stdbool.h>
 # include <stdio.h>
+#include <limits.h>
 
 typedef mlx_image_t img_t;
 
