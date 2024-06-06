@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 10:26:05 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/06 11:00:37 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/06 11:16:22 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ bool	check_extension(char *str)
 
 	temp = ft_substr(str, ft_strlen(str) - 4, ft_strlen(str));
 	if (!temp)
-		return (perror("Malloc failed\n"), true);
+		return (perror("Malloc"), true);
 	if (ft_strlen(str) < 5 || ft_strcmp(temp, ".cub"))
 		return (ft_free(1, &temp), ft_printf_fd(2, \
 				"Error\nInvalid map extension\n"), true);
