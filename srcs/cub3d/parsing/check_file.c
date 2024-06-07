@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:08:42 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/06 14:56:31 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/06/07 10:17:01 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,13 @@ static void	get_color(int *array, char *line)
 	if (split)
 	{
 		while (++i < 3 && split[i])
+		{
 			array[i] = ft_atoi(split[i]);
+			if (array[i] < 0)
+				array[i] = 0;
+			if (array[i] > 255)
+				array[i] = 255;
+		}
 		ft_free_matrix(1, &split);
 	}
 	ft_free(1, &line);

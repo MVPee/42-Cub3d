@@ -73,9 +73,12 @@ int main(int ac, char **av)
     // Check map
     if (check_map(&data.map))
         return (free_data(&data), 1);
-    // Display map
+    // Display map / settings
     for(int i = 0; i < ft_splitlen((const char **)data.map); i++)
         ft_printf("%d.\t%s\n", i, data.map[i]);
+    ft_printf("\nFLOOR:\t\t%d,%d,%d\n", data.floor[0], data.floor[1], data.floor[2]);
+    ft_printf("CEILING:\t%d,%d,%d\n", data.ceiling[0], data.ceiling[1], data.ceiling[2]);
+    ft_printf("\nNO:\t%s\nSO:\t%s\nWE:\t%s\nEA:\t%s\n", data.north, data.south, data.west, data.east);
 	// if (game_loop(&data))
 	// 	return (free_data(&data), 1);
     return (free_data(&data), 0);
