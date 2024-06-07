@@ -40,7 +40,7 @@ int main(int ac, char **av)
         return (ft_printf_fd(2, "Error\nNumber of argument(s)\n"), 1);
 
     if (init_data(&data))
-        return (perror("Malloc"), 1);
+        return (perror("MLX Failed"), 1);
 
     // Extension Check
     if (check_extension(av[1]))
