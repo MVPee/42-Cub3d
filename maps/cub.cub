@@ -1,7 +1,7 @@
-NO /rsrcs/wall/wall1.png
-SO /rsrcs/wall/wall2.png
-WE /rsrcs/wall/wall3.png
-EA /rsrcs/wall/wall4.png
+NO ./rsrcs/wall/wall1.png
+SO ./rsrcs/wall/wall2.png
+WE ./rsrcs/wall/wall3.png
+EA ./rsrcs/wall/wall4.png
 
 F 255,100,255
 C 100,0,100

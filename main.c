@@ -14,21 +14,21 @@
 
 void free_data(t_data *data)
 {
-    ft_free(4, &data->north, &data->south, &data->west, &data->east);
-    ft_free_matrix(2, &data->map, &data->file);
+    //ft_free_matrix(2, &data->map, &data->file);
 }
 
-int init_data(t_data *data)
+bool init_data(t_data *data)
 {
-    int i;
-
-    data->north = NULL;
-    data->south = NULL;
-    data->west = NULL;
-    data->east = NULL;
+    data->north_image = NULL;
+    data->south_image = NULL;
+    data->west_image = NULL;
+    data->east_image = NULL;
     data->file = NULL;
     data->map = NULL;
-    return (0);
+    data->mlx = mlx_init(WIDTH, HEIGHT, PROGRAM_NAME, true);
+	if (!data->mlx)
+		return (mlx_strerror(mlx_errno), true);
+    return (false);
 }
 
 int main(int ac, char **av)
@@ -63,7 +63,6 @@ int main(int ac, char **av)
     // Display map / settings
     for(int i = 0; i < ft_splitlen((const char **)data.map); i++)
         ft_printf("%d.\t%s\n", i, data.map[i]);
-    ft_printf("\nNO:\t%s\nSO:\t%s\nWE:\t%s\nEA:\t%s\n", data.north, data.south, data.west, data.east);
 
 	if (game_loop(&data))
 		return (free_data(&data), 1);

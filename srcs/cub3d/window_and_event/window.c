@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:46 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/07 11:57:04 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/07 12:06:29 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,6 @@ static bool get_background(t_data *data)
 
 static bool	window_init(t_data *data)
 {
-	data->mlx = mlx_init(WIDTH, HEIGHT, PROGRAM_NAME, true);
-	if (!data->mlx)
-		return (mlx_strerror(mlx_errno), true);
-	data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-	if (!data->image)
-		return (mlx_terminate(data->mlx), mlx_strerror(mlx_errno), true);
 	if (get_background(data))
 		return (mlx_terminate(data->mlx), mlx_strerror(mlx_errno), true);
 	return (false);

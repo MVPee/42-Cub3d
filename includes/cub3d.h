@@ -27,10 +27,10 @@ typedef mlx_image_t img_t;
 
 typedef struct s_data
 {
-    char    *north;
-    char    *south;
-    char    *west;
-    char    *east;
+    img_t *north_image;
+    img_t *south_image;
+    img_t *west_image;
+    img_t *east_image;
 
     int     floor_color;
     int     ceiling_color;
@@ -39,10 +39,9 @@ typedef struct s_data
     char    **map;
 
     mlx_t   *mlx;
-    img_t   *image;
 
-    mlx_image_t *floor_image;
-    mlx_image_t *ceiling_image;
+    img_t *floor_image;
+    img_t *ceiling_image;
 }   t_data;
 
 typedef struct s_pos

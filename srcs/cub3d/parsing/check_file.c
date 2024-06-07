@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:08:42 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/07 10:17:01 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/07 12:39:04 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,28 @@
 
 static void	find_error(t_data *data)
 {
-	if (!data->north)
-		ft_printf_fd(2, "Error\nCan you put a north texture please?!\n");
-	if (!data->south)
-		ft_printf_fd(2, "Error\nCan you put a south texture please?!\n");
-	if (!data->west)
-		ft_printf_fd(2, "Error\nCan you put a west texture please?!\n");
-	if (!data->east)
-		ft_printf_fd(2, "Error\nCan you put a east texture please?!\n");
+	if (!data->north_image)
+		ft_printf_fd(2, "Error\nCan you put a valid north_path texture please?!\n");
+	if (!data->south_image)
+		ft_printf_fd(2, "Error\nCan you put a valid south_path texture please?!\n");
+	if (!data->west_image)
+		ft_printf_fd(2, "Error\nCan you put a valid west_path texture please?!\n");
+	if (!data->east_image)
+		ft_printf_fd(2, "Error\nCan you put a valid east_path texture please?!\n");
 }
 
-static void	get_texture(char **texture, char *line)
+static void	get_texture(t_data *data, img_t **image, char *line)
 {
-	ft_free(1, texture);
-	*texture = ft_substr(line, 3, ft_strlen(line) - 4);
+	char *str;
+	mlx_texture_t *texture;
+	
+	str = ft_substr(line, 3, ft_strlen(line) - 4);
+	texture = mlx_load_png(str);
+	if (!texture)
+		return ;
+	*image = mlx_texture_to_image(data->mlx, texture);
+	mlx_delete_texture(texture);
+	ft_free(2, &str, &line);
 }
 
 static void	get_color(int *color, char *line)
@@ -62,13 +70,13 @@ bool	check_file(t_data *data)
 	while (data->file[++i])
 	{
 		if (!ft_strncmp(data->file[i], "NO ", 3))
-			get_texture(&data->north, data->file[i]);
+			get_texture(data, &data->north_image, data->file[i]);
 		else if (!ft_strncmp(data->file[i], "SO ", 3))
-			get_texture(&data->south, data->file[i]);
+			get_texture(data, &data->south_image, data->file[i]);
 		else if (!ft_strncmp(data->file[i], "WE ", 3))
-			get_texture(&data->west, data->file[i]);
+			get_texture(data, &data->west_image, data->file[i]);
 		else if (!ft_strncmp(data->file[i], "EA ", 3))
-			get_texture(&data->east, data->file[i]);
+			get_texture(data, &data->east_image, data->file[i]);
 		else if (!ft_strncmp(data->file[i], "F ", 2))
 			get_color(&data->floor_color, ft_substr(data->file[i], 2, \
 					ft_strlen(data->file[i]) - 3));
@@ -78,7 +86,7 @@ bool	check_file(t_data *data)
 		else if (ft_strlen(data->file[i]) > 1)
 			data->map = ft_splitjoin(data->map, data->file[i]);
 	}
-	if (!data->north || !data->south || !data->west || !data->east)
+	if (!data->north_image || !data->south_image || !data->west_image || !data->east_image)
 		return (find_error(data), true);
 	return (false);
 }
