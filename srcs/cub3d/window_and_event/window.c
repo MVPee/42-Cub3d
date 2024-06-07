@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:46 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/07 12:06:29 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/07 18:14:50 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ static bool	window_init(t_data *data)
 }
 
 int	game_loop(t_data *data)
-{
-	t_pos	player_pos;
-	
+{	
 	if (!data)
 		return (EXIT_FAILURE);
 	else if(window_init(data))
 		return (error_handler(WIN_INIT_FAILED));
-	mlx_key_hook(data->mlx, move_keyhook, &player_pos);
+	get_map_size(data);
+	get_player_pos(data);
+	mlx_key_hook(data->mlx, move_keyhook, data);
 	mlx_loop(data->mlx);
 	mlx_terminate(data->mlx);
 	return (EXIT_SUCCESS);
