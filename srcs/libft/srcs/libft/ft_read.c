@@ -20,7 +20,7 @@ char	*ft_read(int fd)
 
 	if (fd <= 0)
 	{
-		ft_printf_fd(2, RED "Error\nCannot read file.\n" RESET);
+		ft_printf_fd(2, "Error\nCannot read file.\n");
 		return (NULL);
 	}
 	file = ft_strdup("");
@@ -28,7 +28,7 @@ char	*ft_read(int fd)
 	if (!line)
 	{
 		free(file);
-		ft_printf_fd(2, RED "Error\nEmpty map.\n" RESET);
+		ft_printf_fd(2, "Error\nEmpty map.\n");
 		return (NULL);
 	}
 	while (line)
