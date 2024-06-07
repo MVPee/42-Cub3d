@@ -27,7 +27,7 @@ bool init_data(t_data *data)
     data->map = NULL;
     data->mlx = mlx_init(WIDTH, HEIGHT, PROGRAM_NAME, true);
 	if (!data->mlx)
-		return (mlx_strerror(mlx_errno), true);
+		return (true);
     return (false);
 }
 
@@ -37,10 +37,10 @@ int main(int ac, char **av)
     char *temp;
 
     if (ac != 2)
-        return (ft_printf_fd(2, "Error\nNumber of argument(s)\n"), 1);
+        return (ft_printf_fd(2, RED "Error\nNumber of argument(s)\n" RESET), 1);
 
     if (init_data(&data))
-        return (perror("Malloc"), 1);
+        return (ft_printf_fd(2, RED "Error\nMLX INIT FAILED\n" RESET), 1);
 
     // Extension Check
     if (check_extension(av[1]))

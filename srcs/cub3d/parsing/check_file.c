@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:08:42 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/07 12:39:04 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/07 13:20:22 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,31 @@
 static void	find_error(t_data *data)
 {
 	if (!data->north_image)
-		ft_printf_fd(2, "Error\nCan you put a valid north_path texture please?!\n");
+		ft_printf_fd(2, RED "Error\nPut a valid north texture\n" RESET);
 	if (!data->south_image)
-		ft_printf_fd(2, "Error\nCan you put a valid south_path texture please?!\n");
+		ft_printf_fd(2, RED "Error\nPut a valid south texture\n" RESET);
 	if (!data->west_image)
-		ft_printf_fd(2, "Error\nCan you put a valid west_path texture please?!\n");
+		ft_printf_fd(2, RED "Error\nPut a valid west texture\n" RESET);
 	if (!data->east_image)
-		ft_printf_fd(2, "Error\nCan you put a valid east_path texture please?!\n");
+		ft_printf_fd(2, RED "Error\nPut a valid east texture\n" RESET);
 }
 
 static void	get_texture(t_data *data, img_t **image, char *line)
 {
 	char *str;
+	char *temp;
 	mlx_texture_t *texture;
 	
-	str = ft_substr(line, 3, ft_strlen(line) - 4);
+	str = NULL;
+	temp = NULL;
+	temp = ft_substr(line, 3, ft_strlen(line) - 4);
+	str = ft_strtrim(temp, " ");
 	texture = mlx_load_png(str);
 	if (!texture)
 		return ;
 	*image = mlx_texture_to_image(data->mlx, texture);
 	mlx_delete_texture(texture);
-	ft_free(2, &str, &line);
+	ft_free(3, &str, &line, &temp);
 }
 
 static void	get_color(int *color, char *line)

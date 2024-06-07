@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:08:32 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/06 14:33:54 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/06/07 13:19:21 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,22 @@
 
 // ERROR
 # define WIN_INIT_FAILED "Windows initialization failed, check MLX"
+
+// COLOR
+# define RED     "\x1b[31m"
+# define GREEN   "\x1b[32m"
+# define BLUE    "\x1b[34m"
+# define BLACK   "\x1b[30m"
+# define WHITE   "\x1b[37m"
+# define PINK    "\x1b[35m"
+# define YELLOW  "\x1b[33m"
+# define BROWN   "\x1b[33m"
+# define ORANGE  "\x1b[33m"
+# define PURPLE  "\x1b[35m"
+# define GRAY    "\x1b[90m"
+# define LIGHTGRAY "\x1b[37m"
+# define DARKGRAY  "\x1b[90m"
+# define RESET   "\x1b[0m"
 
 // RESOLUTION
 # define WIDTH 1280
