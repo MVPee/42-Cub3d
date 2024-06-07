@@ -12,6 +12,11 @@
 
 #include "../../../includes/cub3d.h"
 
+int get_rgba(int r, int g, int b, int a)
+{
+    return (255 << 24 | b << 16 | g << 8 | r);
+}
+
 bool error_handler(char *str)
 {
     if (!str)

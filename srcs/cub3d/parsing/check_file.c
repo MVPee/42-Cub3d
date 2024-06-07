@@ -30,11 +30,13 @@ static void	get_texture(char **texture, char *line)
 	*texture = ft_substr(line, 3, ft_strlen(line) - 4);
 }
 
-static void	get_color(int *array, char *line)
+static void	get_color(int *color, char *line)
 {
 	char	**split;
 	int		i;
+	int 	array[3];
 
+	ft_memset(array, 0, 3);
 	i = -1;
 	split = ft_split(line, ", ");
 	if (split)
@@ -50,12 +52,12 @@ static void	get_color(int *array, char *line)
 		ft_free_matrix(1, &split);
 	}
 	ft_free(1, &line);
+	*color = get_rgba(array[0], array[1], array[2], 255);
 }
 
 bool	check_file(t_data *data)
 {
 	int	i;
-
 	i = -1;
 	while (data->file[++i])
 	{
@@ -68,10 +70,10 @@ bool	check_file(t_data *data)
 		else if (!ft_strncmp(data->file[i], "EA ", 3))
 			get_texture(&data->east, data->file[i]);
 		else if (!ft_strncmp(data->file[i], "F ", 2))
-			get_color(data->floor, ft_substr(data->file[i], 2, \
+			get_color(&data->floor_color, ft_substr(data->file[i], 2, \
 					ft_strlen(data->file[i]) - 3));
 		else if (!ft_strncmp(data->file[i], "C ", 2))
-			get_color(data->ceiling, ft_substr(data->file[i], 2, \
+			get_color(&data->ceiling_color, ft_substr(data->file[i], 2, \
 					ft_strlen(data->file[i]) - 3));
 		else if (ft_strlen(data->file[i]) > 1)
 			data->map = ft_splitjoin(data->map, data->file[i]);

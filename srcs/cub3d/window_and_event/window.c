@@ -14,24 +14,45 @@
 
 static bool	window_init(t_data *data)
 {
-	mlx_t		*mlx;
-	mlx_image_t	*image;
+	data->mlx = mlx_init(WIDTH, HEIGHT, PROGRAM_NAME, true);
+	if (!data->mlx)
+	{
+		mlx_strerror(mlx_errno);
+		return (false);
+	}
+	data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	if (!data->image)
+	{
+		mlx_terminate(data->mlx);
+		mlx_strerror(mlx_errno);
+		return (false);
+	}
 
-	mlx = mlx_init(WIDTH, HEIGHT, PROGRAM_NAME, true);
-	if (!mlx)
+	data->floor_image = mlx_new_image(data->mlx, WIDTH, HEIGHT/2);
+	if (!data->floor_image)
 	{
+		mlx_terminate(data->mlx);
 		mlx_strerror(mlx_errno);
 		return (false);
 	}
-	image = mlx_new_image(mlx, WIDTH, HEIGHT);
-	if (!image)
+	for (int y = 0; y < data->floor_image->height; ++y)
+        for (int x = 0; x < data->floor_image->width; ++x)
+            ((int32_t*)data->floor_image->pixels)[y * data->floor_image->width + x] = data->floor_color;
+
+	data->ceiling_image = mlx_new_image(data->mlx, WIDTH, HEIGHT/2);
+	if (!data->ceiling_image)
 	{
-		mlx_terminate(mlx);
+		mlx_terminate(data->mlx);
 		mlx_strerror(mlx_errno);
 		return (false);
 	}
-	data->mlx = mlx;
-	data->image = image;
+	for (int y = 0; y < data->ceiling_image->height; ++y)
+        for (int x = 0; x < data->ceiling_image->width; ++x)
+            ((int32_t*)data->ceiling_image->pixels)[y * data->ceiling_image->width + x] = data->ceiling_color;
+
+	mlx_image_to_window(data->mlx, data->floor_image, 0, 0);
+    mlx_image_to_window(data->mlx, data->ceiling_image, 0, HEIGHT/2);
+
 	return (true);
 }
 

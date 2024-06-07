@@ -15,7 +15,6 @@
 void free_data(t_data *data)
 {
     ft_free(4, &data->north, &data->south, &data->west, &data->east);
-    ft_free(2, &data->floor, &data->ceiling);
     ft_free_matrix(2, &data->map, &data->file);
 }
 
@@ -23,18 +22,6 @@ int init_data(t_data *data)
 {
     int i;
 
-    data->floor = (int *)malloc(sizeof(int) * 3);
-    if (!data->floor)
-        return (1);
-    i = -1;
-    while(++i < 3)
-        data->floor[i] = 0;
-    data->ceiling = (int *)malloc(sizeof(int) * 3);
-    if (!data->ceiling)
-        return (ft_free_matrix(1, &data->floor), 1);
-    i = -1;
-    while(++i < 3)
-        data->ceiling[i] = 0;
     data->north = NULL;
     data->south = NULL;
     data->west = NULL;
@@ -76,10 +63,9 @@ int main(int ac, char **av)
     // Display map / settings
     for(int i = 0; i < ft_splitlen((const char **)data.map); i++)
         ft_printf("%d.\t%s\n", i, data.map[i]);
-    ft_printf("\nFLOOR:\t\t%d,%d,%d\n", data.floor[0], data.floor[1], data.floor[2]);
-    ft_printf("CEILING:\t%d,%d,%d\n", data.ceiling[0], data.ceiling[1], data.ceiling[2]);
     ft_printf("\nNO:\t%s\nSO:\t%s\nWE:\t%s\nEA:\t%s\n", data.north, data.south, data.west, data.east);
-	// if (game_loop(&data))
-	// 	return (free_data(&data), 1);
+
+	if (game_loop(&data))
+		return (free_data(&data), 1);
     return (free_data(&data), 0);
 }

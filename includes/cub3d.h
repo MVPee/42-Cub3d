@@ -20,7 +20,8 @@
 # include <errno.h>
 # include <stdbool.h>
 # include <stdio.h>
-#include <limits.h>
+# include <limits.h>
+#define BPP 4
 
 typedef mlx_image_t img_t;
 
@@ -31,14 +32,17 @@ typedef struct s_data
     char    *west;
     char    *east;
 
-    int     *floor;
-    int     *ceiling;
+    int     floor_color;
+    int     ceiling_color;
 
     char    **file;
     char    **map;
 
     mlx_t   *mlx;
     img_t   *image;
+
+    mlx_image_t *floor_image;
+    mlx_image_t *ceiling_image;
 }   t_data;
 
 typedef struct s_pos
@@ -59,6 +63,7 @@ int game_loop(t_data *data);
 void move_keyhook(mlx_key_data_t keydata, void *param);
 // UTILS
 bool    error_handler(char *str);
+int get_rgba(int r, int g, int b, int a);
 
 
 #endif
