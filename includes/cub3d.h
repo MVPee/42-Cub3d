@@ -21,16 +21,39 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <limits.h>
-#define BPP 4
+# include <math.h>
 
-typedef mlx_image_t img_t;
+typedef mlx_image_t     t_img;
+typedef mlx_key_data_t  t_mlx_key;
+
+typedef enum e_move
+{
+    GO_RIGHT,
+    GO_LEFT,
+    GO_UP,
+    GO_DOWN,
+    ROTATE_LEFT,
+    ROTATE_RIGHT
+}   t_move;
+
+typedef struct s_pos
+{
+    double  x;
+    double  y;
+}    t_pos;
+
+typedef struct s_player_pos
+{
+    t_pos   position;
+    double  radian_orientation;
+}   t_player_pos;
 
 typedef struct s_data
 {
-    img_t *north_image;
-    img_t *south_image;
-    img_t *west_image;
-    img_t *east_image;
+    t_img *north_image;
+    t_img *south_image;
+    t_img *west_image;
+    t_img *east_image;
 
     int     floor_color;
     int     ceiling_color;
@@ -38,17 +61,17 @@ typedef struct s_data
     char    **file;
     char    **map;
 
+    int        map_width;
+    int        map_height;
+
     mlx_t   *mlx;
 
-    img_t *floor_image;
-    img_t *ceiling_image;
-}   t_data;
+    t_img *floor_image;
+    t_img *ceiling_image;
+    t_img *image;
 
-typedef struct s_pos
-{
-	double	x;
-	double  y;
-}	t_pos;
+    t_player_pos *player;
+}   t_data;
 
 // PARSING
 bool    check_extension(char *str);
@@ -57,12 +80,13 @@ bool	check_map(char ***map);
 void    map_optimization(char ***map);
 
 // GRAPHICS
-int game_loop(t_data *data);
+int     game_loop(t_data *data);
 // KEY_HOOKS
-void move_keyhook(mlx_key_data_t keydata, void *param);
+void    move_keyhook(mlx_key_data_t keydata, void *param);
 // UTILS
 bool    error_handler(char *str);
-int get_rgba(int r, int g, int b, int a);
-
+int     get_rgba(int r, int g, int b, int a);
+void	get_player_pos(t_data *data);
+void	get_map_size(t_data *data);
 
 #endif
