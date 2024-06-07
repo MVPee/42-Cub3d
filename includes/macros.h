@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:08:32 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/07 16:57:03 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/06/07 19:10:21 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@
 # define RESET   "\x1b[0m"
 
 // MOVEMENT MACROS
-# define MOVE_DISANCE 0.25
+# define SPEED 0.25
+
+// RADIANT
+# define RADIANT 0.0174533
 
 // RESOLUTION
 # define WIDTH 1280
@@ -48,8 +51,8 @@
 #  define MLX_KEY_S 83
 #  define MLX_KEY_Q 65
 #  define MLX_KEY_D 68
-#  define MLX_KEY_RIGHT 263
-#  define MLX_KEY_LEFT 262
+#  define MLX_KEY_RIGHT 262
+#  define MLX_KEY_LEFT 263
 # endif
 // Need to find out keycode with MLX42
 # ifdef __APPLE_

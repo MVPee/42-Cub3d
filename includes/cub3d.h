@@ -44,7 +44,9 @@ typedef struct s_pos
 
 typedef struct s_player_pos
 {
-    t_pos   position;
+    double x;
+    double y;
+    int degree;
     double  radian_orientation;
 }   t_player_pos;
 

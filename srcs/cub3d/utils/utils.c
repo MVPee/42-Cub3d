@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:36:30 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/07 18:10:24 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/06/07 19:43:35 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,8 @@ void	get_player_pos(t_data *data)
 		{
 			if (data->map[y][x] == 'N')
 			{
-				if (x == 0)
-					data->player->position.x = y + 0.5;
-				else
-					data->player->position.x = y - 0.5;
-				if (y == 0)
-					data->player->position.y = x + 0.5;
-				else
-					data->player->position.y = x - 0.5;
+				data->player->x = x - 0.5;
+				data->player->y = y - 0.5;
 				break;
 			}
 		}
