@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:08:42 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/07 13:20:22 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/07 16:25:19 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	find_error(t_data *data)
 		ft_printf_fd(2, RED "Error\nPut a valid east texture\n" RESET);
 }
 
-static void	get_texture(t_data *data, img_t **image, char *line)
+static void	get_texture(t_data *data, t_img **image, char *line)
 {
 	char *str;
 	char *temp;

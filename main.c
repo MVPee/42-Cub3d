@@ -26,6 +26,11 @@ bool init_data(t_data *data)
     data->file = NULL;
     data->map = NULL;
     data->mlx = mlx_init(WIDTH, HEIGHT, PROGRAM_NAME, true);
+    data->player = (t_player_pos *)malloc(sizeof(t_player_pos));
+    if (!data->player)
+        return (true);
+    data->player->position.x = 0;
+    data->player->position.y = 0;
 	if (!data->mlx)
 		return (true);
     return (false);

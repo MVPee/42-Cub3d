@@ -15,8 +15,8 @@ SRCS = 	main.c \
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:%.c=%.o))
 
-CFLAGS = -I $(LIBFT) #-g -ggdb3 -fsanitize=address #-Wall -Werror -Wextra
-LDFLAGS = -lft -L $(LIBFT) #-g -ggdb3 -fsanitize=address
+CFLAGS = -I $(LIBFT) -g -ggdb3 -fsanitize=address #-Wall -Werror -Wextra
+LDFLAGS = -lft -L $(LIBFT) -g -ggdb3 -fsanitize=address
 LINUXFLAG = $(LIBMLX)-Iinclude -ldl -lglfw -pthread -lm
 
 RED=\033[0;31m
