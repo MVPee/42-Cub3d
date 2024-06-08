@@ -85,8 +85,11 @@ static void draw_rays(t_data *data)
     color = get_rgba(255, 0, 0, 255);
     rotation = data->player->rotation - 90 - (WIDTH / 2) * DEGREE;
     for (int i = 0; i < WIDTH; i++) {
-        distance = calculate_distance_to_wall(data, rotation);
+        if (i % 2 == 0)
+            distance = calculate_distance_to_wall(data, rotation);
         wall_height = PIXEL / distance * 400;
+        if (data->img[i])
+            mlx_delete_image(data->mlx, data->img[i]);
         data->img[i] = mlx_new_image(data->mlx, 1, (int)wall_height);
 
         // Set the image color to red
@@ -100,22 +103,12 @@ static void draw_rays(t_data *data)
     }
 }
 
-static void mlx_delete_all_image(t_data *data)
-{
-    for (int i = 0; i < WIDTH; i++)
-    {
-        mlx_delete_image(data->mlx, data->img[i]);
-        data->img[i] = NULL;
-    }
-}
-
 static void event_mlx(mlx_key_data_t keydata, void *param)
 {
     t_data *data = (t_data *)param;
     float temp_x;
     float temp_y;
 
-    mlx_delete_all_image(data);
     //ft_printf("%d\n", keydata.key);
     if (keydata.key == 256) // ESCAP
         exit(0);

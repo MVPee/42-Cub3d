@@ -15,7 +15,7 @@
 #define PIXEL 128
 #define SPEED 32
 #define SPEED_ROTATION 15
-#define DEGREE 0.083333333
+#define DEGREE 0.0555555555555556
 
 #define mapX 5
 #define mapY 5
@@ -23,7 +23,7 @@
 
 #define RADIANT 0.0174533
 
-#define FOV 60
+#define FOV 90
 
 // COLOR
 # define RED     "\x1b[31m"
