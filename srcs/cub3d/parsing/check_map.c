@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 10:37:05 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/07 13:21:54 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/08 21:26:47 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,26 @@
 static bool	check_row(char **map, int y, int x, int *count)
 {
 	if ((map[y][x] != '1' && map[y][x] != '0' && map[y][x] != ' ' \
-			&& map[y][x] != 'N') && !ft_isspace(map[y][x]))
-		return (ft_printf_fd(2, RED "Error\nInvalid map in y: %d x:%d c:'%c'\n RESET", y, x, map[y][x]), true);
-	if (y == 0 && (map[y][x] == '0' || map[y][x] == 'N'))
-		return (ft_printf_fd(2, RED "Error\nBad Border\n"), true);
+			&& !contain_player(map[y][x])) && !ft_isspace(map[y][x]))
+		return (ft_printf_fd(2, RED INVALID_MAP RESET, y, x, map[y][x]), true);
+	if (y == 0 && (map[y][x] == '0' || contain_player(map[y][x])))
+		return (ft_printf_fd(2, RED INVALID_BORDER RESET), true);
 	else if (y == ft_splitlen((const char **)map) - 1 && (map[y][x] == '0' \
-			|| map[y][x] == 'N'))
-		return (ft_printf_fd(2, RED "Error\nBad Border\n" RESET), true);
-	else if (map[y][x] == '0' || map[y][x] == 'N')
+			|| contain_player(map[y][x])))
+		return (ft_printf_fd(2, RED INVALID_BORDER RESET), true);
+	else if (map[y][x] == '0' || contain_player(map[y][x]))
 	{
 		if (x == 0)
-			return (ft_printf_fd(2, RED "Error\nBad Border\n" RESET), true);
+			return (ft_printf_fd(2, RED INVALID_BORDER RESET), true);
 		if (ft_isspace(map[y - 1][x]) || ft_isspace(map[y][x - 1])
 			|| ft_isspace(map[y + 1][x]) || ft_isspace(map[y][x + 1]))
-			return (ft_printf_fd(2, RED "Error\nBad Border\n" RESET), true);
+			return (ft_printf_fd(2, RED INVALID_BORDER RESET), true);
 	}
-	if (map[y][x] == 'N')
+	if (contain_player(map[y][x]))
 		*count += 1;
 	return (false);
 }
+
 
 bool	check_map(char ***map)
 {
@@ -53,9 +54,9 @@ bool	check_map(char ***map)
 				return (true);
 	}
 	if (count == 0)
-		return (ft_printf_fd(2, RED "Error\nNo player online\n" RESET), true);
+		return (ft_printf_fd(2, RED WRONG_PLAYER_COUNT RESET), true);
 	else if (count > 1)
-		return (ft_printf_fd(2, RED "Error\nIt's not a multiplayer game\n" RESET), true);
+		return (ft_printf_fd(2, RED WRONG_PLAYER_COUNT RESET), true);
 	map_optimization(map);
 	return (false);
 }

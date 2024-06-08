@@ -3,40 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   map_optimization.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:54:33 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/06 19:26:14 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/08 22:12:02 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-static void	get_all_directions(char **map, bool *flag, int y, int x)
+static void	get_all_directions(char **map, bool *flag, int y, int x, char p)
 {
 	if (map[y - 1][x] == '0')
 	{
-		map[y - 1][x] = 'N';
+		map[y - 1][x] = p;
 		*flag = true;
 	}
 	if (map[y + 1][x] == '0')
 	{
-		map[y + 1][x] = 'N';
+		map[y + 1][x] = p;
 		*flag = true;
 	}
 	if (map[y][x - 1] == '0')
 	{
-		map[y][x - 1] = 'N';
+		map[y][x - 1] = p;
 		*flag = true;
 	}
 	if (map[y][x + 1] == '0')
 	{
-		map[y][x + 1] = 'N';
+		map[y][x + 1] = p;
 		*flag = true;
 	}
 }
 
-static void	get_all_possible_paths(char **map)
+static void	get_all_possible_paths(char **map, char *p)
 {
 	int		y;
 	int		x;
@@ -51,13 +51,18 @@ static void	get_all_possible_paths(char **map)
 		{
 			x = -1;
 			while (map[y][++x])
-				if (map[y][x] == 'N')
-					get_all_directions(map, &flag, y, x);
+			{
+				if (contain_player(map[y][x]))
+				{
+					*p = return_element(map, x, y);
+					get_all_directions(map, &flag, y, x, *p);
+				}
+			}		
 		}
 	}
 }
 
-static void	get_new_map(char **map, int *n)
+static void	get_new_map(char **map, int *n, char p)
 {
 	int	y;
 	int	x;
@@ -78,11 +83,11 @@ static void	get_new_map(char **map, int *n)
 		x = -1;
 		while (map[y][++x])
 		{
-			if (map[y][x] == 'N')
+			if (contain_player(map[y][x]))
 				map[y][x] = '0';
 		}
 	}
-	map[n[0]][n[1]] = 'N';
+	map[n[0]][n[1]] = p;
 }
 
 static void	put_border(char **map)
@@ -96,7 +101,7 @@ static void	put_border(char **map)
 		x = -1;
 		while (map[y][++x])
 		{
-			if (map[y][x] == '0' || map[y][x] == 'N')
+			if (map[y][x] == '0' || contain_player(map[y][x]))
 			{
 				if (map[y - 1][x] == ' ')
 					map[y - 1][x] = '1';
@@ -116,6 +121,7 @@ void map_optimization(char ***map)
 	int	n[2];
 	int	y;
 	int	x;
+	char p;
 
 	y = -1;
 	while ((*map)[++y])
@@ -123,15 +129,15 @@ void map_optimization(char ***map)
 		x = -1;
 		while ((*map)[y][++x])
 		{
-			if ((*map)[y][x] == 'N')
+			if (contain_player((*map)[y][x]))
 			{
 				n[0] = y;
 				n[1] = x;
 			}
 		}
 	}
-	get_all_possible_paths(*map);
-	get_new_map(*map, n);
+	get_all_possible_paths(*map, &p);
+	get_new_map(*map, n, p);
 	put_border(*map);
 
 	y = 0;
