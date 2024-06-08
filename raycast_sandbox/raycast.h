@@ -43,8 +43,8 @@
 
 typedef struct s_player
 {
-    int posX;
-    int posY;
+    float posX;
+    float posY;
     int rotation;
 }   t_player;
 
