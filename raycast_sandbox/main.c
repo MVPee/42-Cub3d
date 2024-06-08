@@ -44,6 +44,7 @@ static void init(t_data *data)
     get_player_pos(data);
     data->player->rotation = 0;
     ft_printf(GREEN "\nPlayer pos:\n\tY: %d\n\tX: %d\n\n" RESET, data->player->posY, data->player->posX);
+    data->red = get_rgba(255, 0, 0, 255);
 }
 
 static void rotate(t_data *data, char c)
@@ -78,23 +79,21 @@ static void draw_rays(t_data *data)
     float distance;
     float rotation;
     float wall_height;
-    int color;
     int x;
     int y;
 
-    color = get_rgba(255, 0, 0, 255);
     rotation = data->player->rotation - 90 - (WIDTH / 2) * DEGREE;
     for (int i = 0; i < WIDTH; i++) {
         if (i % 2 == 0)
             distance = calculate_distance_to_wall(data, rotation);
-        wall_height = PIXEL / distance * 400;
+        wall_height = PIXEL / distance * 300;
         if (data->img[i])
             mlx_delete_image(data->mlx, data->img[i]);
         data->img[i] = mlx_new_image(data->mlx, 1, (int)wall_height);
 
         // Set the image color to red
         for (y = 0; y < (int)wall_height; y++) {
-            mlx_put_pixel(data->img[i], 0, y, color);
+            mlx_put_pixel(data->img[i], 0, y, data->red);
         }
 
         // Place the image on the window
@@ -143,6 +142,7 @@ int main(void) {
     data.mlx = mlx_init(WIDTH, HEIGHT, "Raycasting with MLX42", false);
 
     mlx_key_hook(data.mlx, event_mlx, &data);
+    draw_rays(&data);
     mlx_loop(data.mlx);
     mlx_terminate(data.mlx);
     return EXIT_SUCCESS;

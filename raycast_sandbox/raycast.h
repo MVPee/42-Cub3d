@@ -15,7 +15,7 @@
 #define PIXEL 128
 #define SPEED 32
 #define SPEED_ROTATION 15
-#define DEGREE 0.0555555555555556
+#define DEGREE 0.0833333333333333
 
 #define mapX 5
 #define mapY 5
@@ -51,7 +51,7 @@ typedef struct s_player
 typedef struct s_data
 {
     t_player *player;
-
+    int red;
     mlx_t* mlx;
     mlx_image_t *img[WIDTH];
 }   t_data;
