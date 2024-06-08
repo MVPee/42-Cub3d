@@ -168,6 +168,38 @@ static void event_mlx(mlx_key_data_t keydata, void *param)
     draw_rays(data);
 }
 
+static bool get_background(t_data *data)
+{
+    int y;
+    int x;
+    int color = 255 << 24 | 65 << 16 | 216 << 8 | 0;
+    int color2 = 255 << 24 | 176 << 16 | 123 << 8 | 26;
+
+    data->floor = mlx_new_image(data->mlx, WIDTH, HEIGHT/2);
+    if (!data->floor)
+        return (mlx_terminate(data->mlx), mlx_strerror(mlx_errno), true);
+    y = -1;
+    while (++y < data->floor->height)
+    {
+        x = -1;
+        while (++x < data->floor->width)
+            ((int32_t*)data->floor->pixels)[y * data->floor->width + x] = color;
+    }
+    data->ceiling = mlx_new_image(data->mlx, WIDTH, HEIGHT/2);
+    if (!data->ceiling)
+        return (mlx_terminate(data->mlx), mlx_strerror(mlx_errno), true);
+    y = -1;
+    while (++y < data->ceiling->height)
+    {
+        x = -1;
+        while (++x < data->ceiling->width)
+            ((int32_t*)data->ceiling->pixels)[y * data->ceiling->width + x] = color2;
+    }
+    mlx_image_to_window(data->mlx, data->ceiling, 0, 0);
+    mlx_image_to_window(data->mlx, data->floor, 0, HEIGHT/2);
+    return (false);    
+}
+
 int main(void)
 {
     t_data data;
@@ -176,6 +208,7 @@ int main(void)
     data.mlx = mlx_init(WIDTH, HEIGHT, "Raycasting with MLX42", false);
 
     mlx_key_hook(data.mlx, event_mlx, &data);
+    get_background(&data);
     draw_rays(&data);
     mlx_loop(data.mlx);
     mlx_terminate(data.mlx);

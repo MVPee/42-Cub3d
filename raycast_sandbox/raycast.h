@@ -57,6 +57,9 @@ typedef struct s_data
     int green;
     int pink;
     char wall_dir;
+    
+    mlx_image_t *floor;
+    mlx_image_t *ceiling;
 
     mlx_t* mlx;
     mlx_image_t *img[WIDTH];
