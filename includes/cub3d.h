@@ -44,10 +44,9 @@ typedef struct s_pos
 
 typedef struct s_player_pos
 {
-    double x;
-    double y;
-    int degree;
-    double  radian_orientation;
+    double  x;
+    double  y;
+    int     angle;
 }   t_player_pos;
 
 typedef struct s_data
@@ -90,5 +89,7 @@ bool    error_handler(char *str);
 int     get_rgba(int r, int g, int b, int a);
 void	get_player_pos(t_data *data);
 void	get_map_size(t_data *data);
+bool	contain_player(char c);
+char	return_element(char **map, int x, int y);
 
 #endif

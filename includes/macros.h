@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:08:32 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/07 19:10:21 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/08 22:17:56 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 
 // ERROR
 # define WIN_INIT_FAILED "Windows initialization failed, check MLX"
-
+# define INVALID_MAP "Error\nInvalid map in y: %d x:%d c:'%c'\n"
+# define INVALID_BORDER "Error\nBad Border\n"
+# define WRONG_PLAYER_COUNT "Error\nWrong player count\n"
 // COLOR
 # define RED     "\x1b[31m"
 # define GREEN   "\x1b[32m"
@@ -38,12 +40,12 @@
 // MOVEMENT MACROS
 # define SPEED 0.25
 
-// RADIANT
-# define RADIANT 0.0174533
-
 // RESOLUTION
 # define WIDTH 1280
 # define HEIGHT 720
+
+// RAYS RESOLUTION
+# define RAY_RES 60
 
 // LINUX_KEYS
 # ifdef __linux__
