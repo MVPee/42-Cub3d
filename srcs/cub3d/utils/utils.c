@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:36:30 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/07 19:43:35 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/08 21:58:48 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
-#include <stdbool.h>
 
 int get_rgba(int r, int g, int b, int a)
 {
@@ -37,6 +36,47 @@ bool	error_handler(char *str)
 	return (false);
 	}
 
+bool	contain_player(char c)
+{
+	char	charset[4];
+	size_t	index;
+
+	index = 0;
+	charset[0] = 'N';
+	charset[1] = 'S';
+	charset[2] = 'W';
+	charset[3] = 'E';
+	while (index < 4)
+	{
+		if (c == charset[index])
+			return (true);
+		index++;
+	}
+	return false;
+}
+
+char	return_element(char **map, int x, int y)
+{
+	return (map[y][x]);
+}
+
+void	set_cardinal_dir(t_data *data, int x, int y)
+{
+	char c;
+
+	if (!data)
+		return ;
+	c = data->map[y][x];
+	if (c == 'N')
+		data->player->angle = 0;
+	else if (c == 'S')
+		data->player->angle = 180;
+	else if (c == 'W')
+		data->player->angle = 270;
+	else if (c == 'E')
+		data->player->angle = 90;
+}
+
 void	get_player_pos(t_data *data)
 {
 	int		x;
@@ -48,10 +88,11 @@ void	get_player_pos(t_data *data)
 		y = -1;
 		while (++y < data->map_height)
 		{
-			if (data->map[y][x] == 'N')
+			if (contain_player(data->map[y][x]))
 			{
 				data->player->x = x - 0.5;
 				data->player->y = y - 0.5;
+				set_cardinal_dir(data, x, y);
 				break;
 			}
 		}
