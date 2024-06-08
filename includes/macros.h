@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:08:32 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/08 22:17:56 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/06/08 23:22:44 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 
 // MOVEMENT MACROS
 # define SPEED 0.25
+# define RADIANT 0.0174533
 
 // RESOLUTION
 # define WIDTH 1280

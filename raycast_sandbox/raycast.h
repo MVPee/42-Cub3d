@@ -61,8 +61,10 @@ typedef struct s_data
     mlx_image_t *floor;
     mlx_image_t *ceiling;
 
+    mlx_image_t *wall1;
+
     mlx_t* mlx;
-    mlx_image_t *img[WIDTH];
+    mlx_image_t *img;
 }   t_data;
 
 #endif

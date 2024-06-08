@@ -41,6 +41,8 @@ static void get_player_pos(t_data *data)
 
 static void init(t_data *data)
 {
+    mlx_texture_t *texture;
+
     data->player = malloc(sizeof(t_player));
     data->mlx = NULL;
     get_player_pos(data);
@@ -51,6 +53,10 @@ static void init(t_data *data)
     data->green = get_rgba(0, 0, 255, 255);
     data->pink = get_rgba(255, 0, 255, 255);
     data->wall_dir = 0;
+    data->img = NULL;
+    // texture = mlx_load_png("./wall1.png");
+    // data->wall1 = mlx_texture_to_image(data->mlx, texture);
+    // mlx_delete_texture(texture);
 }
 
 static void rotate(t_data *data, char c)
@@ -65,7 +71,7 @@ static void rotate(t_data *data, char c)
         data->player->rotation += 360;
 }
 
-static float calculate_distance_to_wall(t_data *data, float rotation)
+static float calculate_distance_to_wall(t_data *data, float rotation, int player_rotation)
 {
     float x = data->player->posX;
     float y = data->player->posY;
@@ -78,12 +84,24 @@ static float calculate_distance_to_wall(t_data *data, float rotation)
         
         x += cos(angle_rad);
         y += sin(angle_rad);
-        if ((int)prev_y / PIXEL != (int)y / PIXEL && (int)y / PIXEL + 1 <= mapY && map[(int)y / PIXEL + 1][(int)x / PIXEL] != '1')
+        // if ((int)prev_y / PIXEL != (int)y / PIXEL)
+        //     ;
+        // if ((int)y / PIXEL + 1 <= mapY)
+        //     if (map[(int)y / PIXEL + 1][(int)x / PIXEL] != '1');
+        // printf("Y: %d X: %d\n", (int)y / PIXEL + 1, (int)x / PIXEL);
+        if ((int)prev_y / PIXEL != (int)y / PIXEL)
         {
-            if (prev_y < y)
-                data->wall_dir = 'S'; //GREEN
-            else
-                data->wall_dir = 'N'; //RED
+            // ft_printf("%d\n", (int)y / PIXEL + 1);
+            // if ((int)y / PIXEL + 1 < mapY)
+            // {
+            //     if (map[(int)y / PIXEL + 1][(int)x / PIXEL] != '1')
+            //     {
+                    if (prev_y < y)
+                        data->wall_dir = 'S'; //GREEN
+                    else
+                        data->wall_dir = 'N'; //RED
+            //     }
+            // }
         } 
         else if ((int)prev_x / PIXEL != (int)x / PIXEL) 
         {
@@ -102,33 +120,41 @@ static void draw_rays(t_data *data)
     float distance;
     float rotation;
     float wall_height;
+    int wall_color;
     int x;
     int y;
-    int wall_color;
+
+    // Création de l'image une seule fois à l'extérieur de la boucle
+    if (data->img)
+        mlx_delete_image(data->mlx, data->img);
+    data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 
     rotation = data->player->rotation - 90 - (WIDTH / 2) * DEGREE;
-    for (int i = 0; i < WIDTH; i++) {
-        if (i % 2 == 0)
-            distance = calculate_distance_to_wall(data, rotation);
+    for (int x = 0; x < WIDTH; x++) {
+        distance = calculate_distance_to_wall(data, rotation, data->player->rotation);
         wall_height = PIXEL / distance * 300;
-        if (data->img[i])
-            mlx_delete_image(data->mlx, data->img[i]);
-        data->img[i] = mlx_new_image(data->mlx, 1, (int)wall_height);
+        if (wall_height - (int)wall_height > 0.5)
+            wall_height += 1;
 
         if (data->wall_dir == 'N')
             wall_color = data->red;
-        if (data->wall_dir == 'S')
+        else if (data->wall_dir == 'S')
             wall_color = data->blue;
-        if (data->wall_dir == 'W')
+        else if (data->wall_dir == 'W')
             wall_color = data->green;
-        if (data->wall_dir == 'E')
+        else if (data->wall_dir == 'E')
             wall_color = data->pink;
-        for (y = 0; y < (int)wall_height; y++)
-            mlx_put_pixel(data->img[i], 0, y, wall_color);
 
-        mlx_image_to_window(data->mlx, data->img[i], i, (HEIGHT - (int)wall_height) / 2);
+        // Dessin des pixels sur l'image unique
+        for (y = 0; y < (int)wall_height; y++)
+            if (y + (HEIGHT - (int)wall_height) / 2 < data->img->height)
+                mlx_put_pixel(data->img, x, (float)y + ((float)HEIGHT - wall_height) / 2, wall_color);
+
         rotation += DEGREE;
     }
+
+    // Affichage de l'image unique à la fenêtre une seule fois après la boucle
+    mlx_image_to_window(data->mlx, data->img, 0, 0);
 }
 
 static void event_mlx(mlx_key_data_t keydata, void *param)
