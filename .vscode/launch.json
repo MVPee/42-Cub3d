@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Launch",
+            "program": "${workspaceFolder}/cub3D",
+            "args": ["maps/cub.cub"],
+            "cwd": "${workspaceFolder}"
+        }
+
+    
+    ]
+}

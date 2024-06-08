@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event_hooks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:53 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/07 19:56:59 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/08 22:11:56 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void    rotate_player(t_data *data, t_mlx_key keydata)
 {
-    if (keydata.key == MLX_KEY_RIGHT)
-		data->player->degree += 15;
+	if (keydata.key == MLX_KEY_RIGHT)
+		data->player->angle += 15;
 	else if(keydata.key == MLX_KEY_LEFT)
-		data->player->degree -= 15;
-	if (data->player->degree > 360)
-		data->player->degree %= 360;
-	else if (data->player->degree < 0)
-		data->player->degree += 360;
-	printf("Degree:\t%d\n", data->player->degree);
+		data->player->angle -= 15;
+	if (data->player->angle > 360)
+		data->player->angle %= 360;
+	else if (data->player->angle < 0)
+		data->player->angle += 360;
+	printf("Degree:\t%d\n", data->player->angle);
 }
 
 static void check_border(t_data *data, float temp_x, float temp_y)
@@ -45,14 +45,14 @@ void    move_player(t_data *data, t_mlx_key keydata)
 
 	if (keydata.key == MLX_KEY_Z && (keydata.action == MLX_REPEAT || keydata.action == (MLX_PRESS)))
 	{
-		temp_x = SPEED * sin(data->player->degree * RADIANT);
-		temp_y = SPEED * -1 * cos(data->player->degree * RADIANT);
+		temp_x = SPEED * sin(data->player->angle * RADIANT);
+		temp_y = SPEED * -1 * cos(data->player->angle * RADIANT);
 		check_border(data, temp_x, temp_y);
 	}
 	else if (keydata.key == MLX_KEY_S && (keydata.action == (MLX_REPEAT) || keydata.action == (MLX_PRESS)))
 	{
-		temp_x = SPEED * -1 * sin(data->player->degree * RADIANT);
-		temp_y = SPEED * cos(data->player->degree * RADIANT);
+		temp_x = SPEED * -1 * sin(data->player->angle * RADIANT);
+		temp_y = SPEED * cos(data->player->angle * RADIANT);
 		check_border(data, temp_x, temp_y);
 	}
 	else if (keydata.key == MLX_KEY_RIGHT && (keydata.action == (MLX_REPEAT) || keydata.action == (MLX_PRESS)))

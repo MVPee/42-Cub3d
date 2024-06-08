@@ -33,7 +33,7 @@ bool init_data(t_data *data)
         return (true);
     data->player->x = 0;
     data->player->y = 0;
-    data->player->degree = 0;
+    data->player->angle = 0;
     return (false);
 }
 
