@@ -18,7 +18,7 @@
 #define DEGREE 0.083333333
 
 #define mapX 5
-#define mapY 9
+#define mapY 5
 #define mapS 25
 
 #define RADIANT 0.0174533
