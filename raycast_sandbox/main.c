@@ -10,7 +10,7 @@ char map[mapY][mapX] = {
 
 int get_rgba(int r, int g, int b, int a)
 {
-    return (255 << 24 | b << 16 | g << 8 | r);
+    return (r << 24 | g << 16 | b << 8 | a);
 }
 
 static int is_wall(float x, float y)
@@ -45,6 +45,10 @@ static void init(t_data *data)
     data->player->rotation = 0;
     ft_printf(GREEN "\nPlayer pos:\n\tY: %d\n\tX: %d\n\n" RESET, data->player->posY, data->player->posX);
     data->red = get_rgba(255, 0, 0, 255);
+    data->blue = get_rgba(0, 255, 0, 255);
+    data->green = get_rgba(0, 0, 255, 255);
+    data->pink = get_rgba(255, 255, 0, 255);
+    data->wall_dir = 0;
 }
 
 static void rotate(t_data *data, char c)
@@ -59,18 +63,32 @@ static void rotate(t_data *data, char c)
         data->player->rotation += 360;
 }
 
-static float calculate_distance_to_wall(t_data *data, float rotation)
-{
+static float calculate_distance_to_wall(t_data *data, float rotation) {
     float x = (float)data->player->posX;
     float y = (float)data->player->posY;
-
     float angle_rad = rotation * RADIANT;
 
     while (map[(int)y / PIXEL][(int)x / PIXEL] != '1') {
+        float prev_x = x;
+        float prev_y = y;
+        
         x += cos(angle_rad);
         y += sin(angle_rad);
+        
+        if ((int)prev_y / PIXEL != (int)y / PIXEL) {
+            if (prev_y < y) {
+                data->wall_dir = 'S';
+            } else {
+                data->wall_dir = 'N';
+            }
+        } else if ((int)prev_x / PIXEL != (int)x / PIXEL) {
+            if (prev_x < x) {
+                data->wall_dir = 'E';
+            } else {
+                data->wall_dir = 'W';
+            }
+        }
     }
-    //printf( RED "y: %d\tx: %d\n" RESET, (int)y, (int)x);
     return (sqrt(pow(x - data->player->posX, 2) + pow(y - data->player->posY, 2)));
 }
 
@@ -81,6 +99,7 @@ static void draw_rays(t_data *data)
     float wall_height;
     int x;
     int y;
+    int wall_color;
 
     rotation = data->player->rotation - 90 - (WIDTH / 2) * DEGREE;
     for (int i = 0; i < WIDTH; i++) {
@@ -91,12 +110,18 @@ static void draw_rays(t_data *data)
             mlx_delete_image(data->mlx, data->img[i]);
         data->img[i] = mlx_new_image(data->mlx, 1, (int)wall_height);
 
-        // Set the image color to red
+        if (data->wall_dir == 'N')
+            wall_color = data->red;
+        if (data->wall_dir == 'S')
+            wall_color = data->blue;
+        if (data->wall_dir == 'W')
+            wall_color = data->green;
+        if (data->wall_dir == 'E')
+            wall_color = data->pink;
         for (y = 0; y < (int)wall_height; y++) {
-            mlx_put_pixel(data->img[i], 0, y, data->red);
+            mlx_put_pixel(data->img[i], 0, y, wall_color);
         }
 
-        // Place the image on the window
         mlx_image_to_window(data->mlx, data->img[i], i, (HEIGHT - (int)wall_height) / 2);
         rotation += DEGREE;
     }

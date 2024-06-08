@@ -51,7 +51,13 @@ typedef struct s_player
 typedef struct s_data
 {
     t_player *player;
+
     int red;
+    int blue;
+    int green;
+    int pink;
+    char wall_dir;
+
     mlx_t* mlx;
     mlx_image_t *img[WIDTH];
 }   t_data;
