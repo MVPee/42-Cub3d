@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:08:32 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/09 14:55:00 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/09 15:08:06 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@
 # define RESET   "\x1b[0m"
 
 // MOVEMENT MACROS
-# define SPEED 0.25
 # define RADIANT 0.0174533 //per 1 degree
 # define PIXEL 128
 # define SPEED 32

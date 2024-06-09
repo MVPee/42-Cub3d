@@ -62,8 +62,10 @@ typedef struct s_data
     char    **file;
     char    **map;
 
-    int        map_width;
-    int        map_height;
+    size_t        map_width;
+    size_t        map_height;
+
+    char wall_dir;
 
     mlx_t   *mlx;
 
@@ -91,5 +93,10 @@ void	get_player_pos(t_data *data);
 void	get_map_size(t_data *data);
 bool	contain_player(char c);
 char	return_element(char **map, int x, int y);
+int	get_correct_color(u_int8_t *pixel);
+
+// RAYCASTING
+float calculate_distance_to_wall(t_data *data, float rotation, int player_rotation, float *hitX, float *hitY);
+void draw_rays(t_data *data);
 
 #endif

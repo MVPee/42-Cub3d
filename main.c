@@ -70,6 +70,9 @@ int main(int ac, char **av)
     for(int i = 0; i < ft_splitlen((const char **)data.map); i++)
         ft_printf("%d.\t%s\n", i, data.map[i]);
 
+    get_map_size(&data);
+	get_player_pos(&data);
+
 	if (game_loop(&data))
 		return (free_data(&data), 1);
     return (free_data(&data), 0);

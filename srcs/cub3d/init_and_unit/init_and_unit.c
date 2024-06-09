@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_and_unit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:07:42 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/08 22:12:41 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/06/09 15:42:56 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ bool init_data(t_data *data)
     data->east_image = NULL;
     data->file = NULL;
     data->map = NULL;
+    data->image = NULL;
     data->mlx = mlx_init(WIDTH, HEIGHT, PROGRAM_NAME, true);
     if (!data->mlx)
 		return (true);
@@ -34,5 +35,6 @@ bool init_data(t_data *data)
     data->player->x = 0;
     data->player->y = 0;
     data->player->angle = 0;
+    data->wall_dir = -1;
     return (false);
 }

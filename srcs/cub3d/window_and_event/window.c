@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:46 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/08 22:11:51 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/06/09 15:45:42 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,7 @@ int	game_loop(t_data *data)
 		return (EXIT_FAILURE);
 	else if(window_init(data))
 		return (error_handler(WIN_INIT_FAILED));
-	get_map_size(data);
-	get_player_pos(data);
+	draw_rays(data);
 	mlx_key_hook(data->mlx, move_keyhook, data);
 	mlx_loop(data->mlx);
 	mlx_terminate(data->mlx);

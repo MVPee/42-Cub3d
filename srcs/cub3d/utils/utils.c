@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:36:30 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/08 21:58:48 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/06/09 15:15:43 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,23 @@ void	get_player_pos(t_data *data)
 		{
 			if (contain_player(data->map[y][x]))
 			{
-				data->player->x = x - 0.5;
-				data->player->y = y - 0.5;
+				data->player->x = x * PIXEL + PIXEL / 2;
+				data->player->y = y * PIXEL + PIXEL / 2;
 				set_cardinal_dir(data, x, y);
 				break;
 			}
 		}
 	}
+}
+
+int	get_correct_color(u_int8_t *pixel)
+{
+	int	rgba;
+
+	rgba = 0;
+	rgba += pixel[0] << 24;
+	rgba += pixel[1] << 16;
+	rgba += pixel[2] << 8;
+	rgba += pixel[3];
+	return (rgba);
 }
