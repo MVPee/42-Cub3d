@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:53 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/09 20:08:53 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/09 20:11:53 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,11 @@ static void    movement(t_data *data, t_mlx_key keydata)
 {
 	if (keydata.key == MLX_KEY_ESCAPE)
         exit(0); //free
-	if (keydata.key == MLX_KEY_Z && (keydata.action == MLX_REPEAT || keydata.action == (MLX_PRESS)))
-        move_player(data, keydata);
-	else if (keydata.key == MLX_KEY_S && (keydata.action == (MLX_REPEAT) || keydata.action == (MLX_PRESS)))
-        move_player(data, keydata);
-    else if (keydata.key == MLX_KEY_A && (keydata.action == (MLX_REPEAT) || keydata.action == (MLX_PRESS)))
-        move_player(data, keydata);
-    else if (keydata.key == MLX_KEY_D && (keydata.action == (MLX_REPEAT) || keydata.action == (MLX_PRESS)))
+	if (keydata.key == MLX_KEY_Z || \
+        keydata.key == MLX_KEY_S || \
+        keydata.key == MLX_KEY_A || \
+        keydata.key == MLX_KEY_D && \
+        (keydata.action == MLX_REPEAT || keydata.action == (MLX_PRESS)))
         move_player(data, keydata);
 	else if (keydata.key == MLX_KEY_RIGHT || keydata.key == MLX_KEY_LEFT && (keydata.action == (MLX_REPEAT) || keydata.action == (MLX_PRESS)))
 		rotate_player(data, keydata);

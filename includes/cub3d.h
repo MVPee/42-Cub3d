@@ -71,6 +71,7 @@ typedef struct s_data
 
     t_img *floor_image;
     t_img *ceiling_image;
+    t_img *fog;
     t_img *image;
 
     t_player_pos *player;
@@ -96,7 +97,6 @@ char	return_element(char **map, int x, int y);
 int	    get_correct_color(u_int8_t *pixel);
 
 // RAYCASTING
-float   calculate_distance_to_wall(t_data *data, float rotation, float *hitX, float *hitY);
 void    draw_rays(t_data *data);
 
 #endif

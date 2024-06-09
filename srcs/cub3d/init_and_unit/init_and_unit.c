@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:07:42 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/09 16:13:57 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/09 21:13:38 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void free_data(t_data *data)
 
 bool init_data(t_data *data)
 {
+    mlx_texture_t *texture;
+
     data->north_image = NULL;
     data->south_image = NULL;
     data->west_image = NULL;
@@ -36,5 +38,12 @@ bool init_data(t_data *data)
     data->player->y = 0;
     data->player->angle = 0;
     data->wall_dir = -1;
+    texture = mlx_load_png("./rsrcs/wall/fog.png");
+    if (!texture)
+        return (true);
+    data->fog = mlx_texture_to_image(texture);
+    if (data->fog)
+        return (true);
+    mlx_delete_texture(texture);
     return (false);
 }

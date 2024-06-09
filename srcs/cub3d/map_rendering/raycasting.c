@@ -6,19 +6,20 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:22:06 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/09 16:17:53 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/09 21:47:26 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-float calculate_distance_to_wall(t_data *data, float rotation, float *hitX, float *hitY)
+static float calculate_distance_to_wall(t_data *data, float rotation, float *hitX, float *hitY)
 {
     float x = data->player->x;
     float y = data->player->y;
     float angle_rad = rotation * RADIANT;
     float prev_x;
     float prev_y;
+    int count = 0;
 
     while ((int)y / PIXEL < data->map_height && (int)x / PIXEL < data->map_width && data->map[(int)y / PIXEL][(int)x / PIXEL] != '1') {
         prev_x = x;
@@ -26,6 +27,9 @@ float calculate_distance_to_wall(t_data *data, float rotation, float *hitX, floa
 
         x += cos(angle_rad);
         y += sin(angle_rad);
+        count++;
+        if (count > 2000)
+            return (printf("YEAH\n"), -1);
     }
     *hitX = x;
     *hitY = y;
@@ -82,11 +86,14 @@ void draw_rays(t_data *data)
 
         texture_x = (int)(hitPos * wall_img->width) % wall_img->width;
 
-        for (y = 0; y < (int)wall_height; y++) {
-            texture_y = (y * wall_img->height) / (int)wall_height;
-            if (y + (HEIGHT - (int)wall_height) / 2 < data->image->height) {
-                color = get_correct_color(&((u_int8_t *)wall_img->pixels)[(texture_y * wall_img->width + texture_x) * 4]);
-                mlx_put_pixel(data->image, x, (float)y + ((float)HEIGHT - wall_height) / 2, color);
+        if (distance != -1)
+        {
+            for (y = 0; y < (int)wall_height; y++) {
+                texture_y = (y * wall_img->height) / (int)wall_height;
+                if (y + (HEIGHT - (int)wall_height) / 2 < data->image->height) {
+                    color = get_correct_color(&((u_int8_t *)wall_img->pixels)[(texture_y * wall_img->width + texture_x) * 4]);
+                    mlx_put_pixel(data->image, x, (float)y + ((float)HEIGHT - wall_height) / 2, color);
+                }
             }
         }
 

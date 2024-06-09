@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_optimization.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:54:33 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/08 22:12:02 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/06/09 21:29:27 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,9 +182,16 @@ void map_optimization(char ***map)
 		}
 	}
 
-	for (int i = 0; i < y; i++)
-		for (int j = 0; j < x; j++)
-			new_map[i][j] = (*map)[i + start][j + min];
+    for (int i = 0; i < y; i++) {
+        int old_row_length = ft_strlen((*map)[i + start]);
+        for (int j = 0; j < x; j++) {
+            if (j + min < old_row_length) {
+                new_map[i][j] = (*map)[i + start][j + min];
+            } else {
+                new_map[i][j] = ' ';
+            }
+        }
+    }
 
 	ft_free_matrix(1, map);
 	*map = ft_splitdup((const char **)new_map);

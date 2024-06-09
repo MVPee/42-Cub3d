@@ -1,10 +1,13 @@
-NO ./rsrcs/wall/wall1.png
-SO ./rsrcs/wall/wall2.png
-WE ./rsrcs/wall/wall3.png
-EA ./rsrcs/wall/wall4.png
+NO ./rsrcs/wall/taile.png
+SO ./rsrcs/wall/iron2.png
+WE ./rsrcs/wall/brick4.png
+EA ./rsrcs/wall/red_brick.png
 
-F 255,100,255
-C 100,0,100
+F  58 , 157 , 35
+C  119 , 181 , 254
+
+F  0,0,0
+C  80, 0, 0
 
 
         1111111111111111111111111
