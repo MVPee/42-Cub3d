@@ -51,10 +51,6 @@ typedef struct s_data
 {
     t_player *player;
 
-    int red;
-    int blue;
-    int green;
-    int pink;
     char wall_dir;
     
     mlx_image_t *floor;

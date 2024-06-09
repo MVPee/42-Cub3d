@@ -53,13 +53,8 @@ static void init(t_data *data)
     get_player_pos(data);
     data->player->rotation = 0;
     ft_printf(GREEN "\nPlayer pos:\n\tY: %d\n\tX: %d\n\n" RESET, data->player->posY, data->player->posX);
-    data->red = get_rgba(255, 0, 0, 255);
-    data->blue = get_rgba(0, 255, 0, 255);
-    data->green = get_rgba(0, 0, 255, 255);
-    data->pink = get_rgba(255, 0, 255, 255);
     data->wall_dir = 0;
     data->img = NULL;
-    data->wall = NULL;
 
     texture = mlx_load_png("../rsrcs/wall/wall1.png");
     if (!texture)
@@ -143,21 +138,19 @@ static float calculate_distance_to_wall(t_data *data, float rotation, int player
 
         x += cos(angle_rad);
         y += sin(angle_rad);
-
-
     }
     *hitX = x;
     *hitY = y;
     if ((int)prev_y / PIXEL != (int)y / PIXEL) {
         if (prev_y < y)
-            data->wall_dir = 'S'; // GREEN
+            data->wall_dir = 'S';
         else
-            data->wall_dir = 'N'; // RED
+            data->wall_dir = 'N';
     } else if ((int)prev_x / PIXEL != (int)x / PIXEL) {
         if (prev_x < x)
-            data->wall_dir = 'E'; // PINK
+            data->wall_dir = 'E';
         else
-            data->wall_dir = 'W'; // BLUE
+            data->wall_dir = 'W';
     }
     return sqrt(pow(x - data->player->posX, 2) + pow(y - data->player->posY, 2));
 }
