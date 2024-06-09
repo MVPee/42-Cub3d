@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:08:32 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/09 15:08:06 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/09 19:47:10 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@
 #  define MLX_KEY_D 68
 #  define MLX_KEY_RIGHT 262
 #  define MLX_KEY_LEFT 263
+#  define MLX_KEY_ESCAPE 256
 # endif
 // Need to find out keycode with MLX42
 # ifdef __APPLE_
