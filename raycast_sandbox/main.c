@@ -25,9 +25,9 @@ static int is_wall(t_data *data, float x, float y)
 
     if (map_x < 0 || map_x >= mapX || map_y < 0 || map_y >= mapY)
         return 1;
-    if ((int)data->player->posY/PIXEL != map_y && (int)data->player->posX/PIXEL != map_x)
+    if ((int)data->player->posY/PIXEL != map_y || (int)data->player->posX/PIXEL != map_x)
         if (map[map_y][map_x] != '1')
-            if (map[map_y][(int)data->player->posX/PIXEL] == '1' && map[(int)data->player->posY/PIXEL][map_x] == '1')
+            if (map[map_y][(int)data->player->posX/PIXEL] == '1' || map[(int)data->player->posY/PIXEL][map_x] == '1')
                 return (1);
     return map[map_y][map_x] == '1';
 }
