@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:46 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/09 15:45:42 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/09 15:48:59 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ static bool get_background(t_data *data)
 		while (++x < data->ceiling_image->width)
             ((int32_t*)data->ceiling_image->pixels)[y * data->ceiling_image->width + x] = data->ceiling_color;
 	}
-	mlx_image_to_window(data->mlx, data->ceiling_image, 0, 0);
-    mlx_image_to_window(data->mlx, data->floor_image, 0, HEIGHT/2);
 	return (false);	
 }
 
@@ -46,6 +44,8 @@ static bool	window_init(t_data *data)
 {
 	if (get_background(data))
 		return (mlx_terminate(data->mlx), mlx_strerror(mlx_errno), true);
+	mlx_image_to_window(data->mlx, data->ceiling_image, 0, 0);
+    mlx_image_to_window(data->mlx, data->floor_image, 0, HEIGHT/2);
 	return (false);
 }
 
