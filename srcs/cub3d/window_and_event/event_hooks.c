@@ -6,24 +6,25 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:53 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/09 19:55:01 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/09 20:08:53 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-static int is_wall(t_data *data, float x, float y)
+static void is_wall(t_data *data, float x, float y)
 {
-    int map_x = (int)x / PIXEL;
-    int map_y = (int)y / PIXEL;
+    int map_x;
+    int map_y;
 
+    map_x = (int)x / PIXEL;
+    map_y = (int)y / PIXEL;
     if (map_x < 0 || map_x >= data->map_width || map_y < 0 || map_y >= data->map_height)
-        return 1;
-    if ((int)data->player->y/PIXEL != map_y || (int)data->player->x/PIXEL != map_x)
-        if (data->map[map_y][map_x] != '1')
-            if (data->map[map_y][(int)data->player->x/PIXEL] == '1' || data->map[(int)data->player->y/PIXEL][map_x] == '1')
-                return (1);
-    return (data->map[map_y][map_x] == '1');
+        return;
+    if (data->map[(int)data->player->y / PIXEL][(int)x / PIXEL] != '1')
+        data->player->x = x;
+    if (data->map[(int)y / PIXEL][(int)data->player->x / PIXEL] != '1')
+        data->player->y = y;
 }
 
 static void rotate_player(t_data *data, t_mlx_key keydata)
@@ -64,11 +65,7 @@ static void move_player(t_data *data, t_mlx_key keydata)
         temp_x = data->player->x + SPEED * sin((data->player->angle + 90) * RADIANT);
         temp_y = data->player->y + SPEED * -1 * cos((data->player->angle + 90) * RADIANT);
     }
-    if (!is_wall(data, temp_x, temp_y))
-    {
-        data->player->x = temp_x;
-        data->player->y = temp_y;
-    }
+    is_wall(data, temp_x, temp_y);
 }
 
 static void    movement(t_data *data, t_mlx_key keydata)
