@@ -1,11 +1,16 @@
 #include "raycast.h"
 
 char map[mapY][mapX] = {
-    {'1', '1', '1', '1', '1'},
-    {'1', '0', '0', '0', '1'},
-    {'1', 'P', '1', '0', '1'},
-    {'1', '0', '0', '0', '1'},
-    {'1', '1', '1', '1', '1'}
+    {'1', '1', '1', '1', '1','1', '1', '1', '1', '1'},
+    {'1', '0', '0', '0', '1','1', '0', '1', '1', '1'},
+    {'1', '0', '0', '0', '0','0', '0', '0', '0', '1'},
+    {'1', '0', '0', '0', '0','0', '0', '0', '0', '1'},
+    {'1', '0', '0', '1', '1','0', '0', '1', '0', '1'},
+    {'1', '0', '0', '1', '0','0', '0', '1', '0', '1'},
+    {'1', '0', '0', '1', '0','0', '1', '1', '0', '1'},
+    {'1', '0', '0', '1', '0','0', '0', '1', '0', '1'},
+    {'1', 'P', '0', '0', '0','0', '0', '0', '0', '1'},
+    {'1', '1', '1', '1', '1','1', '1', '1', '1', '1'}
 };
 
 int get_rgba(int r, int g, int b, int a)
@@ -44,7 +49,7 @@ static void init(t_data *data)
     mlx_texture_t *texture;
 
     data->player = malloc(sizeof(t_player));
-    data->mlx = NULL;
+    data->mlx = mlx_init(WIDTH, HEIGHT, "Raycasting with MLX42", false);
     get_player_pos(data);
     data->player->rotation = 0;
     ft_printf(GREEN "\nPlayer pos:\n\tY: %d\n\tX: %d\n\n" RESET, data->player->posY, data->player->posX);
@@ -54,9 +59,63 @@ static void init(t_data *data)
     data->pink = get_rgba(255, 0, 255, 255);
     data->wall_dir = 0;
     data->img = NULL;
-    // texture = mlx_load_png("./wall1.png");
-    // data->wall1 = mlx_texture_to_image(data->mlx, texture);
-    // mlx_delete_texture(texture);
+    data->wall = NULL;
+
+    texture = mlx_load_png("../rsrcs/wall/wall1.png");
+    if (!texture)
+    {
+        printf(RED "texture failed\n" RESET);
+        exit(1);
+    }
+    data->wall = mlx_texture_to_image(data->mlx, texture);
+    if (!data->wall)
+    {
+        printf(RED "image failed\n" RESET);
+        exit(1);
+    }
+    mlx_delete_texture(texture);
+
+    texture = mlx_load_png("../rsrcs/wall/wall2.png");
+    if (!texture)
+    {
+        printf(RED "texture failed\n" RESET);
+        exit(1);
+    }
+    data->wall1 = mlx_texture_to_image(data->mlx, texture);
+    if (!data->wall1)
+    {
+        printf(RED "image failed\n" RESET);
+        exit(1);
+    }
+    mlx_delete_texture(texture);
+
+    texture = mlx_load_png("../rsrcs/wall/wall3.png");
+    if (!texture)
+    {
+        printf(RED "texture failed\n" RESET);
+        exit(1);
+    }
+    data->wall2 = mlx_texture_to_image(data->mlx, texture);
+    if (!data->wall2)
+    {
+        printf(RED "image failed\n" RESET);
+        exit(1);
+    }
+    mlx_delete_texture(texture);
+
+    texture = mlx_load_png("../rsrcs/wall/wall4.png");
+    if (!texture)
+    {
+        printf(RED "texture failed\n" RESET);
+        exit(1);
+    }
+    data->wall3 = mlx_texture_to_image(data->mlx, texture);
+    if (!data->wall3)
+    {
+        printf(RED "image failed\n" RESET);
+        exit(1);
+    }
+    mlx_delete_texture(texture);
 }
 
 static void rotate(t_data *data, char c)
@@ -71,48 +130,48 @@ static void rotate(t_data *data, char c)
         data->player->rotation += 360;
 }
 
-static float calculate_distance_to_wall(t_data *data, float rotation, int player_rotation)
-{
+static float calculate_distance_to_wall(t_data *data, float rotation, int player_rotation, float *hitX, float *hitY) {
     float x = data->player->posX;
     float y = data->player->posY;
     float angle_rad = rotation * RADIANT;
+    float prev_x;
+    float prev_y;
 
-    while (map[(int)y / PIXEL][(int)x / PIXEL] != '1')
-    {
-        float prev_x = x;
-        float prev_y = y;
-        
+    while (map[(int)y / PIXEL][(int)x / PIXEL] != '1') {
+        prev_x = x;
+        prev_y = y;
+
         x += cos(angle_rad);
         y += sin(angle_rad);
-        // if ((int)prev_y / PIXEL != (int)y / PIXEL)
-        //     ;
-        // if ((int)y / PIXEL + 1 <= mapY)
-        //     if (map[(int)y / PIXEL + 1][(int)x / PIXEL] != '1');
-        // printf("Y: %d X: %d\n", (int)y / PIXEL + 1, (int)x / PIXEL);
-        if ((int)prev_y / PIXEL != (int)y / PIXEL)
-        {
-            // ft_printf("%d\n", (int)y / PIXEL + 1);
-            // if ((int)y / PIXEL + 1 < mapY)
-            // {
-            //     if (map[(int)y / PIXEL + 1][(int)x / PIXEL] != '1')
-            //     {
-                    if (prev_y < y)
-                        data->wall_dir = 'S'; //GREEN
-                    else
-                        data->wall_dir = 'N'; //RED
-            //     }
-            // }
-        } 
-        else if ((int)prev_x / PIXEL != (int)x / PIXEL) 
-        {
-            if (prev_x < x)
-                data->wall_dir = 'E'; //PINK
-            else
-                data->wall_dir = 'W'; //BLUE
-        }
-        
+
+
     }
-    return (sqrt(pow(x - data->player->posX, 2) + pow(y - data->player->posY, 2)));
+    *hitX = x;
+    *hitY = y;
+    if ((int)prev_y / PIXEL != (int)y / PIXEL) {
+        if (prev_y < y)
+            data->wall_dir = 'S'; // GREEN
+        else
+            data->wall_dir = 'N'; // RED
+    } else if ((int)prev_x / PIXEL != (int)x / PIXEL) {
+        if (prev_x < x)
+            data->wall_dir = 'E'; // PINK
+        else
+            data->wall_dir = 'W'; // BLUE
+    }
+    return sqrt(pow(x - data->player->posX, 2) + pow(y - data->player->posY, 2));
+}
+
+static int	get_correct_color(u_int8_t *pixel)
+{
+	int	rgba;
+
+	rgba = 0;
+	rgba += pixel[0] << 24;
+	rgba += pixel[1] << 16;
+	rgba += pixel[2] << 8;
+	rgba += pixel[3];
+	return (rgba);
 }
 
 static void draw_rays(t_data *data)
@@ -120,42 +179,53 @@ static void draw_rays(t_data *data)
     float distance;
     float rotation;
     float wall_height;
-    int wall_color;
-    int x;
-    int y;
+    int x, y, texture_x, texture_y;
+    float hitX, hitY;
+    int color;
+    mlx_image_t *wall_img;
 
-    // Création de l'image une seule fois à l'extérieur de la boucle
     if (data->img)
         mlx_delete_image(data->mlx, data->img);
     data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 
     rotation = data->player->rotation - 90 - (WIDTH / 2) * DEGREE;
     for (int x = 0; x < WIDTH; x++) {
-        distance = calculate_distance_to_wall(data, rotation, data->player->rotation);
-        wall_height = PIXEL / distance * 300;
+        distance = calculate_distance_to_wall(data, rotation, data->player->rotation, &hitX, &hitY);
+        wall_height = (PIXEL / distance) * (PIXEL * 5);
         if (wall_height - (int)wall_height > 0.5)
             wall_height += 1;
 
-        if (data->wall_dir == 'N')
-            wall_color = data->red;
-        else if (data->wall_dir == 'S')
-            wall_color = data->blue;
-        else if (data->wall_dir == 'W')
-            wall_color = data->green;
-        else if (data->wall_dir == 'E')
-            wall_color = data->pink;
+        float hitPos;
+        if (data->wall_dir == 'E' || data->wall_dir == 'W')
+            hitPos = hitY / PIXEL;
+        else
+            hitPos = hitX / PIXEL;
 
-        // Dessin des pixels sur l'image unique
-        for (y = 0; y < (int)wall_height; y++)
-            if (y + (HEIGHT - (int)wall_height) / 2 < data->img->height)
-                mlx_put_pixel(data->img, x, (float)y + ((float)HEIGHT - wall_height) / 2, wall_color);
+        if (data->wall_dir == 'N')
+            wall_img = data->wall;
+        else if (data->wall_dir == 'S')
+            wall_img = data->wall1;
+        else if (data->wall_dir == 'E')
+            wall_img = data->wall2;
+        else if (data->wall_dir == 'W')
+            wall_img = data->wall3;
+
+        texture_x = (int)(hitPos * wall_img->width) % wall_img->width;
+
+        for (y = 0; y < (int)wall_height; y++) {
+            texture_y = (y * wall_img->height) / (int)wall_height;
+            if (y + (HEIGHT - (int)wall_height) / 2 < data->img->height) {
+                color = get_correct_color(&((u_int8_t *)wall_img->pixels)[(texture_y * wall_img->width + texture_x) * 4]);
+                mlx_put_pixel(data->img, x, (float)y + ((float)HEIGHT - wall_height) / 2, color);
+            }
+        }
 
         rotation += DEGREE;
     }
 
-    // Affichage de l'image unique à la fenêtre une seule fois après la boucle
     mlx_image_to_window(data->mlx, data->img, 0, 0);
 }
+
 
 static void event_mlx(mlx_key_data_t keydata, void *param)
 {
@@ -170,7 +240,7 @@ static void event_mlx(mlx_key_data_t keydata, void *param)
         rotate(data, 'r');
     if (keydata.key == 263 && (keydata.action == (MLX_REPEAT) || keydata.action == (MLX_PRESS))) //LEFT
         rotate(data, 'l');
-    if (keydata.key == 87 && (keydata.action == (MLX_PRESS)))
+    if (keydata.key == 87 && (keydata.action == (MLX_REPEAT) || keydata.action == (MLX_PRESS)))
     {
         temp_x = data->player->posX + SPEED * sin(data->player->rotation * RADIANT);
         temp_y = data->player->posY + SPEED * -1 * cos(data->player->rotation * RADIANT);
@@ -180,7 +250,7 @@ static void event_mlx(mlx_key_data_t keydata, void *param)
             data->player->posY = temp_y;
         }
     }
-    if (keydata.key == 83 && (keydata.action == (MLX_PRESS)))
+    if (keydata.key == 83 && (keydata.action == (MLX_REPEAT) || keydata.action == (MLX_PRESS)))
     {
         temp_x = data->player->posX + SPEED * -1 * sin(data->player->rotation * RADIANT);
         temp_y = data->player->posY + SPEED * cos(data->player->rotation * RADIANT);
@@ -231,7 +301,6 @@ int main(void)
     t_data data;
     
     init(&data);
-    data.mlx = mlx_init(WIDTH, HEIGHT, "Raycasting with MLX42", false);
 
     mlx_key_hook(data.mlx, event_mlx, &data);
     get_background(&data);

@@ -17,9 +17,8 @@
 #define SPEED_ROTATION 15
 #define DEGREE 0.0833333333333333
 
-#define mapX 5
-#define mapY 5
-#define mapS 25
+#define mapX 10
+#define mapY 10
 
 #define RADIANT 0.0174533
 
@@ -43,8 +42,8 @@
 
 typedef struct s_player
 {
-    float posX;
-    float posY;
+    int posX;
+    int posY;
     int rotation;
 }   t_player;
 
@@ -61,7 +60,10 @@ typedef struct s_data
     mlx_image_t *floor;
     mlx_image_t *ceiling;
 
+    mlx_image_t *wall;
     mlx_image_t *wall1;
+    mlx_image_t *wall2;
+    mlx_image_t *wall3;
 
     mlx_t* mlx;
     mlx_image_t *img;
