@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:08:42 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/07 16:25:19 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/06/09 22:13:18 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
+
+bool	check_extension(char *str)
+{
+	char	*temp;
+
+	temp = ft_substr(str, ft_strlen(str) - 4, ft_strlen(str));
+	if (!temp)
+		return (perror("Malloc"), true);
+	if (ft_strlen(str) < 5 || ft_strcmp(temp, ".cub"))
+		return (ft_free(1, &temp), ft_printf_fd(2, RED\
+				"Error\nInvalid map extension\n" RESET), true);
+	ft_free(1, &temp);
+	return (false);
+}
+
 
 static void	find_error(t_data *data)
 {
