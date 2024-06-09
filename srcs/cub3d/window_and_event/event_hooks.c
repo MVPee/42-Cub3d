@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:53 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/09 16:45:42 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/09 19:39:09 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,26 @@ void    move_player(t_data *data, t_mlx_key keydata)
 	{
         temp_x = data->player->x + SPEED * -1 * sin(data->player->angle * RADIANT);
         temp_y = data->player->y + SPEED * cos(data->player->angle * RADIANT);
+        if (!is_wall(data, temp_x, temp_y))
+        {
+            data->player->x = temp_x;
+            data->player->y = temp_y;
+        }
+    }
+    else if (keydata.key == MLX_KEY_A && (keydata.action == (MLX_REPEAT) || keydata.action == (MLX_PRESS)))
+	{
+        temp_x = data->player->x + SPEED * -1 * sin((data->player->angle + 90) * RADIANT);
+        temp_y = data->player->y + SPEED * cos((data->player->angle + 90) * RADIANT);
+        if (!is_wall(data, temp_x, temp_y))
+        {
+            data->player->x = temp_x;
+            data->player->y = temp_y;
+        }
+    }
+    else if (keydata.key == MLX_KEY_D && (keydata.action == (MLX_REPEAT) || keydata.action == (MLX_PRESS)))
+	{
+        temp_x = data->player->x + SPEED * sin((data->player->angle + 90) * RADIANT);
+        temp_y = data->player->y + SPEED * -1 * cos((data->player->angle + 90) * RADIANT);
         if (!is_wall(data, temp_x, temp_y))
         {
             data->player->x = temp_x;
