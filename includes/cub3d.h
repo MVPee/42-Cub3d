@@ -93,10 +93,10 @@ void	get_player_pos(t_data *data);
 void	get_map_size(t_data *data);
 bool	contain_player(char c);
 char	return_element(char **map, int x, int y);
-int	get_correct_color(u_int8_t *pixel);
+int	    get_correct_color(u_int8_t *pixel);
 
 // RAYCASTING
-float calculate_distance_to_wall(t_data *data, float rotation, int player_rotation, float *hitX, float *hitY);
-void draw_rays(t_data *data);
+float   calculate_distance_to_wall(t_data *data, float rotation, float *hitX, float *hitY);
+void    draw_rays(t_data *data);
 
 #endif

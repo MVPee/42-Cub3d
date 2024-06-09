@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:53 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/09 15:28:05 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/09 16:17:38 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void    move_player(t_data *data, t_mlx_key keydata)
 	float temp_x;
 	float temp_y;
 
+	if (keydata.key == 256) // ESCAP
+        exit(0);
 	if (keydata.key == MLX_KEY_Z && (keydata.action == MLX_REPEAT || keydata.action == (MLX_PRESS)))
 	{
         temp_x = data->player->x + SPEED * sin(data->player->angle * RADIANT);
@@ -53,6 +55,7 @@ void    move_player(t_data *data, t_mlx_key keydata)
             data->player->x = temp_x;
             data->player->y = temp_y;
         }
+		draw_rays(data);
     }
 	else if (keydata.key == MLX_KEY_S && (keydata.action == (MLX_REPEAT) || keydata.action == (MLX_PRESS)))
 	{
@@ -63,11 +66,18 @@ void    move_player(t_data *data, t_mlx_key keydata)
             data->player->x = temp_x;
             data->player->y = temp_y;
         }
+		draw_rays(data);
     }
 	else if (keydata.key == MLX_KEY_RIGHT && (keydata.action == (MLX_REPEAT) || keydata.action == (MLX_PRESS)))
+	{
 		rotate_player(data, keydata);
+		draw_rays(data);
+	}
 	else if (keydata.key == MLX_KEY_LEFT && (keydata.action == (MLX_REPEAT) || keydata.action == (MLX_PRESS)))
+	{
 		rotate_player(data, keydata);
+		draw_rays(data);
+	}
 }
 
 void    move_keyhook(t_mlx_key keydata, void *param)
@@ -78,5 +88,4 @@ void    move_keyhook(t_mlx_key keydata, void *param)
         return ;
     data = (t_data *) param;
 	move_player(data, keydata);
-	draw_rays(data);
 }

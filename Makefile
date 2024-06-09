@@ -18,7 +18,8 @@ OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:%.c=%.o))
 
 CFLAGS = -I $(LIBFT) #-g -ggdb3 -fsanitize=address #-Wall -Werror -Wextra
 LDFLAGS = -lft -L $(LIBFT) #-g -ggdb3 -fsanitize=address
-LINUXFLAG = $(LIBMLX)-Iinclude -lglfw -lm -lGL -O3 -Ofast -ffast-math
+LINUXFLAG = $(LIBMLX) -Iinclude
+LINUXFLAG2 = -lglfw -lm -lGL -O3 -Ofast -ffast-math
 
 RED=\033[0;31m
 GREEN=\033[0;32m
@@ -30,11 +31,11 @@ $(LIBFT)/libft.a:
 	$(MAKE) -C $(LIBFT) 
 
 $(NAME): $(OBJS) $(LIBFT)/libft.a
-	@gcc $(OBJS) $(LDFLAGS) $(LINUXFLAG) -o $(NAME)
+	@gcc $(OBJS) $(LDFLAGS) $(LINUXFLAG) $(LINUXFLAG2) -o $(NAME)
 	@echo   "${GREEN}./${NAME} ${RED}map${NC}"
 
 $(OBJS_DIR)/%.o: %.c | $(OBJS_DIR)
-	@gcc $(CFLAGS) -c $< -o $@
+	@gcc $(CFLAGS) $(LINUXFLAG2) -c $< -o $@
 
 $(OBJS_DIR):
 	mkdir -p $(dir $(OBJS))

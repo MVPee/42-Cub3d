@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:07:42 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/09 15:42:56 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/09 16:13:57 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool init_data(t_data *data)
     data->file = NULL;
     data->map = NULL;
     data->image = NULL;
-    data->mlx = mlx_init(WIDTH, HEIGHT, PROGRAM_NAME, true);
+    data->mlx = mlx_init(WIDTH, HEIGHT, PROGRAM_NAME, false);
     if (!data->mlx)
 		return (true);
     data->player = (t_player_pos *)malloc(sizeof(t_player_pos));

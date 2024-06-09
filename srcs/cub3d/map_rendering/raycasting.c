@@ -6,13 +6,13 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:22:06 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/09 15:44:06 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/09 16:17:53 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-float calculate_distance_to_wall(t_data *data, float rotation, int player_rotation, float *hitX, float *hitY)
+float calculate_distance_to_wall(t_data *data, float rotation, float *hitX, float *hitY)
 {
     float x = data->player->x;
     float y = data->player->y;
@@ -20,7 +20,7 @@ float calculate_distance_to_wall(t_data *data, float rotation, int player_rotati
     float prev_x;
     float prev_y;
 
-    while ((int)(y / PIXEL) < data->map_height && (int)(x / PIXEL) < data->map_width && data->map[(int)(y / PIXEL)][(int)(x / PIXEL)] != '1') {
+    while ((int)y / PIXEL < data->map_height && (int)x / PIXEL < data->map_width && data->map[(int)y / PIXEL][(int)x / PIXEL] != '1') {
         prev_x = x;
         prev_y = y;
 
@@ -50,7 +50,9 @@ void draw_rays(t_data *data)
     float wall_height;
     int texture_x, texture_y;
     float hitX, hitY;
+    float hitPos;
     int color;
+    int x, y;
     mlx_image_t *wall_img;
 
     if (data->image)
@@ -58,13 +60,12 @@ void draw_rays(t_data *data)
     data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 
     rotation = data->player->angle - 90 - (WIDTH / 2) * DEGREE;
-    for (int x = 0; x < WIDTH; x++) {
-        distance = calculate_distance_to_wall(data, rotation, data->player->angle, &hitX, &hitY);
+    for (x = 0; x < WIDTH; x++) {
+        distance = calculate_distance_to_wall(data, rotation, &hitX, &hitY);
         wall_height = (PIXEL / distance) * (PIXEL * 5);
         if (wall_height - (int)wall_height > 0.5)
             wall_height += 1;
 
-        float hitPos;
         if (data->wall_dir == 'E' || data->wall_dir == 'W')
             hitPos = hitY / PIXEL;
         else
@@ -81,7 +82,7 @@ void draw_rays(t_data *data)
 
         texture_x = (int)(hitPos * wall_img->width) % wall_img->width;
 
-        for (int y = 0; y < (int)wall_height; y++) {
+        for (y = 0; y < (int)wall_height; y++) {
             texture_y = (y * wall_img->height) / (int)wall_height;
             if (y + (HEIGHT - (int)wall_height) / 2 < data->image->height) {
                 color = get_correct_color(&((u_int8_t *)wall_img->pixels)[(texture_y * wall_img->width + texture_x) * 4]);
@@ -91,6 +92,5 @@ void draw_rays(t_data *data)
 
         rotation += DEGREE;
     }
-
     mlx_image_to_window(data->mlx, data->image, 0, 0);
 }
