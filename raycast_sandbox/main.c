@@ -5,12 +5,12 @@ char map[mapY][mapX] = {
     {'1', '0', '0', '0', '1','1', '0', '1', '1', '1'},
     {'1', '0', '0', '0', '0','0', '0', '0', '0', '1'},
     {'1', '0', '0', '0', '0','0', '0', '0', '0', '1'},
-    {'1', '0', '0', '1', '1','0', '0', '1', '0', '1'},
+    {'1', '0', '0', '0', '1','0', '0', '1', '0', '1'},
     {'1', '0', '0', '1', '0','0', '0', '1', '0', '1'},
     {'1', '0', '0', '1', '0','0', '1', '1', '0', '1'},
     {'1', '0', '0', '1', '0','0', '0', '1', '0', '1'},
     {'1', 'P', '0', '0', '0','0', '0', '0', '0', '1'},
-    {'1', '1', '1', '1', '1','1', '1', '1', '1', '1'}
+    {'0', '1', '1', '1', '1','1', '1', '1', '1', '1'}
 };
 
 int get_rgba(int r, int g, int b, int a)
@@ -18,14 +18,17 @@ int get_rgba(int r, int g, int b, int a)
     return (r << 24 | g << 16 | b << 8 | a);
 }
 
-static int is_wall(float x, float y)
+static int is_wall(t_data *data, float x, float y)
 {
     int map_x = (int)x / PIXEL;
     int map_y = (int)y / PIXEL;
 
     if (map_x < 0 || map_x >= mapX || map_y < 0 || map_y >= mapY)
         return 1;
-
+    if ((int)data->player->posY/PIXEL != map_y && (int)data->player->posX/PIXEL != map_x)
+        if (map[map_y][map_x] != '1')
+            if (map[map_y][(int)data->player->posX/PIXEL] == '1' && map[(int)data->player->posY/PIXEL][map_x] == '1')
+                return (1);
     return map[map_y][map_x] == '1';
 }
 
@@ -52,7 +55,6 @@ static void init(t_data *data)
     data->mlx = mlx_init(WIDTH, HEIGHT, "Raycasting with MLX42", false);
     get_player_pos(data);
     data->player->rotation = 0;
-    ft_printf(GREEN "\nPlayer pos:\n\tY: %d\n\tX: %d\n\n" RESET, data->player->posY, data->player->posX);
     data->wall_dir = 0;
     data->img = NULL;
 
@@ -123,6 +125,7 @@ static void rotate(t_data *data, char c)
         data->player->rotation -= 360;
     else if (data->player->rotation < 0)
         data->player->rotation += 360;
+    printf(BLUE "\nPlayer Rotation:\n\t%d°\n" RESET, data->player->rotation);
 }
 
 static float calculate_distance_to_wall(t_data *data, float rotation, int player_rotation, float *hitX, float *hitY) {
@@ -132,7 +135,7 @@ static float calculate_distance_to_wall(t_data *data, float rotation, int player
     float prev_x;
     float prev_y;
 
-    while (map[(int)y / PIXEL][(int)x / PIXEL] != '1') {
+    while ((int)y / PIXEL < mapY && (int)x / PIXEL < mapX && map[(int)y / PIXEL][(int)x / PIXEL] != '1') {
         prev_x = x;
         prev_y = y;
 
@@ -237,7 +240,7 @@ static void event_mlx(mlx_key_data_t keydata, void *param)
     {
         temp_x = data->player->posX + SPEED * sin(data->player->rotation * RADIANT);
         temp_y = data->player->posY + SPEED * -1 * cos(data->player->rotation * RADIANT);
-        if (!is_wall(temp_x, temp_y))
+        if (!is_wall(data, temp_x, temp_y))
         {
             data->player->posX = temp_x;
             data->player->posY = temp_y;
@@ -247,13 +250,12 @@ static void event_mlx(mlx_key_data_t keydata, void *param)
     {
         temp_x = data->player->posX + SPEED * -1 * sin(data->player->rotation * RADIANT);
         temp_y = data->player->posY + SPEED * cos(data->player->rotation * RADIANT);
-        if (!is_wall(temp_x, temp_y))
+        if (!is_wall(data, temp_x, temp_y))
         {
             data->player->posX = temp_x;
             data->player->posY = temp_y;
         }
     }
-    printf(BLUE "\nPlayer Rotation:\n\t%d°\n" RESET, data->player->rotation);
     draw_rays(data);
 }
 
