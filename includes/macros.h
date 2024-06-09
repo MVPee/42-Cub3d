@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:08:32 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/08 23:22:44 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/09 14:55:00 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,16 @@
 
 // MOVEMENT MACROS
 # define SPEED 0.25
-# define RADIANT 0.0174533
+# define RADIANT 0.0174533 //per 1 degree
+# define PIXEL 128
+# define SPEED 32
+# define SPEED_ROTATION 15
+# define DEGREE 0.0833333333333333 // beetween ray (POV/WIDTH)
+# define FOV 90
 
 // RESOLUTION
-# define WIDTH 1280
+# define WIDTH 1080
 # define HEIGHT 720
-
-// RAYS RESOLUTION
-# define RAY_RES 60
 
 // LINUX_KEYS
 # ifdef __linux__
