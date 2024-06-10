@@ -6,7 +6,7 @@
 /*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 10:37:05 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/08 21:26:47 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/06/09 21:32:35 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static bool	check_row(char **map, int y, int x, int *count)
 		*count += 1;
 	return (false);
 }
-
 
 bool	check_map(char ***map)
 {

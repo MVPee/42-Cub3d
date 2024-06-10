@@ -3,118 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   map_optimization.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:54:33 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/09 21:29:27 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/10 15:54:30 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-static void	get_all_directions(char **map, bool *flag, int y, int x, char p)
-{
-	if (map[y - 1][x] == '0')
-	{
-		map[y - 1][x] = p;
-		*flag = true;
-	}
-	if (map[y + 1][x] == '0')
-	{
-		map[y + 1][x] = p;
-		*flag = true;
-	}
-	if (map[y][x - 1] == '0')
-	{
-		map[y][x - 1] = p;
-		*flag = true;
-	}
-	if (map[y][x + 1] == '0')
-	{
-		map[y][x + 1] = p;
-		*flag = true;
-	}
-}
-
-static void	get_all_possible_paths(char **map, char *p)
-{
-	int		y;
-	int		x;
-	bool	flag;
-
-	flag = true;
-	while (flag)
-	{
-		flag = false;
-		y = -1;
-		while (map[++y])
-		{
-			x = -1;
-			while (map[y][++x])
-			{
-				if (contain_player(map[y][x]))
-				{
-					*p = return_element(map, x, y);
-					get_all_directions(map, &flag, y, x, *p);
-				}
-			}		
-		}
-	}
-}
-
-static void	get_new_map(char **map, int *n, char p)
-{
-	int	y;
-	int	x;
-
-	y = -1;
-	while (map[++y])
-	{
-		x = -1;
-		while (map[y][++x])
-		{
-			if (map[y][x] == '0' || map[y][x] == '1')
-				map[y][x] = ' ';
-		}
-	}
-	y = -1;
-	while (map[++y])
-	{
-		x = -1;
-		while (map[y][++x])
-		{
-			if (contain_player(map[y][x]))
-				map[y][x] = '0';
-		}
-	}
-	map[n[0]][n[1]] = p;
-}
-
-static void	put_border(char **map)
-{
-	int	y;
-	int	x;
-
-	y = -1;
-	while (map[++y])
-	{
-		x = -1;
-		while (map[y][++x])
-		{
-			if (map[y][x] == '0' || contain_player(map[y][x]))
-			{
-				if (map[y - 1][x] == ' ')
-					map[y - 1][x] = '1';
-				if (map[y + 1][x] == ' ')
-					map[y + 1][x] = '1';
-				if (map[y][x - 1] == ' ')
-					map[y][x - 1] = '1';
-				if (map[y][x + 1] == ' ')
-					map[y][x + 1] = '1';
-			}
-		}
-	}
-}
+// TODO : Je vais refactor la fonction chef ne t'inquetes pas
 
 void map_optimization(char ***map)
 {
@@ -123,19 +21,7 @@ void map_optimization(char ***map)
 	int	x;
 	char p;
 
-	y = -1;
-	while ((*map)[++y])
-	{
-		x = -1;
-		while ((*map)[y][++x])
-		{
-			if (contain_player((*map)[y][x]))
-			{
-				n[0] = y;
-				n[1] = x;
-			}
-		}
-	}
+	fetch_player_pos(map, n);
 	get_all_possible_paths(*map, &p);
 	get_new_map(*map, n, p);
 	put_border(*map);
@@ -161,7 +47,6 @@ void map_optimization(char ***map)
 			}
 		}
 	}
-
 	x = max + 1 - min;
 	char **new_map = (char **)malloc(sizeof(char *) * (y + 1));
 	for (int i = 0; i < y; i++)
