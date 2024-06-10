@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event_hooks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:53 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/10 15:40:16 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/06/10 20:44:36 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,11 @@ static void    movement(t_data *data, t_mlx_key keydata)
         keydata.key == MLX_KEY_D && \
         (keydata.action == MLX_REPEAT || keydata.action == (MLX_PRESS)))
         move_player(data, keydata);
-	else if (keydata.key == MLX_KEY_RIGHT || keydata.key == MLX_KEY_LEFT && (keydata.action == (MLX_REPEAT) || keydata.action == (MLX_PRESS)))
+	else if (keydata.key == MLX_KEY_RIGHT && \
+        (keydata.action == (MLX_REPEAT) || keydata.action == (MLX_PRESS)))
+		rotate_player(data, keydata);
+    else if (keydata.key == MLX_KEY_LEFT && \
+        (keydata.action == (MLX_REPEAT) || keydata.action == (MLX_PRESS)))
 		rotate_player(data, keydata);
 	draw_rays(data);
 }
