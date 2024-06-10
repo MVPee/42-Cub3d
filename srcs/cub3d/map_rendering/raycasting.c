@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:22:06 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/09 21:47:26 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/10 09:40:28 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,19 @@ static float calculate_distance_to_wall(t_data *data, float rotation, float *hit
         y += sin(angle_rad);
         count++;
         if (count > 2000)
-            return (printf("YEAH\n"), -1);
+            return (-1);
     }
     *hitX = x;
     *hitY = y;
-    if ((int)prev_y / PIXEL != (int)y / PIXEL) {
+    if ((int)prev_y / PIXEL != (int)y / PIXEL)
+    {
         if (prev_y < y)
             data->wall_dir = 'S';
         else
             data->wall_dir = 'N';
-    } else if ((int)prev_x / PIXEL != (int)x / PIXEL) {
+    }
+    else if ((int)prev_x / PIXEL != (int)x / PIXEL)
+    {
         if (prev_x < x)
             data->wall_dir = 'E';
         else
