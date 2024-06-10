@@ -13,11 +13,8 @@ SRCS = 	main.c \
 		srcs/cub3d/parsing/map_optimization.c \
 		srcs/cub3d/parsing/map_optimization_utils.c \
 		srcs/cub3d/map_rendering/raycasting.c \
-<<<<<<< Updated upstream
+		srcs/cub3d/map_rendering/raycasting_utils.c \
 		srcs/cub3d/map_rendering/minimap.c
-=======
-		srcs/cub3d/map_rendering/raycasting_utils.c
->>>>>>> Stashed changes
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:%.c=%.o))
 

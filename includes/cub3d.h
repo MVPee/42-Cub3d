@@ -36,12 +36,6 @@ typedef enum e_move
     ROTATE_RIGHT
 }   t_move;
 
-typedef struct s_pos
-{
-    double  x;
-    double  y;
-}   t_pos;
-
 typedef struct s_player_pos
 {
     double  x;
@@ -49,45 +43,61 @@ typedef struct s_player_pos
     int     angle;
 }   t_player_pos;
 
+// RAYCAST STRUCTURES
+
+typedef struct s_distance
+{
+    float	x;
+    float	y;
+    float	angle_rad;
+    float	step_x;
+    float	step_y;
+    int		prev_x;
+    int		prev_y;
+	float	distance;
+}   t_distance;
+
+typedef t_distance t_dist;
+
+typedef struct s_raycast
+{
+    float		distance;
+    float		rotation;
+    float		wall_height;
+    int			texture_x;
+	int			texture_y;
+    float		hitX;
+	float		hitY;
+    float		hitPos;
+    int			color;
+    int			x;
+	int			y;
+	mlx_image_t	*wall_img;
+}   t_raycast;
+
 typedef struct s_data
 {
     t_img *north_image;
     t_img *south_image;
     t_img *west_image;
     t_img *east_image;
-
     int     floor_color;
     int     ceiling_color;
-
     char    **file;
     char    **map;
-
     size_t        map_width;
     size_t        map_height;
-
     char wall_dir;
-
     mlx_t   *mlx;
-
     t_img *floor_image;
     t_img *ceiling_image;
     t_img *fog;
     t_img *image;
-
     t_img *minimap;
     t_img *arrow;
-
     t_player_pos *player;
 }   t_data;
 
-// MAP OPTIMISATION
-
-// MAP OPTIMISATION UTILS
-void	get_all_directions(char **map, bool *flag,int *val, char p);
-void	get_all_possible_paths(char **map, char *p);
-void	get_new_map(char **map, int *n, char p);
-void	put_border(char **map);
-void    fetch_player_pos(char ***map, int *n);
 // PARSING
 bool    check_extension(char *str);
 bool    check_file(t_data *data);
@@ -97,7 +107,12 @@ void    fetch_player_pos(char ***map, int *n);
 void	put_border(char **map);
 void	get_new_map(char **map, int *n, char p);
 void	get_all_possible_paths(char **map, char *p);
-
+// PARSING UTILS
+void	get_all_directions(char **map, bool *flag,int *val, char p);
+void	get_all_possible_paths(char **map, char *p);
+void	get_new_map(char **map, int *n, char p);
+void	put_border(char **map);
+void    fetch_player_pos(char ***map, int *n);
 // GRAPHICS
 int     game_loop(t_data *data);
 // KEY_HOOKS
@@ -114,5 +129,7 @@ int	    get_correct_color(u_int8_t *pixel);
 // RAYCASTING
 void    draw_rays(t_data *data);
 void    mini_map(t_data *data);
+// RAYCASTING UTILS
+float get_distance(t_data *data, float rotation, float *hitX, float *hitY);
 
 #endif
