@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event_hooks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:53 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/09 20:11:53 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/10 15:40:16 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,22 @@ static void move_player(t_data *data, t_mlx_key keydata)
     float temp_x;
     float temp_y;
 
-    if (keydata.key == MLX_KEY_Z)
+    if (keydata.key == MLX_KEY_A)
     {
         temp_x = data->player->x + SPEED * sin(data->player->angle * RADIANT);
         temp_y = data->player->y + SPEED * -1 * cos(data->player->angle * RADIANT);
     }
-    else if (keydata.key == MLX_KEY_S)
+    else if (keydata.key == MLX_KEY_D)
     {
         temp_x = data->player->x + SPEED * -1 * sin(data->player->angle * RADIANT);
         temp_y = data->player->y + SPEED * cos(data->player->angle * RADIANT);
     }
-    else if (keydata.key == MLX_KEY_A)
+    else if (keydata.key == MLX_KEY_S)
     {
         temp_x = data->player->x + SPEED * -1 * sin((data->player->angle + 90) * RADIANT);
         temp_y = data->player->y + SPEED * cos((data->player->angle + 90) * RADIANT);
     }
-    else if (keydata.key == MLX_KEY_D)
+    else if (keydata.key == MLX_KEY_Z)
     {
         temp_x = data->player->x + SPEED * sin((data->player->angle + 90) * RADIANT);
         temp_y = data->player->y + SPEED * -1 * cos((data->player->angle + 90) * RADIANT);
