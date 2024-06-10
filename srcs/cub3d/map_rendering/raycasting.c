@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:22:06 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/10 09:40:28 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/10 15:55:20 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static float calculate_distance_to_wall(t_data *data, float rotation, float *hit
         else
             data->wall_dir = 'W';
     }
-    return sqrt(pow(x - data->player->x, 2) + pow(y - data->player->y, 2));
+    return sqrt((pow(x - data->player->x, 2) + pow(y - data->player->y, 2)));
 }
 
 void draw_rays(t_data *data)
@@ -60,16 +60,21 @@ void draw_rays(t_data *data)
     float hitPos;
     int color;
     int x, y;
+    float ray_angle;
+    float corrected_distance ;
+    float view_distance;
     mlx_image_t *wall_img;
 
     if (data->image)
         mlx_delete_image(data->mlx, data->image);
     data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-
-    rotation = data->player->angle - 90 - (WIDTH / 2) * DEGREE;
-    for (x = 0; x < WIDTH; x++) {
-        distance = calculate_distance_to_wall(data, rotation, &hitX, &hitY);
-        wall_height = (PIXEL / distance) * (PIXEL * 5);
+    rotation = data->player->angle - 90 - ((float) WIDTH / 2) * DEGREE;
+    for (int x = 0; x < WIDTH; x++) {
+    view_distance = (WIDTH / (2 * tan(((float) FOV/2.0f) * RADIANT)));
+    ray_angle = data->player->angle + atan((x - WIDTH / 2.0f) / view_distance) * (180.0f / M_PI);
+    distance = calculate_distance_to_wall(data, ray_angle, &hitX, &hitY);
+    corrected_distance = distance * cos((ray_angle - data->player->angle) * RADIANT);
+    wall_height = (PIXEL * view_distance) / corrected_distance;
         if (wall_height - (int)wall_height > 0.5)
             wall_height += 1;
 
@@ -102,5 +107,6 @@ void draw_rays(t_data *data)
 
         rotation += DEGREE;
     }
+    printf(RED"PLAYER X : %d PLAYER Y: %d\n" RESET, (int) data->player->x, (int) data->player->y);
     mlx_image_to_window(data->mlx, data->image, 0, 0);
 }
