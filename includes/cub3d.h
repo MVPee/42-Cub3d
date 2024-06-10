@@ -74,6 +74,9 @@ typedef struct s_data
     t_img *fog;
     t_img *image;
 
+    t_img *minimap;
+    t_img *arrow;
+
     t_player_pos *player;
 }   t_data;
 
@@ -101,7 +104,7 @@ int     game_loop(t_data *data);
 void    move_keyhook(mlx_key_data_t keydata, void *param);
 // UTILS
 bool    error_handler(char *str);
-int     get_rgba(int r, int g, int b, int a);
+int     get_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 void	get_player_pos(t_data *data);
 void	get_map_size(t_data *data);
 bool	contain_player(char c);
@@ -110,5 +113,6 @@ int	    get_correct_color(u_int8_t *pixel);
 
 // RAYCASTING
 void    draw_rays(t_data *data);
+void    mini_map(t_data *data);
 
 #endif
