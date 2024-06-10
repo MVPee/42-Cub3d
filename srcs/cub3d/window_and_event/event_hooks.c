@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event_hooks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:53 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/10 22:46:35 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/11 00:00:54 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ static void    movement(t_data *data, t_mlx_key keydata)
 {
 	if (keydata.key == MLX_KEY_ESCAPE)
         exit(0); //free
-	if (keydata.key == MLX_KEY_Z || \
+	if ((keydata.key == MLX_KEY_Z || \
         keydata.key == MLX_KEY_S || \
         keydata.key == MLX_KEY_A || \
-        keydata.key == MLX_KEY_D && \
+        keydata.key == MLX_KEY_D ) && \
         (keydata.action == MLX_REPEAT || keydata.action == (MLX_PRESS)))
         move_player(data, keydata);
 	else if (keydata.key == MLX_KEY_RIGHT && \

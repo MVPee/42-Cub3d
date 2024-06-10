@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:08:32 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/10 22:38:34 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/11 00:01:24 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 # define SPEED_ROTATION 15
 # define DEGREE 0.0833333333333333
 # define FOV 60
-# define FAST_PI_DIV 57.2957795131
+# define F_PI 57.2957795131
 
 // RESOLUTION
 # define WIDTH 1080
