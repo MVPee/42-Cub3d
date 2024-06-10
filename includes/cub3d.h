@@ -40,7 +40,7 @@ typedef struct s_pos
 {
     double  x;
     double  y;
-}    t_pos;
+}   t_pos;
 
 typedef struct s_player_pos
 {
@@ -77,12 +77,19 @@ typedef struct s_data
     t_player_pos *player;
 }   t_data;
 
+// MAP OPTIMISATION
+
+// MAP OPTIMISATION UTILS
+void	get_all_directions(char **map, bool *flag,int *val, char p);
+void	get_all_possible_paths(char **map, char *p);
+void	get_new_map(char **map, int *n, char p);
+void	put_border(char **map);
+void    fetch_player_pos(char ***map, int *n);
 // PARSING
 bool    check_extension(char *str);
 bool    check_file(t_data *data);
 bool	check_map(char ***map);
 void    map_optimization(char ***map);
-
 // GRAPHICS
 int     game_loop(t_data *data);
 // KEY_HOOKS

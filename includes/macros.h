@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:08:32 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/10 09:37:42 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/10 16:57:39 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,13 @@
 # define RESET   "\x1b[0m"
 
 // MOVEMENT MACROS
-# define RADIANT 0.0174533 //per 1 degree
+# define RADIANT 0.0174533
 # define PIXEL 128
-# define SPEED 32
+# define SPEED 64
 # define SPEED_ROTATION 15
-# define DEGREE 0.0833333333333333 // beetween ray (POV/WIDTH)
-# define FOV 90
+# define DEGREE 0.0833333333333333
+# define FOV 60
+# define FAST_PI_DIV 57.2957795131
 
 // RESOLUTION
 # define WIDTH 1080
