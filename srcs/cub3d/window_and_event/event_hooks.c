@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:53 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/10 21:19:26 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/10 22:46:35 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,23 +84,6 @@ static void    movement(t_data *data, t_mlx_key keydata)
     else if (keydata.key == MLX_KEY_LEFT && \
         (keydata.action == (MLX_REPEAT) || keydata.action == (MLX_PRESS)))
 		rotate_player(data, keydata);
-}
-
-void mini_map(t_data *data)
-{
-    uint32_t white = get_rgba(255,255,255,64);
-    int color;
-
-    color = get_correct_color(((u_int8_t *)&white));
-    if (data->minimap)
-        mlx_delete_image(data->mlx, data->minimap);
-    data->minimap = mlx_new_image(data->mlx, 200, 200);
-    for (int i = 0; i < 200; i++)
-        for (int j = 0; j < 200; j++)
-            mlx_put_pixel(data->minimap, j, i, color);
-    printf(GREEN "Player:\n\tY: %f\n\tX: %f\n" RESET, data->player->y, data->player->x);
-    mlx_image_to_window(data->mlx, data->minimap, WIDTH - 200 - 25, 25);
-
 }
 
 void    move_keyhook(t_mlx_key keydata, void *param)

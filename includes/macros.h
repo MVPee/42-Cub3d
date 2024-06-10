@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:08:32 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/10 16:57:39 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/06/10 22:38:34 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@
 // RESOLUTION
 # define WIDTH 1080
 # define HEIGHT 720
+
+// MINIMAP
+# define MINIMAP_SIZE 150
+# define WALL_SIZE 20
+# define PLAYER_SIZE 10
 
 // LINUX_KEYS
 # ifdef __linux__
