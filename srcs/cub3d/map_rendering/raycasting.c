@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:22:06 by nechaara          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/06/10 19:20:33 by nechaara         ###   ########.fr       */
-=======
-/*   Updated: 2024/06/10 20:05:56 by mvpee            ###   ########.fr       */
->>>>>>> af19afb397f75f1abc96e5a185544861d2b70ee6
+/*   Updated: 2024/06/10 21:56:23 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +14,28 @@
 
 static float calculate_distance_to_wall(t_data *data, float rotation, float *hitX, float *hitY)
 {
-    float x = data->player->x;
-    float y = data->player->y;
-    float angle_rad = rotation * RADIANT;
-    float prev_x;
-    float prev_y;
-    int count = 0;
+    float x;
+    float y;
+    float angle_rad;
+    float step_x;
+    float step_y;
+    int prev_x;
+    int prev_y;
 
-    while ((int)y / PIXEL < data->map_height && (int)x / PIXEL < data->map_width && data->map[(int)y / PIXEL][(int)x / PIXEL] != '1') {
+    x = data->player->x;
+    y = data->player->y;
+    angle_rad = rotation * RADIANT;
+    step_x = cos(angle_rad);
+    step_y = sin(angle_rad);
+
+    while ((int)y / PIXEL < data->map_height && (int)x / PIXEL < data->map_width && data->map[(int)y / PIXEL][(int)x / PIXEL] != '1') 
+    {
         prev_x = x;
         prev_y = y;
 
-        x += cos(angle_rad);
-        y += sin(angle_rad);
-        count++;
-        if (count > 2000)
-            return (-1);
+        x += step_x;
+        y += step_y;
     }
-    *hitX = x;
-    *hitY = y;
     if ((int)prev_y / PIXEL != (int)y / PIXEL)
     {
         if (prev_y < y)
@@ -51,7 +50,11 @@ static float calculate_distance_to_wall(t_data *data, float rotation, float *hit
         else
             data->wall_dir = 'W';
     }
-    return sqrt((pow(x - data->player->x, 2) + pow(y - data->player->y, 2)));
+    float distance = sqrt(pow(x - data->player->x, 2) + pow(y - data->player->y, 2));
+    *hitX = x;
+    *hitY = y;
+
+    return distance;
 }
 
 void draw_rays(t_data *data)
@@ -74,10 +77,10 @@ void draw_rays(t_data *data)
     data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
     rotation = data->player->angle - 90 - ((float) WIDTH / 2) * DEGREE;
     for (int x = 0; x < WIDTH; x++) {
-        view_distance = (WIDTH / (2 * tan(((float) FOV/2.0f) * RADIANT)));
-        ray_angle = data->player->angle + atan((x - WIDTH / 2.0f) / view_distance) * (180.0f / M_PI);
-        distance = calculate_distance_to_wall(data, ray_angle, &hitX, &hitY);
-        corrected_distance = distance * cos((ray_angle - data->player->angle) * RADIANT);
+		view_distance = (WIDTH / (2 * tan(((float) FOV/2.0f) * RADIANT)));
+		ray_angle = data->player->angle + atan((x - WIDTH / 2.0f) / view_distance) * (180.0f / M_PI);
+		distance = calculate_distance_to_wall(data, ray_angle, &hitX, &hitY);
+		corrected_distance = distance * cos((ray_angle - data->player->angle) * RADIANT);
         wall_height = (PIXEL * view_distance) / corrected_distance;
         if (wall_height - (int)wall_height > 0.5)
             wall_height += 1;
