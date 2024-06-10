@@ -6,7 +6,7 @@
 /*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:36:30 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/10 14:29:05 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/06/10 19:15:39 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,13 @@ void	set_cardinal_dir(t_data *data, int x, int y)
 		return ;
 	c = data->map[y][x];
 	if (c == 'N')
-		data->player->angle = 0;
-	else if (c == 'S')
-		data->player->angle = 180;
-	else if (c == 'W')
 		data->player->angle = 270;
 	else if (c == 'E')
+		data->player->angle = 0;
+	else if (c == 'S')
 		data->player->angle = 90;
+	else if (c == 'W')
+		data->player->angle = 180;
 }
 
 void	get_player_pos(t_data *data)
@@ -90,8 +90,8 @@ void	get_player_pos(t_data *data)
 		{
 			if (contain_player(data->map[y][x]))
 			{
-				data->player->x = x * PIXEL + PIXEL / 2;
-				data->player->y = y * PIXEL + PIXEL / 2;
+				data->player->x = x * PIXEL + ((float) PIXEL / 2);
+				data->player->y = y * PIXEL + ((float) PIXEL / 2);
 				set_cardinal_dir(data, x, y);
 				break;
 			}
