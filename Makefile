@@ -11,6 +11,7 @@ SRCS = 	main.c \
 		srcs/cub3d/window_and_event/event_hooks.c \
 		srcs/cub3d/utils/utils.c \
 		srcs/cub3d/parsing/map_optimization.c \
+		srcs/cub3d/parsing/map_optimization_utils.c \
 		srcs/cub3d/map_rendering/raycasting.c \
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:%.c=%.o))
