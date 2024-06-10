@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:22:06 by nechaara          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/06/10 19:20:33 by nechaara         ###   ########.fr       */
+=======
+/*   Updated: 2024/06/10 20:05:56 by mvpee            ###   ########.fr       */
+>>>>>>> af19afb397f75f1abc96e5a185544861d2b70ee6
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +74,11 @@ void draw_rays(t_data *data)
     data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
     rotation = data->player->angle - 90 - ((float) WIDTH / 2) * DEGREE;
     for (int x = 0; x < WIDTH; x++) {
-    view_distance = (WIDTH / (2 * tan(((float) FOV/2.0f) * RADIANT)));
-    ray_angle = data->player->angle + atan((x - WIDTH / 2.0f) / view_distance) * FAST_PI_DIV;
-    distance = calculate_distance_to_wall(data, ray_angle, &hitX, &hitY);
-    corrected_distance = distance * cos((data->player->angle - ray_angle) * RADIANT);
-    wall_height = (PIXEL * view_distance) / corrected_distance;
+        view_distance = (WIDTH / (2 * tan(((float) FOV/2.0f) * RADIANT)));
+        ray_angle = data->player->angle + atan((x - WIDTH / 2.0f) / view_distance) * (180.0f / M_PI);
+        distance = calculate_distance_to_wall(data, ray_angle, &hitX, &hitY);
+        corrected_distance = distance * cos((ray_angle - data->player->angle) * RADIANT);
+        wall_height = (PIXEL * view_distance) / corrected_distance;
         if (wall_height - (int)wall_height > 0.5)
             wall_height += 1;
 

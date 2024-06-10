@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   map_optimization_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:03:24 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/09 21:32:26 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/06/10 19:58:13 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-void	get_all_directions(char **map, bool *flag,int *val, char p)
+static void	get_all_directions(char **map, bool *flag,int *val, char p)
 {
 	if (map[val[1] - 1][val[0]] == '0')
 	{
