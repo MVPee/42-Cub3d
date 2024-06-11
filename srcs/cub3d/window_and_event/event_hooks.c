@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event_hooks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:53 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/11 00:00:54 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/06/11 09:07:40 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,24 @@
 
 static void is_wall(t_data *data, float x, float y)
 {
-    int map_x;
-    int map_y;
+    int map_x, map_y;
+    int player_map_x = (int)data->player->x / PIXEL;
+    int player_map_y = (int)data->player->y / PIXEL;
 
     map_x = (int)x / PIXEL;
     map_y = (int)y / PIXEL;
+
     if (map_x < 0 || map_x >= data->map_width || map_y < 0 || map_y >= data->map_height)
         return;
+
+    if (data->map[player_map_y][((int)x + PIXEL / 8) / PIXEL] == '1')
+        x = data->player->x;
+    if (data->map[((int)y + PIXEL / 8) / PIXEL][player_map_x] == '1')
+        y = data->player->y;
+    if (data->map[player_map_y][((int)x - PIXEL / 8) / PIXEL] == '1')
+        x = data->player->x;
+    if (data->map[((int)y - PIXEL / 8) / PIXEL][player_map_x] == '1')
+        y = data->player->y;
     if (data->map[(int)data->player->y / PIXEL][(int)x / PIXEL] != '1')
         data->player->x = x;
     if (data->map[(int)y / PIXEL][(int)data->player->x / PIXEL] != '1')
