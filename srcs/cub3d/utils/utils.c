@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:36:30 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/10 19:15:39 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/06/10 21:02:00 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-int get_rgba(int r, int g, int b, int a)
+int get_rgba(uint8_t  r, uint8_t  g, uint8_t  b, uint8_t  a)
 {
-    return (255 << 24 | b << 16 | g << 8 | r);
+    return (a << 24 | b << 16 | g << 8 | r);
 }
 
 void	get_map_size(t_data *data)

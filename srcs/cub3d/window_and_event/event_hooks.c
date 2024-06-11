@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:53 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/10 20:44:36 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/11 09:09:55 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,14 @@ static void is_wall(t_data *data, float x, float y)
     map_y = (int)y / PIXEL;
     if (map_x < 0 || map_x >= data->map_width || map_y < 0 || map_y >= data->map_height)
         return;
+    if (data->map[(int)data->player->y / PIXEL][((int)x + PIXEL / 8) / PIXEL] == '1')
+        x = data->player->x;
+    if (data->map[((int)y + PIXEL / 8) / PIXEL][(int)data->player->x / PIXEL] == '1')
+        y = data->player->y;
+    if (data->map[(int)data->player->y / PIXEL][((int)x - PIXEL / 8) / PIXEL] == '1')
+        x = data->player->x;
+    if (data->map[((int)y - PIXEL / 8) / PIXEL][(int)data->player->x / PIXEL] == '1')
+        y = data->player->y;
     if (data->map[(int)data->player->y / PIXEL][(int)x / PIXEL] != '1')
         data->player->x = x;
     if (data->map[(int)y / PIXEL][(int)data->player->x / PIXEL] != '1')
@@ -72,10 +80,10 @@ static void    movement(t_data *data, t_mlx_key keydata)
 {
 	if (keydata.key == MLX_KEY_ESCAPE)
         exit(0); //free
-	if (keydata.key == MLX_KEY_Z || \
+	if ((keydata.key == MLX_KEY_Z || \
         keydata.key == MLX_KEY_S || \
         keydata.key == MLX_KEY_A || \
-        keydata.key == MLX_KEY_D && \
+        keydata.key == MLX_KEY_D ) && \
         (keydata.action == MLX_REPEAT || keydata.action == (MLX_PRESS)))
         move_player(data, keydata);
 	else if (keydata.key == MLX_KEY_RIGHT && \
@@ -84,7 +92,6 @@ static void    movement(t_data *data, t_mlx_key keydata)
     else if (keydata.key == MLX_KEY_LEFT && \
         (keydata.action == (MLX_REPEAT) || keydata.action == (MLX_PRESS)))
 		rotate_player(data, keydata);
-	draw_rays(data);
 }
 
 void    move_keyhook(t_mlx_key keydata, void *param)
@@ -95,4 +102,6 @@ void    move_keyhook(t_mlx_key keydata, void *param)
         return ;
     data = (t_data *) param;
 	movement(data, keydata);
+    draw_rays(data);
+    mini_map(data);
 }

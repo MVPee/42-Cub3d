@@ -25,6 +25,7 @@ bool init_data(t_data *data)
     data->east_image = NULL;
     data->file = NULL;
     data->map = NULL;
+    data->minimap = NULL;
     data->mlx = mlx_init(WIDTH, HEIGHT, PROGRAM_NAME, true);
     if (!data->mlx)
 		return (true);
