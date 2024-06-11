@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:08:32 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/11 00:01:24 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/06/11 09:17:11 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define INVALID_MAP "Error\nInvalid map in y: %d x:%d c:'%c'\n"
 # define INVALID_BORDER "Error\nBad Border\n"
 # define WRONG_PLAYER_COUNT "Error\nWrong player count\n"
+# define NUMBERS_OF_ARGUMENTS "Error\nNumber of argument(s)\n"
 // COLOR
 # define RED     "\x1b[31m"
 # define GREEN   "\x1b[32m"
