@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event_hooks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nechaara <nechaara.student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:53 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/11 09:28:00 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/11 19:12:37 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void    move_keyhook(t_mlx_key keydata, void *param)
     if (!param)
         return ;
     data = (t_data *) param;
-	movement(data, keydata);
+    movement(data, keydata);
     draw_rays(data);
     mini_map(data);
 }

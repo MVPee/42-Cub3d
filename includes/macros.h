@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nechaara <nechaara.student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:08:32 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/11 09:17:11 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/11 19:10:06 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,13 @@
 # define MINIMAP_SIZE 150
 # define WALL_SIZE 20
 # define PLAYER_SIZE 10
+# define MLX_KEY_Z 87
+# define MLX_KEY_S 83
+# define MLX_KEY_Q 65
+# define MLX_KEY_D 68
+# define MLX_KEY_RIGHT 262
+# define MLX_KEY_LEFT 263
+# define MLX_KEY_ESCAPE 256
 
-// LINUX_KEYS
-# ifdef __linux__
-#  define MLX_KEY_Z 87
-#  define MLX_KEY_S 83
-#  define MLX_KEY_Q 65
-#  define MLX_KEY_D 68
-#  define MLX_KEY_RIGHT 262
-#  define MLX_KEY_LEFT 263
-#  define MLX_KEY_ESCAPE 256
-# endif
-// Need to find out keycode with MLX42
-# ifdef __APPLE_
-#  define Z_KEY 87
-#  define S_KEY 83
-#  define Q_KEY 65
-#  define D_KEY 68
-# endif 
 
 #endif
