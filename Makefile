@@ -19,10 +19,26 @@ SRCS = 	main.c \
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:%.c=%.o))
 
-CFLAGS = -I $(LIBFT) #-g -ggdb3 -fsanitize=address -Wall -Werror -Wextra
+
+OS = $(shell uname)
+FLAG_OPTI = -Ofast -ffast-math -O3
+FLAG = $(LIBMLX) -Iinclude
+ifeq ($(OS), Darwin)
+    PROJECT_FLAGS = -L "/Users/$(USER)/.brew/opt/glfw/lib/" -lglfw -lm -framework Cocoa -framework OpenGL -framework IOKit $(FLAG_OPTI)
+else ifeq($(OS), Darwin)
+    PROJECT_FLAGS = -lglfw -lm -lGL $(FLAG_OPTI)
+else
+    $(error "Unsupported OS")
+endif
+CFLAGS = -I $(LIBFT) #-Wall -Werror -Wextra #-g -ggdb3 -fsanitize=address 
 LDFLAGS = -lft -L $(LIBFT) #-g -ggdb3 -fsanitize=address
-LINUXFLAG = $(LIBMLX) -Iinclude
-LINUXFLAG2 = -lglfw -lm -lGL -O3 -Ofast -ffast-math
+
+CFLAGS = -I $(LIBFT) #-Wall -Werror -Wextra #-g -ggdb3 -fsanitize=address 
+LDFLAGS = -lft -L $(LIBFT) #-g -ggdb3 -fsanitize=address
+FLAG = $(LIBMLX) -Iinclude
+LINUXFLAG2 = -lglfw -lm -lGL $(FLAG_OPTI)
+MACOSFLAG = -L "/Users/$(USER)/.brew/opt/glfw/lib/" -lglfw -lm -O3 -Ofast -ffast-math -framework Cocoa -framework OpenGL -framework IOKit $(FLAG_OPTI)
+FLAG_OPTI = -Ofast -ffast-math -O3
 
 RED=\033[0;31m
 GREEN=\033[0;32m
@@ -31,14 +47,14 @@ NC=\033[0m
 all: $(NAME)
 
 $(LIBFT)/libft.a:
-	$(MAKE) -C $(LIBFT) 
+	$(MAKE) -C $(LIBFT)
 
 $(NAME): $(OBJS) $(LIBFT)/libft.a
-	@gcc $(OBJS) $(LDFLAGS) $(LINUXFLAG) $(LINUXFLAG2) -o $(NAME)
+	@gcc $(OBJS) $(LDFLAGS) $(FLAG) $(PROJECT_FLAGS) -o $(NAME)
 	@echo   "${GREEN}./${NAME} ${RED}map${NC}"
 
 $(OBJS_DIR)/%.o: %.c | $(OBJS_DIR)
-	@gcc $(CFLAGS) $(LINUXFLAG2) -c $< -o $@
+	@gcc $(CFLAGS) $(FLAG_OPTI) $ -c $< -o $@
 
 $(OBJS_DIR):
 	mkdir -p $(dir $(OBJS))
