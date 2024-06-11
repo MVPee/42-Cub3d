@@ -5,6 +5,7 @@ LIBMLX = ./MLX42/build/libmlx42.a
 
 OBJS_DIR = .objs
 SRCS = 	main.c \
+		srcs/cub3d/init_and_unit/init_and_unit.c \
 		srcs/cub3d/parsing/check_file.c \
 		srcs/cub3d/parsing/check_map.c \
 		srcs/cub3d/window_and_event/window.c \

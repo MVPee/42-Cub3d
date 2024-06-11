@@ -132,4 +132,7 @@ void    mini_map(t_data *data);
 // RAYCASTING UTILS
 float get_distance(t_data *data, float rotation, float *hitX, float *hitY);
 
+// INIT AND UNIT
+bool init_data(t_data *data);
+void free_data(t_data *data);
 #endif

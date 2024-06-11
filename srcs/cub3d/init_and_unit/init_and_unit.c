@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:07:42 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/10 21:21:11 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/11 09:29:02 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,19 @@ bool init_data(t_data *data)
     data->player->y = 0;
     data->player->angle = 0;
     data->wall_dir = -1;
-    texture = mlx_load_png("./rsrcs/wall/fog.png");
-    if (!texture)
-        return (true);
-    data->fog = mlx_texture_to_image(texture);
-    if (data->fog)
-        return (true);
-    mlx_delete_texture(texture);
-    texture = mlx_load_png("./rsrcs/other/player");
-    if (!texture)
-        return (true);
-    data->arrow = mlx_texture_to_image(texture);
-    if (data->arrow)
-        return (true);
-    mlx_delete_texture(texture);
+    // texture = mlx_load_png("./rsrcs/wall/fog.png");
+    // if (!texture)
+    //     return (true);
+    // data->fog = mlx_texture_to_image(data->mlx, texture);
+    // if (data->fog)
+    //     return (true);
+    // mlx_delete_texture(texture);
+    // texture = mlx_load_png("./rsrcs/other/player");
+    // if (!texture)
+    //     return (true);
+    // data->arrow = mlx_texture_to_image(data->mlx, texture);
+    // if (data->arrow)
+    //     return (true);
+    // mlx_delete_texture(texture);
     return (false);
 }

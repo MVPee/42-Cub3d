@@ -12,10 +12,6 @@
 
 #include "includes/cub3d.h"
 
-void	free_data(t_data *data)
-{
-}
-
 int	main(int ac, char **av)
 {
 	t_data	data;
