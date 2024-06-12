@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:46:41 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/12 10:52:24 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/12 11:36:54 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,24 @@ void mini_map(t_data *data)
 {
     int map_x;
     int map_y;
-    int white = get_rgba(255, 255, 255, 50);
-    int pink = get_rgba(0, 0, 0, 0);
-    int black = get_rgba(0, 0, 0, 255);
-    uint32_t pink_color = get_correct_color((u_int8_t *)&(pink));
-    uint32_t transparent_white = get_correct_color((u_int8_t *)&(white));
-    uint32_t black_color = get_correct_color((u_int8_t *)&(black));
-
+    uint32_t transparent_white = get_rgba(255, 255, 255, 50);
+    uint32_t white = get_rgba(255, 255, 255, 255);
+    uint32_t transparent = get_rgba(0, 0, 0, 0);
+    uint32_t black = get_rgba(0, 0, 0, 255);
+    uint32_t black2 = get_rgba(0, 0, 0, 100);
+    
+    transparent_white = get_correct_color((u_int8_t *)&(transparent_white));
+    black = get_correct_color((u_int8_t *)&(black));
+    black2 = get_correct_color((u_int8_t *)&(black2));
+    transparent = get_correct_color((u_int8_t *)&(transparent));
     if (data->minimap)
         mlx_delete_image(data->mlx, data->minimap);
 
     data->minimap = mlx_new_image(data->mlx, MINIMAP_SIZE, MINIMAP_SIZE);
 
+    for (int i = 0; i < MINIMAP_SIZE; i++)
+        for (int j = 0; j < MINIMAP_SIZE; j++)
+            mlx_put_pixel(data->minimap, j, i, black2);
     for (int i = (MINIMAP_SIZE/40 + 1) * - 1; i <= (MINIMAP_SIZE/40 + 1); i++)
     { 
         for (int j = (MINIMAP_SIZE/40 + 1) * - 1; j <= (MINIMAP_SIZE/40 + 1); j++)
@@ -53,15 +59,16 @@ void mini_map(t_data *data)
                 draw_square(data->minimap, 5 + MINIMAP_SIZE / 2 + i * WALL_SIZE, 5 + MINIMAP_SIZE / 2 + j * WALL_SIZE, WALL_SIZE, transparent_white);
         }
     }
-    draw_square(data->minimap, 5 + (MINIMAP_SIZE / 2 - PLAYER_SIZE / 2) + 10, (5 + MINIMAP_SIZE / 2 - PLAYER_SIZE / 2) + 10, PLAYER_SIZE, white);
     for (int i = 0; i < MINIMAP_SIZE; i++)
+    {
         for (int j = 0; j < MINIMAP_SIZE; j++)
+        {
+            if (!is_in_cercle(j - 1, i) || !is_in_cercle(j + 1, i) || !is_in_cercle(j, i - 1) || !is_in_cercle(j, i + 1))
+                mlx_put_pixel(data->minimap, j, i, black);
             if (!is_in_cercle(j, i))
-                mlx_put_pixel(data->minimap, j, i, pink_color);
-    for (int i = 0; i < MINIMAP_SIZE; i++)
-        for (int j = 0; j < MINIMAP_SIZE; j++)
-            if (is_in_cercle(j, i))
-                if (!is_in_cercle(j - 1, i) || !is_in_cercle(j + 1, i) || !is_in_cercle(j, i - 1) || !is_in_cercle(j, i + 1))
-                    mlx_put_pixel(data->minimap, j, i, black_color);
+                mlx_put_pixel(data->minimap, j, i, transparent);   
+        }
+    }
+    draw_square(data->minimap, 5 + (MINIMAP_SIZE / 2 - PLAYER_SIZE / 2) + 10, (5 + MINIMAP_SIZE / 2 - PLAYER_SIZE / 2) + 10, PLAYER_SIZE, white);
     mlx_image_to_window(data->mlx, data->minimap, WIDTH - MINIMAP_SIZE - 25, 25);
 }
