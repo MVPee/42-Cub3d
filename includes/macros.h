@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nechaara <nechaara.student.s19.be>         +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:08:32 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/11 19:10:06 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/06/12 10:51:49 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,11 @@
 # define HEIGHT 720
 
 // MINIMAP
-# define MINIMAP_SIZE 150
+# define MINIMAP_SIZE 200
 # define WALL_SIZE 20
 # define PLAYER_SIZE 10
+
+// KEY
 # define MLX_KEY_Z 87
 # define MLX_KEY_S 83
 # define MLX_KEY_Q 65
