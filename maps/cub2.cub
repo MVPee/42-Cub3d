@@ -1,0 +1,21 @@
+NO ./rsrcs/wall/flower.png
+SO ./rsrcs/wall/iron2.png
+WE ./rsrcs/wall/brick4.png
+EA ./rsrcs/wall/red_brick.png
+
+F  58 , 157 , 35
+C  119 , 181 , 254
+
+F  0,0,0
+C  80, 0, 0
+
+
+111
+101
+111
+
+11111
+10001
+10N01
+10001
+11111

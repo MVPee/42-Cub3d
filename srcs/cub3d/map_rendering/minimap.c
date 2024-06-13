@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:46:41 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/12 11:36:54 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/13 09:30:34 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,21 @@ void mini_map(t_data *data)
     black = get_correct_color((u_int8_t *)&(black));
     black2 = get_correct_color((u_int8_t *)&(black2));
     transparent = get_correct_color((u_int8_t *)&(transparent));
+    
+    int y_adjust = 0;
+    int x_adjust = 0;
+
+    if (data->player->y/128-(int)(data->player->y/128) > 0.25)
+        y_adjust = -5;
+    if (data->player->y/128-(int)(data->player->y/128) > 0.5)
+        y_adjust = -10;
+    if (data->player->x/128-(int)(data->player->x/128) > 0.25)
+        x_adjust = -5;
+    if (data->player->x/128-(int)(data->player->x/128) > 0.5)
+        x_adjust = -10;
     if (data->minimap)
         mlx_delete_image(data->mlx, data->minimap);
-
     data->minimap = mlx_new_image(data->mlx, MINIMAP_SIZE, MINIMAP_SIZE);
-
     for (int i = 0; i < MINIMAP_SIZE; i++)
         for (int j = 0; j < MINIMAP_SIZE; j++)
             mlx_put_pixel(data->minimap, j, i, black2);
@@ -56,7 +66,7 @@ void mini_map(t_data *data)
             map_x = (int)data->player->x / PIXEL + i;
             map_y = (int)data->player->y / PIXEL + j;
             if (map_x >= 0 && map_x < data->map_width && map_y >= 0 && map_y < data->map_height && ft_ischarin(data->map[map_y][map_x], "NSWE0"))
-                draw_square(data->minimap, 5 + MINIMAP_SIZE / 2 + i * WALL_SIZE, 5 + MINIMAP_SIZE / 2 + j * WALL_SIZE, WALL_SIZE, transparent_white);
+                draw_square(data->minimap, x_adjust + MINIMAP_SIZE / 2 + i * WALL_SIZE, y_adjust + MINIMAP_SIZE / 2 + j * WALL_SIZE, WALL_SIZE, transparent_white);
         }
     }
     for (int i = 0; i < MINIMAP_SIZE; i++)
@@ -69,6 +79,6 @@ void mini_map(t_data *data)
                 mlx_put_pixel(data->minimap, j, i, transparent);   
         }
     }
-    draw_square(data->minimap, 5 + (MINIMAP_SIZE / 2 - PLAYER_SIZE / 2) + 10, (5 + MINIMAP_SIZE / 2 - PLAYER_SIZE / 2) + 10, PLAYER_SIZE, white);
+    draw_square(data->minimap, 5 + (MINIMAP_SIZE / 2 - PLAYER_SIZE / 2), (5 + MINIMAP_SIZE / 2 - PLAYER_SIZE / 2), PLAYER_SIZE, white);
     mlx_image_to_window(data->mlx, data->minimap, WIDTH - MINIMAP_SIZE - 25, 25);
 }
