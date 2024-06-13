@@ -6,7 +6,7 @@
 /*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 21:59:10 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/10 23:59:26 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/06/13 12:12:50 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,16 @@ static void	compute_dist(t_dist *vars, t_data *data, float *hitX, float *hitY)
 
 	p_x = data->player->x;
 	p_y = data->player->y;
-	if ((int)vars->prev_y / PIXEL != (int)vars->y / PIXEL)
+	if ((int)vars->prev_y / PIXEL != (int)vars->y / PIXEL
+		&& !((int)vars->prev_x / PIXEL != (int)vars->x / PIXEL))
 	{
 		if (vars->prev_y < vars->y)
 			data->wall_dir = 'S';
 		else
 			data->wall_dir = 'N';
 	}
-	else if ((int)vars->prev_x / PIXEL != (int)vars->x / PIXEL)
+	else if ((int)vars->prev_x / PIXEL != (int)vars->x / PIXEL
+		&& !((int)vars->prev_y / PIXEL != (int)vars->y / PIXEL))
 	{
 		if (vars->prev_x < vars->x)
 			data->wall_dir = 'E';
