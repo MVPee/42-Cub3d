@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_optimization.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
+/*   By: nechaara <nechaara.student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:54:33 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/10 20:21:51 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/06/14 16:21:57 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void populate_new_map(char ***map, char **new_map, int start, int x, int 
 			if (j + min < old_row_length)
 				new_map[i][j] = (*map)[i + start][j + min];
 			else
-				new_map[i][j] = ' ';
+				new_map[i][j] = '1';
 		}
 	}
 	ft_free_matrix(1, map);
@@ -90,6 +90,18 @@ static void	generate_new_map(char ***map, int *x, int *y, int *min, int *max)
 	populate_new_map(map, new_map, start, *x ,*y , *min);
 }
 
+static void fill_void_spaces_map(char **map)
+{
+	for(int i = 0; i < ft_splitlen((const char **)map); i++)
+	{
+		for (int j = 0; j < ft_strlen(map[i]); j++)
+		{
+			if (map[i][j] == ' ')
+				map[i][j] = '1';
+		}
+	}
+}
+
 void map_optimization(char ***map)
 {
 	int	n[2];
@@ -108,4 +120,5 @@ void map_optimization(char ***map)
 	put_border(*map);
 	set_min_max(&x, &y, map, &min, &max);
 	generate_new_map(map, &x, &y, &min, &max);
+	fill_void_spaces_map(*map);
 }
