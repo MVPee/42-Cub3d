@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event_hooks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nechaara <nechaara.student.s19.be>         +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:53 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/11 19:12:37 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/06/14 16:45:03 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,20 @@ static void is_wall(t_data *data, float x, float y)
         x = data->player->x;
     if (data->map[((int)y - PIXEL / 8) / PIXEL][(int)data->player->x / PIXEL] == '1')
         y = data->player->y;
-    if (data->map[(int)data->player->y / PIXEL][(int)x / PIXEL] != '1')
+    if (data->map[(int)data->player->y / PIXEL][((int)x + PIXEL / 8) / PIXEL] != '1')
+    {
+        if (data->map[((int)y - (PIXEL / 8)) / PIXEL][map_x] == '1' || \
+            data->map[((int)y + (PIXEL / 8)) / PIXEL][map_x] == '1')
+            return;
         data->player->x = x;
-    if (data->map[(int)y / PIXEL][(int)data->player->x / PIXEL] != '1')
+    }
+    if (data->map[((int)y + PIXEL / 8) / PIXEL][(int)data->player->x / PIXEL] != '1')
+    {
+        if (data->map[map_y][((int)x + (PIXEL / 8)) / PIXEL] == '1' || \
+            data->map[map_y][((int)x + (PIXEL / 8)) / PIXEL] == '1')
+            return;
         data->player->y = y;
+    }
 }
 
 static void rotate_player(t_data *data, t_mlx_key keydata)
