@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:46:41 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/13 09:30:34 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/14 17:17:12 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,51 @@ static bool is_in_cercle(int x, int y)
     return (dx * dx + dy * dy) < (MINIMAP_SIZE / 2) * (MINIMAP_SIZE / 2);
 }
 
-static void draw_square(mlx_image_t *img, int x, int y, int size, uint32_t color)
+static void draw_square(int map[MINIMAP_SIZE][MINIMAP_SIZE], int x, int y, int size, uint32_t color)
 {
     for (int i = 0; i < size; i++)
         for (int j = 0; j < size; j++)
-            if (x + j >= 0 && x + j < img->width && y + i >= 0 && y + i < img->height)
-                mlx_put_pixel(img, x + j, y + i, color);
+            if (x + j >= 0 && x + j < MINIMAP_SIZE && y + i >= 0 && y + i < MINIMAP_SIZE)
+                map[x + j][y + i] = color;
+}
+
+void rotateImage(double angle, int input[MINIMAP_SIZE][MINIMAP_SIZE], int output[MINIMAP_SIZE][MINIMAP_SIZE]) {
+    double radians = angle * M_PI / 180.0;
+    double cosAngle = sin(radians);
+    double sinAngle = cos(radians);
+
+    int x0 = MINIMAP_SIZE / 2;
+    int y0 = MINIMAP_SIZE / 2;
+
+    for (int y = 0; y < MINIMAP_SIZE; y++) {
+        for (int x = 0; x < MINIMAP_SIZE; x++) {
+            int newX = (int)((x - x0) * cosAngle - (y - y0) * sinAngle + x0);
+            int newY = (int)((x - x0) * sinAngle + (y - y0) * cosAngle + y0);
+
+            if (newX >= 0 && newX < MINIMAP_SIZE && newY >= 0 && newY < MINIMAP_SIZE) {
+                output[newX][newY] = input[x][y];
+            }
+        }
+    }
 }
 
 void mini_map(t_data *data)
 {
     int map_x;
     int map_y;
-    uint32_t transparent_white = get_rgba(255, 255, 255, 50);
-    uint32_t white = get_rgba(255, 255, 255, 255);
-    uint32_t transparent = get_rgba(0, 0, 0, 0);
-    uint32_t black = get_rgba(0, 0, 0, 255);
-    uint32_t black2 = get_rgba(0, 0, 0, 100);
+    int transparent_white = get_rgba(255, 255, 255, 50);
+    int white = get_rgba(255, 255, 255, 255);
+    int transparent = get_rgba(0, 0, 0, 0);
+    int black = get_rgba(0, 0, 0, 255);
+    int black2 = get_rgba(0, 0, 0, 100);
     
     transparent_white = get_correct_color((u_int8_t *)&(transparent_white));
     black = get_correct_color((u_int8_t *)&(black));
     black2 = get_correct_color((u_int8_t *)&(black2));
     transparent = get_correct_color((u_int8_t *)&(transparent));
     
+    int map_input[MINIMAP_SIZE][MINIMAP_SIZE];
+    int map_output[MINIMAP_SIZE][MINIMAP_SIZE];
     int y_adjust = 0;
     int x_adjust = 0;
 
@@ -53,12 +75,14 @@ void mini_map(t_data *data)
         x_adjust = -5;
     if (data->player->x/128-(int)(data->player->x/128) > 0.5)
         x_adjust = -10;
+
     if (data->minimap)
         mlx_delete_image(data->mlx, data->minimap);
     data->minimap = mlx_new_image(data->mlx, MINIMAP_SIZE, MINIMAP_SIZE);
+
     for (int i = 0; i < MINIMAP_SIZE; i++)
         for (int j = 0; j < MINIMAP_SIZE; j++)
-            mlx_put_pixel(data->minimap, j, i, black2);
+            map_input[i][j] = black2;
     for (int i = (MINIMAP_SIZE/40 + 1) * - 1; i <= (MINIMAP_SIZE/40 + 1); i++)
     { 
         for (int j = (MINIMAP_SIZE/40 + 1) * - 1; j <= (MINIMAP_SIZE/40 + 1); j++)
@@ -66,9 +90,16 @@ void mini_map(t_data *data)
             map_x = (int)data->player->x / PIXEL + i;
             map_y = (int)data->player->y / PIXEL + j;
             if (map_x >= 0 && map_x < data->map_width && map_y >= 0 && map_y < data->map_height && ft_ischarin(data->map[map_y][map_x], "NSWE0"))
-                draw_square(data->minimap, x_adjust + MINIMAP_SIZE / 2 + i * WALL_SIZE, y_adjust + MINIMAP_SIZE / 2 + j * WALL_SIZE, WALL_SIZE, transparent_white);
+                draw_square(map_input, x_adjust + MINIMAP_SIZE / 2 + i * WALL_SIZE, y_adjust + MINIMAP_SIZE / 2 + j * WALL_SIZE, WALL_SIZE, transparent_white);
         }
     }
+    draw_square(map_input, 5 + (MINIMAP_SIZE / 2 - PLAYER_SIZE / 2), (5 + MINIMAP_SIZE / 2 - PLAYER_SIZE / 2), PLAYER_SIZE, white);
+
+    rotateImage(data->player->angle + 180, map_input, map_output);
+    for (int i = 0; i < MINIMAP_SIZE; i++)
+        for (int j = 0; j < MINIMAP_SIZE; j++)
+            mlx_put_pixel(data->minimap, i, j, map_output[i][j]);
+
     for (int i = 0; i < MINIMAP_SIZE; i++)
     {
         for (int j = 0; j < MINIMAP_SIZE; j++)
@@ -79,6 +110,5 @@ void mini_map(t_data *data)
                 mlx_put_pixel(data->minimap, j, i, transparent);   
         }
     }
-    draw_square(data->minimap, 5 + (MINIMAP_SIZE / 2 - PLAYER_SIZE / 2), (5 + MINIMAP_SIZE / 2 - PLAYER_SIZE / 2), PLAYER_SIZE, white);
     mlx_image_to_window(data->mlx, data->minimap, WIDTH - MINIMAP_SIZE - 25, 25);
 }
