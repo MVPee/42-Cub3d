@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:46:41 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/14 17:36:06 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/14 17:40:07 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,26 +47,24 @@ void rotateImage(double angle, int input[MINIMAP_SIZE][MINIMAP_SIZE], int output
     int x0 = MINIMAP_SIZE / 2;
     int y0 = MINIMAP_SIZE / 2;
 
-    for (int y = 0; y < MINIMAP_SIZE; y++) {
-        for (int x = 0; x < MINIMAP_SIZE; x++) {
+    for (int y = 0; y < MINIMAP_SIZE; y++)
+        for (int x = 0; x < MINIMAP_SIZE; x++)
             output[y][x] = 0;
-        }
-    }
 
-    for (int y = 0; y < MINIMAP_SIZE; y++) {
-        for (int x = 0; x < MINIMAP_SIZE; x++) {
+    for (int y = 0; y < MINIMAP_SIZE; y++)
+    {
+        for (int x = 0; x < MINIMAP_SIZE; x++)
+        {
             int newX = (int)((x - x0) * cosAngle - (y - y0) * sinAngle + x0);
             int newY = (int)((x - x0) * sinAngle + (y - y0) * cosAngle + y0);
-
-            if (newX >= 0 && newX < MINIMAP_SIZE && newY >= 0 && newY < MINIMAP_SIZE) {
+            if (newX >= 0 && newX < MINIMAP_SIZE && newY >= 0 && newY < MINIMAP_SIZE)
                 output[newY][newX] = input[y][x];
-            }
         }
     }
     for (int y = 1; y < MINIMAP_SIZE - 1; y++)
         for (int x = 1; x < MINIMAP_SIZE - 1; x++)
             if (output[y][x] == transparent)
-                output[y][x] = output[y][x + 1];
+                output[y][x] = output[y][x - 1];
 }
 
 
