@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:53 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/14 16:49:08 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/14 16:53:17 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,18 @@ static void is_wall(t_data *data, float x, float y)
     map_y = (int)y / PIXEL;
     if (map_x < 0 || map_x >= data->map_width || map_y < 0 || map_y >= data->map_height)
         return;
-    if (data->map[(int)data->player->y / PIXEL][((int)x + PIXEL / 4) / PIXEL] == '1')
+    if (data->map[(int)data->player->y / PIXEL][((int)x + PIXEL / 8) / PIXEL] == '1')
         x = data->player->x;
-    if (data->map[((int)y + PIXEL / 4) / PIXEL][(int)data->player->x / PIXEL] == '1')
+    if (data->map[((int)y + PIXEL / 8) / PIXEL][(int)data->player->x / PIXEL] == '1')
         y = data->player->y;
-    if (data->map[(int)data->player->y / PIXEL][((int)x - PIXEL / 4) / PIXEL] == '1')
+    if (data->map[(int)data->player->y / PIXEL][((int)x - PIXEL / 8) / PIXEL] == '1')
         x = data->player->x;
-    if (data->map[((int)y - PIXEL / 4) / PIXEL][(int)data->player->x / PIXEL] == '1')
+    if (data->map[((int)y - PIXEL / 8) / PIXEL][(int)data->player->x / PIXEL] == '1')
         y = data->player->y;
-    if (data->map[(int)data->player->y / PIXEL][((int)x + PIXEL / 4) / PIXEL] != '1')
-    {
-        if (data->map[((int)y - (PIXEL / 4)) / PIXEL][map_x] == '1' || \
-            data->map[((int)y + (PIXEL / 4)) / PIXEL][map_x] == '1')
-            return;
+    if (data->map[(int)data->player->y / PIXEL][(int)x / PIXEL] != '1')
         data->player->x = x;
-    }
-    if (data->map[((int)y + PIXEL / 4) / PIXEL][(int)data->player->x / PIXEL] != '1')
-    {
-        if (data->map[map_y][((int)x + (PIXEL / 4)) / PIXEL] == '1' || \
-            data->map[map_y][((int)x + (PIXEL / 4)) / PIXEL] == '1')
-            return;
+    if (data->map[(int)y / PIXEL][(int)data->player->x / PIXEL] != '1')
         data->player->y = y;
-    }
 }
 
 static void rotate_player(t_data *data, t_mlx_key keydata)
