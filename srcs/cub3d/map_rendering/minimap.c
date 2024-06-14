@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:46:41 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/14 17:17:12 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/14 17:36:06 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,31 @@ static void draw_square(int map[MINIMAP_SIZE][MINIMAP_SIZE], int x, int y, int s
                 map[x + j][y + i] = color;
 }
 
-void rotateImage(double angle, int input[MINIMAP_SIZE][MINIMAP_SIZE], int output[MINIMAP_SIZE][MINIMAP_SIZE]) {
+void rotateImage(double angle, int input[MINIMAP_SIZE][MINIMAP_SIZE], int output[MINIMAP_SIZE][MINIMAP_SIZE])
+{
+    int transparent_white = get_rgba(255, 255, 255, 50);
+    int white = get_rgba(255, 255, 255, 255);
+    int transparent = get_rgba(0, 0, 0, 0);
+    int black = get_rgba(0, 0, 0, 255);
+    int black2 = get_rgba(0, 0, 0, 100);
+    
+    transparent_white = get_correct_color((u_int8_t *)&(transparent_white));
+    black = get_correct_color((u_int8_t *)&(black));
+    black2 = get_correct_color((u_int8_t *)&(black2));
+    transparent = get_correct_color((u_int8_t *)&(transparent));
+    
     double radians = angle * M_PI / 180.0;
-    double cosAngle = sin(radians);
-    double sinAngle = cos(radians);
+    double cosAngle = cos(radians);
+    double sinAngle = sin(radians);
 
     int x0 = MINIMAP_SIZE / 2;
     int y0 = MINIMAP_SIZE / 2;
+
+    for (int y = 0; y < MINIMAP_SIZE; y++) {
+        for (int x = 0; x < MINIMAP_SIZE; x++) {
+            output[y][x] = 0;
+        }
+    }
 
     for (int y = 0; y < MINIMAP_SIZE; y++) {
         for (int x = 0; x < MINIMAP_SIZE; x++) {
@@ -41,11 +59,16 @@ void rotateImage(double angle, int input[MINIMAP_SIZE][MINIMAP_SIZE], int output
             int newY = (int)((x - x0) * sinAngle + (y - y0) * cosAngle + y0);
 
             if (newX >= 0 && newX < MINIMAP_SIZE && newY >= 0 && newY < MINIMAP_SIZE) {
-                output[newX][newY] = input[x][y];
+                output[newY][newX] = input[y][x];
             }
         }
     }
+    for (int y = 1; y < MINIMAP_SIZE - 1; y++)
+        for (int x = 1; x < MINIMAP_SIZE - 1; x++)
+            if (output[y][x] == transparent)
+                output[y][x] = output[y][x + 1];
 }
+
 
 void mini_map(t_data *data)
 {
@@ -95,7 +118,7 @@ void mini_map(t_data *data)
     }
     draw_square(map_input, 5 + (MINIMAP_SIZE / 2 - PLAYER_SIZE / 2), (5 + MINIMAP_SIZE / 2 - PLAYER_SIZE / 2), PLAYER_SIZE, white);
 
-    rotateImage(data->player->angle + 180, map_input, map_output);
+    rotateImage(data->player->angle + 90, map_input, map_output);
     for (int i = 0; i < MINIMAP_SIZE; i++)
         for (int j = 0; j < MINIMAP_SIZE; j++)
             mlx_put_pixel(data->minimap, i, j, map_output[i][j]);
