@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:46:41 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/14 17:40:07 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/14 17:58:42 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,10 @@ static void draw_square(int map[MINIMAP_SIZE][MINIMAP_SIZE], int x, int y, int s
 void rotateImage(double angle, int input[MINIMAP_SIZE][MINIMAP_SIZE], int output[MINIMAP_SIZE][MINIMAP_SIZE])
 {
     int transparent_white = get_rgba(255, 255, 255, 50);
-    int white = get_rgba(255, 255, 255, 255);
     int transparent = get_rgba(0, 0, 0, 0);
-    int black = get_rgba(0, 0, 0, 255);
     int black2 = get_rgba(0, 0, 0, 100);
     
     transparent_white = get_correct_color((u_int8_t *)&(transparent_white));
-    black = get_correct_color((u_int8_t *)&(black));
     black2 = get_correct_color((u_int8_t *)&(black2));
     transparent = get_correct_color((u_int8_t *)&(transparent));
     
