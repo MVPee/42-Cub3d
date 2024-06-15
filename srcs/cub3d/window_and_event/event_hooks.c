@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:53 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/15 22:10:05 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/15 22:34:27 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	move_keyhook(void *param)
 	t_data *data;
 
 	data = (t_data *)param;
-	movement(data);
 	draw_rays(data);
 	minimap(data);
+	movement(data);
 }

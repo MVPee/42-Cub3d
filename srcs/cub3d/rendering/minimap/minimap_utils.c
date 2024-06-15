@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:43:10 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/15 18:26:45 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/15 22:27:34 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,16 @@ void	map_init(t_data *data)
 
 void	get_adjust_coord(t_data *data)
 {
-	if (data->player->y / 128 - (int)(data->player->y / 128) > 0.25)
-		data->minimap->y_adjust = -5;
-	if (data->player->y / 128 - (int)(data->player->y / 128) > 0.5)
-		data->minimap->y_adjust = -10;
-	if (data->player->x / 128 - (int)(data->player->x / 128) > 0.25)
-		data->minimap->x_adjust = -5;
-	if (data->player->x / 128 - (int)(data->player->x / 128) > 0.5)
-		data->minimap->x_adjust = -10;
+	// if (data->player->y / 128 - (int)(data->player->y / 128) > 0.25)
+	// 	data->minimap->y_adjust = -5;
+	// if (data->player->y / 128 - (int)(data->player->y / 128) > 0.5)
+	// 	data->minimap->y_adjust = -10;
+	// if (data->player->x / 128 - (int)(data->player->x / 128) > 0.25)
+	// 	data->minimap->x_adjust = -5;
+	// if (data->player->x / 128 - (int)(data->player->x / 128) > 0.5)
+	// 	data->minimap->x_adjust = -10;
+	data->minimap->x_adjust = -5;
+	data->minimap->y_adjust = -5;
 }
 
 bool	is_in_cercle(int x, int y)

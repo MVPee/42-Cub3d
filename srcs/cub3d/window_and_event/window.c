@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:46 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/15 22:10:53 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/15 22:38:19 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,20 @@ int	game_loop(t_data *data)
 		return (error_handler(WIN_INIT_FAILED));
 	for (int i = 0; i < 512; i++)
         data->keys[i] = false;
+
+	data->minimap->image = mlx_new_image(data->mlx, MINIMAP_SIZE, MINIMAP_SIZE);
+	data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+
+	mlx_image_to_window(data->mlx, data->image, 0, 0);
+	mlx_image_to_window(data->mlx, data->minimap->image, WIDTH - MINIMAP_SIZE - 25, 25);
+
 	mlx_key_hook(data->mlx, key_callback, data);
 	mlx_loop_hook(data->mlx, move_keyhook, data);
 	mlx_loop(data->mlx);
 	mlx_terminate(data->mlx);
+	if (data->minimap->image)
+		mlx_delete_image(data->mlx, data->minimap->image);
+	if (data->image)
+		mlx_delete_image(data->mlx, data->image);
 	return (EXIT_SUCCESS);
 }

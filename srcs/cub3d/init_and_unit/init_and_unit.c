@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:07:42 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/15 22:11:00 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/15 22:41:39 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static bool	init_minimap(t_data *data)
 	data->minimap->black = get_correct_color((u_int8_t *)&(data->minimap->black));
 	data->minimap->transparent_black = get_rgba(0, 0, 0, 100);
 	data->minimap->transparent_black = get_correct_color((u_int8_t *)&(data->minimap->transparent_black));
-	data->minimap->image = NULL;
+	data->minimap->image = mlx_new_image(data->mlx, MINIMAP_SIZE, MINIMAP_SIZE);
 	data->minimap->map_input = (int **)malloc(sizeof(int *) * MINIMAP_SIZE);
 	if (!data->minimap->map_input)
 		return (true);
@@ -62,10 +62,10 @@ bool	init_data(t_data *data)
 	data->east_image = NULL;
 	data->file = NULL;
 	data->map = NULL;
-	data->image = NULL;
 	data->mlx = mlx_init(WIDTH, HEIGHT, PROGRAM_NAME, false);
 	if (!data->mlx)
 		return (true);
+	data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	data->player = (t_player_pos *)malloc(sizeof(t_player_pos));
 	if (!data->player)
 		return (true);

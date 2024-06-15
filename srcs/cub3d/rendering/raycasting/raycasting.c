@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:22:06 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/15 16:26:11 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/15 22:40:44 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,15 @@ void	draw_rays(t_data *data)
 {
 	t_raycast	vars;
 
-	if (data->image)
-		mlx_delete_image(data->mlx, data->image);
-	data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < WIDTH)
+	{
+		j = -1;
+		while (++j < HEIGHT)
+			mlx_put_pixel(data->image, i, j, data->minimap->transparent);
+	}
 	raycaster_loop(vars, data);
-	mlx_image_to_window(data->mlx, data->image, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:46:41 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/15 18:29:48 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/15 22:37:36 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,5 @@ void	minimap(t_data *data)
 {
 	get_adjust_coord(data);
 	map_init(data);
-	if (data->minimap->image)
-		mlx_delete_image(data->mlx, data->minimap->image);
-	data->minimap->image = mlx_new_image(data->mlx, MINIMAP_SIZE, MINIMAP_SIZE);
 	draw_minimap(data);
-	mlx_image_to_window(data->mlx, data->minimap->image, WIDTH - MINIMAP_SIZE
-		- 25, 25);
 }
