@@ -30,11 +30,9 @@ else ifeq($(OS), Darwin)
 else
     $(error "Unsupported OS")
 endif
-CFLAGS = -I $(LIBFT) #-Wall -Werror -Wextra #-g -ggdb3 -fsanitize=address 
-LDFLAGS = -lft -L $(LIBFT) #-g -ggdb3 -fsanitize=address
 
-CFLAGS = -I $(LIBFT) #-Wall -Werror -Wextra #-g -ggdb3 -fsanitize=address 
-LDFLAGS = -lft -L $(LIBFT) #-g -ggdb3 -fsanitize=address
+CFLAGS = -I $(LIBFT)  -g -ggdb3 -fsanitize=address #-Wall -Werror -Wextra
+LDFLAGS = -lft -L $(LIBFT) -g -ggdb3 -fsanitize=address
 FLAG = $(LIBMLX) -Iinclude
 LINUXFLAG2 = -lglfw -lm -lGL $(FLAG_OPTI)
 MACOSFLAG = -L "/Users/$(USER)/.brew/opt/glfw/lib/" -lglfw -lm -O3 -Ofast -ffast-math -framework Cocoa -framework OpenGL -framework IOKit $(FLAG_OPTI)

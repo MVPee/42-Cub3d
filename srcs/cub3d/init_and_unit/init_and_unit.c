@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:07:42 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/11 09:29:02 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/15 17:08:39 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,37 @@
 void free_data(t_data *data)
 {
     //ft_free_matrix(2, &data->map, &data->file);
+}
+
+static bool init_minimap(t_data *data)
+{
+    data->minimap->white = get_rgba(255, 255, 255, 255);
+    data->minimap->transparent_white = get_rgba(255, 255, 255, 50);
+    data->minimap->transparent_white = get_correct_color((u_int8_t *)&(data->minimap->transparent_white));
+    data->minimap->transparent = get_rgba(0, 0, 0, 0);
+    data->minimap->transparent = get_correct_color((u_int8_t *)&(data->minimap->transparent));
+    data->minimap->black = get_rgba(0, 0, 0, 255);
+    data->minimap->black = get_correct_color((u_int8_t *)&(data->minimap->black));
+    data->minimap->transparent_black = get_rgba(0, 0, 0, 100);
+    data->minimap->transparent_black = get_correct_color((u_int8_t *)&(data->minimap->transparent_black));
+    data->minimap->image = NULL;
+    data->minimap->map_input = (int **)malloc(sizeof(int *) * MINIMAP_SIZE);
+    if (!data->minimap->map_input)
+        return (true);
+    for (int i = 0; i < MINIMAP_SIZE; i++) {
+        data->minimap->map_input[i] = (int *)malloc(sizeof(int) * MINIMAP_SIZE);
+        if (!data->minimap->map_input[i])
+            return (true);
+    }
+    data->minimap->map_output = (int **)malloc(sizeof(int *) * (MINIMAP_SIZE + 1));
+    if (!data->minimap->map_output)
+        return (true);
+    for (int i = 0; i < MINIMAP_SIZE; i++) {
+        data->minimap->map_output[i] = (int *)malloc(sizeof(int) * MINIMAP_SIZE);
+        if (!data->minimap->map_output[i])
+            return (true);
+    }
+    return (false);
 }
 
 bool init_data(t_data *data)
@@ -34,23 +65,14 @@ bool init_data(t_data *data)
     data->player = (t_player_pos *)malloc(sizeof(t_player_pos));
     if (!data->player)
         return (true);
+    data->minimap = (t_minimap *)malloc(sizeof(t_minimap));
+    if (!data->minimap)
+        return (true);
     data->player->x = 0;
     data->player->y = 0;
     data->player->angle = 0;
     data->wall_dir = -1;
-    // texture = mlx_load_png("./rsrcs/wall/fog.png");
-    // if (!texture)
-    //     return (true);
-    // data->fog = mlx_texture_to_image(data->mlx, texture);
-    // if (data->fog)
-    //     return (true);
-    // mlx_delete_texture(texture);
-    // texture = mlx_load_png("./rsrcs/other/player");
-    // if (!texture)
-    //     return (true);
-    // data->arrow = mlx_texture_to_image(data->mlx, texture);
-    // if (data->arrow)
-    //     return (true);
-    // mlx_delete_texture(texture);
+    if (init_minimap(data))
+        return (true);
     return (false);
 }

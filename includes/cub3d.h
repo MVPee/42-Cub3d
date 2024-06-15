@@ -75,6 +75,19 @@ typedef struct s_raycast
 	mlx_image_t	*wall_img;
 }   t_raycast;
 
+typedef struct s_minimap
+{
+    t_img *image;
+    int **map_input;
+    int **map_output;
+
+    int black;
+    int white;
+    int transparent;
+    int transparent_black;
+    int transparent_white;
+}   t_minimap;
+
 typedef struct s_data
 {
     t_img *north_image;
@@ -91,11 +104,9 @@ typedef struct s_data
     mlx_t   *mlx;
     t_img *floor_image;
     t_img *ceiling_image;
-    t_img *fog;
     t_img *image;
-    t_img *minimap;
-    t_img *arrow;
     t_player_pos *player;
+    t_minimap *minimap;
 }   t_data;
 
 // PARSING
@@ -128,7 +139,7 @@ int	    get_correct_color(u_int8_t *pixel);
 
 // RAYCASTING
 void    draw_rays(t_data *data);
-void    mini_map(t_data *data);
+void    minimap(t_data *data);
 // RAYCASTING UTILS
 float get_distance(t_data *data, float rotation, float *hitX, float *hitY);
 

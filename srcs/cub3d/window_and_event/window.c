@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:46 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/10 21:08:09 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/15 17:42:23 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	game_loop(t_data *data)
 	else if(window_init(data))
 		return (error_handler(WIN_INIT_FAILED));
 	draw_rays(data);
-	mini_map(data);
+	minimap(data);
 	mlx_key_hook(data->mlx, move_keyhook, data);
 	mlx_loop(data->mlx);
 	mlx_terminate(data->mlx);
