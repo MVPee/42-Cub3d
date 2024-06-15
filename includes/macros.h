@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:08:32 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/12 10:51:49 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/15 22:11:36 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@
 // MOVEMENT MACROS
 # define RADIANT 0.0174533
 # define PIXEL 128
-# define SPEED 64
-# define SPEED_ROTATION 15
+# define SPEED 16
+# define SPEED_ROTATION 5
 # define DEGREE 0.0833333333333333
 # define FOV 60
 # define F_PI 57.2957795131

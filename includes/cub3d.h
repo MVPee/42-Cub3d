@@ -112,6 +112,7 @@ typedef struct s_data
 	t_img *image;
 	t_player_pos *player;
 	t_minimap *minimap;
+	bool *keys;
 } t_data;
 
 // PARSING
@@ -132,7 +133,7 @@ void	fetch_player_pos(char ***map, int *n);
 // GRAPHICS
 int	game_loop(t_data *data);
 // KEY_HOOKS
-void	move_keyhook(mlx_key_data_t keydata, void *param);
+void	move_keyhook(void *param);
 // UTILS
 bool	error_handler(char *str);
 int	get_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a);

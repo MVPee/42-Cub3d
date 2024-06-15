@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:46 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/15 17:42:23 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/15 22:10:53 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,31 @@ static bool	window_init(t_data *data)
 	return (false);
 }
 
+static void key_callback(mlx_key_data_t keydata, void *param)
+{
+    t_data *data = (t_data *)param;
+
+    if (keydata.key < 512)
+	{
+        if (keydata.action == MLX_PRESS)
+            data->keys[keydata.key] = true;
+		else if (keydata.action == MLX_RELEASE)
+            data->keys[keydata.key] = false;
+    }
+    if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+        exit(0);
+}
+
 int	game_loop(t_data *data)
 {	
 	if (!data)
 		return (EXIT_FAILURE);
 	else if(window_init(data))
 		return (error_handler(WIN_INIT_FAILED));
-	draw_rays(data);
-	minimap(data);
-	mlx_key_hook(data->mlx, move_keyhook, data);
+	for (int i = 0; i < 512; i++)
+        data->keys[i] = false;
+	mlx_key_hook(data->mlx, key_callback, data);
+	mlx_loop_hook(data->mlx, move_keyhook, data);
 	mlx_loop(data->mlx);
 	mlx_terminate(data->mlx);
 	return (EXIT_SUCCESS);
