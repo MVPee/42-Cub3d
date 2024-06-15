@@ -6,15 +6,15 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:36:30 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/10 21:02:00 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/15 18:34:04 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-int get_rgba(uint8_t  r, uint8_t  g, uint8_t  b, uint8_t  a)
+int	get_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
-    return (a << 24 | b << 16 | g << 8 | r);
+	return (a << 24 | b << 16 | g << 8 | r);
 }
 
 void	get_map_size(t_data *data)
@@ -34,7 +34,7 @@ bool	error_handler(char *str)
 		return (false);
 	ft_printf_fd(STDERR_FILENO, "%s\n", str);
 	return (false);
-	}
+}
 
 bool	contain_player(char c)
 {
@@ -52,7 +52,7 @@ bool	contain_player(char c)
 			return (true);
 		index++;
 	}
-	return false;
+	return (false);
 }
 
 char	return_element(char **map, int x, int y)
@@ -62,7 +62,7 @@ char	return_element(char **map, int x, int y)
 
 void	set_cardinal_dir(t_data *data, int x, int y)
 {
-	char c;
+	char	c;
 
 	if (!data)
 		return ;
@@ -79,9 +79,9 @@ void	set_cardinal_dir(t_data *data, int x, int y)
 
 void	get_player_pos(t_data *data)
 {
-	int		x;
-	int		y;
-	
+	int	x;
+	int	y;
+
 	x = -1;
 	while (++x < data->map_width)
 	{
@@ -90,10 +90,10 @@ void	get_player_pos(t_data *data)
 		{
 			if (contain_player(data->map[y][x]))
 			{
-				data->player->x = x * PIXEL + ((float) PIXEL / 2);
-				data->player->y = y * PIXEL + ((float) PIXEL / 2);
+				data->player->x = x * PIXEL + ((float)PIXEL / 2);
+				data->player->y = y * PIXEL + ((float)PIXEL / 2);
 				set_cardinal_dir(data, x, y);
-				break;
+				break ;
 			}
 		}
 	}

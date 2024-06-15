@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   map_optimization.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nechaara <nechaara.student.s19.be>         +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:54:33 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/14 16:21:57 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/06/15 18:31:58 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-static void set_min_max(int *x, int *y, char ***map, int *min, int *max)
+static void	set_min_max(int *x, int *y, char ***map, int *min, int *max)
 {
 	int	i;
 	int	j;
@@ -28,28 +28,29 @@ static void set_min_max(int *x, int *y, char ***map, int *min, int *max)
 		while (++j < ft_strlen((*map)[i]))
 		{
 			if ((*map)[i][j] == '1')
-				{
-					if (*min > j)
-						*min = j;
-					if (*max < j)
-						*max = j;
-				}
+			{
+				if (*min > j)
+					*min = j;
+				if (*max < j)
+					*max = j;
+			}
 		}
 	}
 	*x = *max + 1 - *min;
 }
 
-static void populate_new_map(char ***map, char **new_map, int start, int x, int y, int min)
+static void	populate_new_map(char ***map, char **new_map, int start, int x,
+		int y, int min)
 {
-	int i;
-	int j;
-	int old_row_length;
+	int	i;
+	int	j;
+	int	old_row_length;
 
 	i = -1;
 	while (++i < y)
 	{
 		old_row_length = ft_strlen((*map)[i + start]);
-		j= -1;
+		j = -1;
 		while (++j < x)
 		{
 			if (j + min < old_row_length)
@@ -68,7 +69,7 @@ static void	generate_new_map(char ***map, int *x, int *y, int *min, int *max)
 	char	**new_map;
 	int		start;
 	int		i;
-	
+
 	new_map = (char **)malloc(sizeof(char *) * (*y + 1));
 	i = -1;
 	while (++i < *y)
@@ -84,15 +85,15 @@ static void	generate_new_map(char ***map, int *x, int *y, int *min, int *max)
 		if (ft_ischarin('1', (*map)[i]))
 		{
 			start = i;
-			break;
+			break ;
 		}
 	}
-	populate_new_map(map, new_map, start, *x ,*y , *min);
+	populate_new_map(map, new_map, start, *x, *y, *min);
 }
 
-static void fill_void_spaces_map(char **map)
+static void	fill_void_spaces_map(char **map)
 {
-	for(int i = 0; i < ft_splitlen((const char **)map); i++)
+	for (int i = 0; i < ft_splitlen((const char **)map); i++)
 	{
 		for (int j = 0; j < ft_strlen(map[i]); j++)
 		{
@@ -102,18 +103,20 @@ static void fill_void_spaces_map(char **map)
 	}
 }
 
-void map_optimization(char ***map)
+void	map_optimization(char ***map)
 {
-	int	n[2];
-	int	min_max[2];
-	int	y;
-	int	x;
-	char p;
+	int		n[2];
+	int		min_max[2];
+	int		y;
+	int		x;
+	char	p;
+	int		min;
+	int		max;
 
 	y = 0;
 	x = 0;
-	int min = INT_MAX;
-	int max = INT_MIN;
+	min = INT_MAX;
+	max = INT_MIN;
 	fetch_player_pos(map, n);
 	get_all_possible_paths(*map, &p);
 	get_new_map(*map, n, p);

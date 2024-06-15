@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:08:42 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/09 22:13:18 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/15 18:30:53 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,11 @@ bool	check_extension(char *str)
 	if (!temp)
 		return (perror("Malloc"), true);
 	if (ft_strlen(str) < 5 || ft_strcmp(temp, ".cub"))
-		return (ft_free(1, &temp), ft_printf_fd(2, RED\
-				"Error\nInvalid map extension\n" RESET), true);
+		return (ft_free(1, &temp), ft_printf_fd(2,
+				RED "Error\nInvalid map extension\n" RESET), true);
 	ft_free(1, &temp);
 	return (false);
 }
-
 
 static void	find_error(t_data *data)
 {
@@ -41,10 +40,10 @@ static void	find_error(t_data *data)
 
 static void	get_texture(t_data *data, t_img **image, char *line)
 {
-	char *str;
-	char *temp;
-	mlx_texture_t *texture;
-	
+	char			*str;
+	char			*temp;
+	mlx_texture_t	*texture;
+
 	str = NULL;
 	temp = NULL;
 	temp = ft_substr(line, 3, ft_strlen(line) - 4);
@@ -61,7 +60,7 @@ static void	get_color(int *color, char *line)
 {
 	char	**split;
 	int		i;
-	int 	array[3];
+	int		array[3];
 
 	ft_memset(array, 0, 3);
 	i = -1;
@@ -85,6 +84,7 @@ static void	get_color(int *color, char *line)
 bool	check_file(t_data *data)
 {
 	int	i;
+
 	i = -1;
 	while (data->file[++i])
 	{
@@ -97,15 +97,16 @@ bool	check_file(t_data *data)
 		else if (!ft_strncmp(data->file[i], "EA ", 3))
 			get_texture(data, &data->east_image, data->file[i]);
 		else if (!ft_strncmp(data->file[i], "F ", 2))
-			get_color(&data->floor_color, ft_substr(data->file[i], 2, \
+			get_color(&data->floor_color, ft_substr(data->file[i], 2,
 					ft_strlen(data->file[i]) - 3));
 		else if (!ft_strncmp(data->file[i], "C ", 2))
-			get_color(&data->ceiling_color, ft_substr(data->file[i], 2, \
+			get_color(&data->ceiling_color, ft_substr(data->file[i], 2,
 					ft_strlen(data->file[i]) - 3));
 		else if (ft_strlen(data->file[i]) > 1)
 			data->map = ft_splitjoin(data->map, data->file[i]);
 	}
-	if (!data->north_image || !data->south_image || !data->west_image || !data->east_image)
+	if (!data->north_image || !data->south_image || !data->west_image
+		|| !data->east_image)
 		return (find_error(data), true);
 	return (false);
 }
