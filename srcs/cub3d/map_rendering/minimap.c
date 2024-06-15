@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:46:41 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/14 17:58:42 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/15 16:11:39 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,18 @@ void rotateImage(double angle, int input[MINIMAP_SIZE][MINIMAP_SIZE], int output
                 output[newY][newX] = input[y][x];
         }
     }
-    for (int y = 1; y < MINIMAP_SIZE - 1; y++)
-        for (int x = 1; x < MINIMAP_SIZE - 1; x++)
+    for (int y = 0; y < MINIMAP_SIZE; y++)
+    {
+        for (int x = 0; x < MINIMAP_SIZE; x++)
+        {
             if (output[y][x] == transparent)
-                output[y][x] = output[y][x - 1];
+            {
+                output[y][x] = output[y + 1][x];
+                if (output[y][x] == transparent)
+                    output[y][x] = output[y][x + 1];
+            }
+        }
+    }
 }
 
 
