@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:22:06 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/10 23:58:13 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/06/15 16:26:11 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/cub3d.h"
+#include "../../../../includes/cub3d.h"
 
 static void	pixel_puter(t_raycast *vars, t_data *data)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nechaara <nechaara.student.s19.be>         +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 21:59:10 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/14 16:25:56 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/06/15 16:26:14 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/cub3d.h"
+#include "../../../../includes/cub3d.h"
 
 static void	compute_dist(t_dist *vars, t_data *data, float *hitX, float *hitY)
 {

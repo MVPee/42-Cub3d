@@ -6,11 +6,11 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:46:41 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/15 16:11:39 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/15 16:30:59 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/cub3d.h"
+#include "../../../../includes/cub3d.h"
 
 static bool is_in_cercle(int x, int y)
 {
@@ -120,12 +120,12 @@ void mini_map(t_data *data)
         }
     }
     draw_square(map_input, 5 + (MINIMAP_SIZE / 2 - PLAYER_SIZE / 2), (5 + MINIMAP_SIZE / 2 - PLAYER_SIZE / 2), PLAYER_SIZE, white);
-
     rotateImage(data->player->angle + 90, map_input, map_output);
     for (int i = 0; i < MINIMAP_SIZE; i++)
         for (int j = 0; j < MINIMAP_SIZE; j++)
             mlx_put_pixel(data->minimap, i, j, map_output[i][j]);
 
+    
     for (int i = 0; i < MINIMAP_SIZE; i++)
     {
         for (int j = 0; j < MINIMAP_SIZE; j++)
