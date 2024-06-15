@@ -15,7 +15,8 @@ SRCS = 	main.c \
 		srcs/cub3d/parsing/map_optimization_utils.c \
 		srcs/cub3d/rendering/raycasting/raycasting.c \
 		srcs/cub3d/rendering/raycasting/raycasting_utils.c \
-		srcs/cub3d/rendering/minimap/minimap.c
+		srcs/cub3d/rendering/minimap/minimap.c \
+		srcs/cub3d/rendering/minimap/minimap_utils.c
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:%.c=%.o))
 
