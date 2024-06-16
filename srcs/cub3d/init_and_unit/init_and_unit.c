@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:07:42 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/16 17:27:46 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/16 17:29:29 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,7 @@ bool	init_data(t_data *data)
 	if (!data->minimap)
 		return (true);
 	data->keys = (bool *)malloc(sizeof(bool) * 512);
-	for (int i = 0; i < 512; i++)
-        data->keys[i] = false;
+	ft_memset(data->keys, false, 512);
 	data->player->x = 0;
 	data->player->y = 0;
 	data->player->angle = 0;
