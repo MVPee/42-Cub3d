@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:08:42 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/15 18:30:53 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/16 19:26:05 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,21 @@ bool	check_extension(char *str)
 	return (false);
 }
 
-static void	find_error(t_data *data)
+static bool	find_error(t_data *data)
 {
-	if (!data->north_image)
-		ft_printf_fd(2, RED "Error\nPut a valid north texture\n" RESET);
-	if (!data->south_image)
-		ft_printf_fd(2, RED "Error\nPut a valid south texture\n" RESET);
-	if (!data->west_image)
-		ft_printf_fd(2, RED "Error\nPut a valid west texture\n" RESET);
-	if (!data->east_image)
-		ft_printf_fd(2, RED "Error\nPut a valid east texture\n" RESET);
+	if (!data->north_image || !data->south_image || !data->west_image || !data->east_image)
+	{
+		if (!data->north_image)
+			ft_printf_fd(2, RED "Error\nPut a valid north texture\n" RESET);
+		if (!data->south_image)
+			ft_printf_fd(2, RED "Error\nPut a valid south texture\n" RESET);
+		if (!data->west_image)
+			ft_printf_fd(2, RED "Error\nPut a valid west texture\n" RESET);
+		if (!data->east_image)
+			ft_printf_fd(2, RED "Error\nPut a valid east texture\n" RESET);
+		return (true);
+	}
+	return (false);
 }
 
 static void	get_texture(t_data *data, t_img **image, char *line)
@@ -105,8 +110,5 @@ bool	check_file(t_data *data)
 		else if (ft_strlen(data->file[i]) > 1)
 			data->map = ft_splitjoin(data->map, data->file[i]);
 	}
-	if (!data->north_image || !data->south_image || !data->west_image
-		|| !data->east_image)
-		return (find_error(data), true);
-	return (false);
+	return (find_error(data));
 }
