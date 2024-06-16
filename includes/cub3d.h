@@ -135,12 +135,9 @@ int	game_loop(t_data *data);
 // KEY_HOOKS
 void	move_keyhook(void *param);
 // UTILS
-bool	error_handler(char *str);
 int	get_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 void	get_player_pos(t_data *data);
 void	get_map_size(t_data *data);
-bool	contain_player(char c);
-char	return_element(char **map, int x, int y);
 int	get_correct_color(u_int8_t *pixel);
 
 // RAYCASTING

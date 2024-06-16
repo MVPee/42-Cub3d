@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   map_optimization_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:03:24 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/10 20:29:24 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/06/16 20:18:39 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-void	get_all_directions(char **map, bool *flag,int *val, char p)
+void	get_all_directions(char **map, bool *flag, int *val, char p)
 {
 	if (map[val[1] - 1][val[0]] == '0')
 	{
@@ -24,7 +24,7 @@ void	get_all_directions(char **map, bool *flag,int *val, char p)
 		map[val[1] + 1][val[0]] = p;
 		*flag = true;
 	}
-	if (map[val[1]][val[0]- 1] == '0')
+	if (map[val[1]][val[0] - 1] == '0')
 	{
 		map[val[1]][val[0] - 1] = p;
 		*flag = true;
@@ -53,17 +53,18 @@ void	get_all_possible_paths(char **map, char *p)
 			x = -1;
 			while (map[y][++x])
 			{
-				if (contain_player(map[y][x]))
+				if (ft_ischarin(map[y][x], "NSWE"))
 				{
-					*p = return_element(map, x, y);
+					*p = map[y][x];
 					val[0] = x;
 					val[1] = y;
-					get_all_directions(map, &flag, val,*p);
+					get_all_directions(map, &flag, val, *p);
 				}
-			}		
+			}
 		}
 	}
 }
+
 void	get_new_map(char **map, int *n, char p)
 {
 	int	y;
@@ -85,7 +86,7 @@ void	get_new_map(char **map, int *n, char p)
 		x = -1;
 		while (map[y][++x])
 		{
-			if (contain_player(map[y][x]))
+			if (ft_ischarin(map[y][x], "NSWE"))
 				map[y][x] = '0';
 		}
 	}
@@ -103,7 +104,7 @@ void	put_border(char **map)
 		x = -1;
 		while (map[y][++x])
 		{
-			if (map[y][x] == '0' || contain_player(map[y][x]))
+			if (map[y][x] == '0' || ft_ischarin(map[y][x], "NSWE"))
 			{
 				if (map[y - 1][x] == ' ')
 					map[y - 1][x] = '1';
@@ -118,18 +119,18 @@ void	put_border(char **map)
 	}
 }
 
-void fetch_player_pos(char ***map, int *n)
+void	fetch_player_pos(char ***map, int *n)
 {
-	int x;
-	int y;
-	
+	int	x;
+	int	y;
+
 	y = -1;
 	while ((*map)[++y])
 	{
 		x = -1;
 		while ((*map)[y][++x])
 		{
-			if (contain_player((*map)[y][x]))
+			if (ft_ischarin((*map)[y][x], "NSWE"))
 			{
 				n[0] = y;
 				n[1] = x;

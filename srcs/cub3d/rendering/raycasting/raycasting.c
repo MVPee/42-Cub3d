@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:22:06 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/15 22:40:44 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/16 19:46:15 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,17 @@ static void	pixel_puter(t_raycast *vars, t_data *data)
 		vars->y = -1;
 		while (++vars->y < (int)vars->wall_height)
 		{
-			vars->texture_y = (vars->y * vars->wall_img->height) \
+			vars->texture_y = (vars->y * vars->wall_img->height)
 				/ (int)vars->wall_height;
-			if (vars->y + (HEIGHT - (int)vars->wall_height) \
+			if (vars->y + (HEIGHT - (int)vars->wall_height)
 				/ 2 < data->image->height)
 			{
-				vars->color = get_correct_color(&((u_int8_t *) \
-					vars->wall_img->pixels)[(vars->texture_y * \
+				vars->color = \
+					get_correct_color(&((u_int8_t *)vars->wall_img->pixels) \
+					[(vars->texture_y * \
 					vars->wall_img->width + vars->texture_x) * 4]);
-				mlx_put_pixel(data->image, vars->x, (float)vars->y \
-					+((float)HEIGHT - vars->wall_height) / 2, vars->color);
+				mlx_put_pixel(data->image, vars->x, (float)vars->y
+					+ ((float)HEIGHT - vars->wall_height) / 2, vars->color);
 			}
 		}
 	}
@@ -63,13 +64,13 @@ static void	raycaster_loop(t_raycast vars, t_data *data)
 	p_angle = data->player->angle;
 	while (++vars.x < WIDTH)
 	{
-		v_dist = (WIDTH / (2 * tan(((float) FOV / 2.0f) * RADIANT)));
+		v_dist = (WIDTH / (2 * tan(((float)FOV / 2.0f) * RADIANT)));
 		ray_angle = p_angle + atan((vars.x - WIDTH / 2.0f) / v_dist) * F_PI;
 		vars.distance = get_distance(data, ray_angle, &vars.hitX, &vars.hitY);
 		corr_dist = vars.distance * cos((ray_angle - p_angle) * RADIANT);
 		vars.wall_height = (PIXEL * v_dist) / corr_dist;
 		wall_height_and_orientation(data, &vars);
-		vars.texture_x = (int)(vars.hitPos * vars.wall_img->width) \
+		vars.texture_x = (int)(vars.hitPos * vars.wall_img->width)
 			% vars.wall_img->width;
 		pixel_puter(&vars, data);
 	}
@@ -78,9 +79,8 @@ static void	raycaster_loop(t_raycast vars, t_data *data)
 void	draw_rays(t_data *data)
 {
 	t_raycast	vars;
-
-	int	i;
-	int	j;
+	int			i;
+	int			j;
 
 	i = -1;
 	while (++i < WIDTH)

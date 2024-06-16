@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:36:30 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/15 18:34:04 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/16 20:06:14 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,55 +28,6 @@ void	get_map_size(t_data *data)
 	data->map_height = map_height;
 }
 
-bool	error_handler(char *str)
-{
-	if (!str)
-		return (false);
-	ft_printf_fd(STDERR_FILENO, "%s\n", str);
-	return (false);
-}
-
-bool	contain_player(char c)
-{
-	char	charset[4];
-	size_t	index;
-
-	index = 0;
-	charset[0] = 'N';
-	charset[1] = 'S';
-	charset[2] = 'W';
-	charset[3] = 'E';
-	while (index < 4)
-	{
-		if (c == charset[index])
-			return (true);
-		index++;
-	}
-	return (false);
-}
-
-char	return_element(char **map, int x, int y)
-{
-	return (map[y][x]);
-}
-
-void	set_cardinal_dir(t_data *data, int x, int y)
-{
-	char	c;
-
-	if (!data)
-		return ;
-	c = data->map[y][x];
-	if (c == 'N')
-		data->player->angle = 270;
-	else if (c == 'E')
-		data->player->angle = 0;
-	else if (c == 'S')
-		data->player->angle = 90;
-	else if (c == 'W')
-		data->player->angle = 180;
-}
-
 void	get_player_pos(t_data *data)
 {
 	int	x;
@@ -88,12 +39,18 @@ void	get_player_pos(t_data *data)
 		y = -1;
 		while (++y < data->map_height)
 		{
-			if (contain_player(data->map[y][x]))
+			if (ft_ischarin(data->map[y][x], "NSWE"))
 			{
 				data->player->x = x * PIXEL + ((float)PIXEL / 2);
 				data->player->y = y * PIXEL + ((float)PIXEL / 2);
-				set_cardinal_dir(data, x, y);
-				break ;
+				if (data->map[y][x] == 'N')
+					data->player->angle = 270;
+				else if (data->map[y][x] == 'E')
+					data->player->angle = 0;
+				else if (data->map[y][x] == 'S')
+					data->player->angle = 90;
+				else if (data->map[y][x] == 'W')
+					data->player->angle = 180;
 			}
 		}
 	}
