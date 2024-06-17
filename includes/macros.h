@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:08:32 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/16 18:19:46 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/17 06:48:22 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,5 @@
 # define MLX_KEY_RIGHT 262
 # define MLX_KEY_LEFT 263
 # define MLX_KEY_ESCAPE 256
-
 
 #endif

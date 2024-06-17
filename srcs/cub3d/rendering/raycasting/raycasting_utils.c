@@ -6,13 +6,13 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 21:59:10 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/15 16:26:14 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/17 06:53:49 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/cub3d.h"
 
-static void	compute_dist(t_dist *vars, t_data *data, float *hitX, float *hitY)
+static void	compute_dist(t_distance*vars, t_data *data, float *hit_x, float *hit_y)
 {
 	float	p_x;
 	float	p_y;
@@ -36,11 +36,11 @@ static void	compute_dist(t_dist *vars, t_data *data, float *hitX, float *hitY)
 			data->wall_dir = 'W';
 	}
 	vars->distance = sqrt(pow(vars->x - p_x, 2) + pow(vars->y - p_y, 2));
-	*hitX = vars->x;
-	*hitY = vars->y;
+	*hit_x = vars->x;
+	*hit_y = vars->y;
 }
 
-float	get_distance(t_data *data, float rotation, float *hitX, float *hitY)
+float	get_distance(t_data *data, float rotation, float *hit_x, float *hit_y)
 {
 	t_distance	vars;
 
@@ -58,6 +58,6 @@ float	get_distance(t_data *data, float rotation, float *hitX, float *hitY)
 		vars.x += vars.step_x;
 		vars.y += vars.step_y;
 	}
-	compute_dist(&vars, data, hitX, hitY);
+	compute_dist(&vars, data, hit_x, hit_y);
 	return (vars.distance);
 }

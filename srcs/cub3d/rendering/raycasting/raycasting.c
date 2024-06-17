@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:22:06 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/16 19:46:15 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/17 06:54:16 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ static void	wall_height_and_orientation(t_data *data, t_raycast *vars)
 	if (vars->wall_height - (int)vars->wall_height > 0.5)
 		vars->wall_height += 1;
 	if (data->wall_dir == 'E' || data->wall_dir == 'W')
-		vars->hitPos = vars->hitY / PIXEL;
+		vars->hit_pos = vars->hit_y / PIXEL;
 	else
-		vars->hitPos = vars->hitX / PIXEL;
+		vars->hit_pos = vars->hit_x / PIXEL;
 	if (data->wall_dir == 'N')
 		vars->wall_img = data->north_image;
 	else if (data->wall_dir == 'S')
@@ -66,11 +66,11 @@ static void	raycaster_loop(t_raycast vars, t_data *data)
 	{
 		v_dist = (WIDTH / (2 * tan(((float)FOV / 2.0f) * RADIANT)));
 		ray_angle = p_angle + atan((vars.x - WIDTH / 2.0f) / v_dist) * F_PI;
-		vars.distance = get_distance(data, ray_angle, &vars.hitX, &vars.hitY);
+		vars.distance = get_distance(data, ray_angle, &vars.hit_x, &vars.hit_y);
 		corr_dist = vars.distance * cos((ray_angle - p_angle) * RADIANT);
 		vars.wall_height = (PIXEL * v_dist) / corr_dist;
 		wall_height_and_orientation(data, &vars);
-		vars.texture_x = (int)(vars.hitPos * vars.wall_img->width)
+		vars.texture_x = (int)(vars.hit_pos * vars.wall_img->width)
 			% vars.wall_img->width;
 		pixel_puter(&vars, data);
 	}
