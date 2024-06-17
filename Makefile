@@ -11,8 +11,6 @@ SRCS = 	main.c \
 		srcs/cub3d/window_and_event/window.c \
 		srcs/cub3d/window_and_event/event_hooks.c \
 		srcs/cub3d/utils/utils.c \
-		srcs/cub3d/parsing/map_optimization.c \
-		srcs/cub3d/parsing/map_optimization_utils.c \
 		srcs/cub3d/rendering/raycasting/raycasting.c \
 		srcs/cub3d/rendering/raycasting/raycasting_utils.c \
 		srcs/cub3d/rendering/minimap/minimap.c \
