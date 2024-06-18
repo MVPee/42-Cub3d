@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:46:41 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/15 22:37:36 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/18 19:48:26 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,10 @@ static void	draw_minimap(t_data *data)
 		j = -1;
 		while (++j < MINIMAP_SIZE)
 		{
-			if (!is_in_cercle(j - 1, i) || !is_in_cercle(j + 1, i)
-				|| !is_in_cercle(j, i - 1) || !is_in_cercle(j, i + 1))
+			if (!is_in_circle(j - 1, i) || !is_in_circle(j + 1, i)
+				|| !is_in_circle(j, i - 1) || !is_in_circle(j, i + 1))
 				mlx_put_pixel(data->minimap->image, j, i, data->minimap->black);
-			if (!is_in_cercle(j, i))
+			if (!is_in_circle(j, i))
 				mlx_put_pixel(data->minimap->image, j, i,
 					data->minimap->transparent);
 			else

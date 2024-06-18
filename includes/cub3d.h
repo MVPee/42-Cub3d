@@ -134,7 +134,7 @@ void	draw_rays(t_data *data);
 
 // MINIMAP
 void	minimap(t_data *data);
-bool	is_in_cercle(int x, int y);
+bool	is_in_circle(int x, int y);
 void	draw_square(t_minimap *minimap, int x, int y, char c);
 void	get_adjust_coord(t_data *data);
 void	map_init(t_data *data);

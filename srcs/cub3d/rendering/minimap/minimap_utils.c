@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:43:10 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/16 19:43:32 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/18 19:47:51 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	get_adjust_coord(t_data *data)
 	data->minimap->y_adjust = -5;
 }
 
-bool	is_in_cercle(int x, int y)
+bool	is_in_circle(int x, int y)
 {
 	int	dx;
 	int	dy;
