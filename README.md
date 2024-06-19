@@ -7,3 +7,4 @@ make
 cd ../..
 make run
 ```
+Have fun
