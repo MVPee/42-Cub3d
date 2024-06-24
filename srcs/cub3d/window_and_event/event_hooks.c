@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:53 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/16 18:31:28 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/24 10:32:39 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static void	is_wall(t_data *data, float x, float y)
 
 	map_x = (int)x / PIXEL;
 	map_y = (int)y / PIXEL;
-	if (map_x < 0 || map_x >= data->map_width || map_y < 0
-		|| map_y >= data->map_height)
+	if (map_x < 0 || map_x >= (int)data->map_width || map_y < 0
+		|| map_y >= (int)data->map_height)
 		return ;
 	if (data->map[(int)data->player->y / PIXEL][((int)x + PIXEL / 8)
 		/ PIXEL] == '1')
@@ -57,7 +57,8 @@ static void	move_player_left_right(t_data *data, char c, float *temp_x,
 {
 	if (c == 'A')
 	{
-		*temp_x = data->player->x + SPEED * sin(data->player->angle * RADIANT);
+		*temp_x = data->player->x + SPEED * sin(data->player->angle
+				* RADIANT);
 		*temp_y = data->player->y + SPEED * -1 * cos(data->player->angle
 				* RADIANT);
 	}
@@ -65,7 +66,8 @@ static void	move_player_left_right(t_data *data, char c, float *temp_x,
 	{
 		*temp_x = data->player->x + SPEED * -1 * sin(data->player->angle
 				* RADIANT);
-		*temp_y = data->player->y + SPEED * cos(data->player->angle * RADIANT);
+		*temp_y = data->player->y + SPEED * cos(data->player->angle
+				* RADIANT);
 	}
 }
 
@@ -74,6 +76,8 @@ static void	move_player(t_data *data, char c)
 	float	temp_x;
 	float	temp_y;
 
+	temp_x = data->player->x;
+	temp_y = data->player->y;
 	if (c == 'Z')
 	{
 		temp_x = data->player->x + SPEED * sin((data->player->angle + 90)
@@ -109,6 +113,6 @@ void	move_keyhook(void *param)
 		rotate_player(data, 'R');
 	if (data->keys[MLX_KEY_LEFT])
 		rotate_player(data, 'L');
-	draw_rays(data);
+	raycasting(data);
 	minimap(data);
 }

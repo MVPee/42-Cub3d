@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:46 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/16 18:27:05 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/24 10:08:31 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,18 @@ static void	get_background(t_data *data)
 	int	x;
 
 	y = -1;
-	while (++y < data->floor_image->height)
+	while (++y < (int)data->floor_image->height)
 	{
 		x = -1;
-		while (++x < data->floor_image->width)
+		while (++x < (int)data->floor_image->width)
 			((int32_t *)data->floor_image->pixels)[y * data->floor_image->width
 				+ x] = data->floor_color;
 	}
 	y = -1;
-	while (++y < data->ceiling_image->height)
+	while (++y < (int)data->ceiling_image->height)
 	{
 		x = -1;
-		while (++x < data->ceiling_image->width)
+		while (++x < (int)data->ceiling_image->width)
 			((int32_t *)data->ceiling_image->pixels)[y
 				* data->ceiling_image->width + x] = data->ceiling_color;
 	}

@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:22:06 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/17 06:54:16 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/24 10:30:24 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static void	pixel_puter(t_raycast *vars, t_data *data)
 		{
 			vars->texture_y = (vars->y * vars->wall_img->height)
 				/ (int)vars->wall_height;
-			if (vars->y + (HEIGHT - (int)vars->wall_height)
-				/ 2 < data->image->height)
+			if ((uint32_t)(vars->y + (HEIGHT - (int)vars->wall_height)
+				/ 2) < data->image->height)
 			{
 				vars->color = \
 					get_correct_color(&((u_int8_t *)vars->wall_img->pixels) \
@@ -76,7 +76,7 @@ static void	raycaster_loop(t_raycast vars, t_data *data)
 	}
 }
 
-void	draw_rays(t_data *data)
+void	raycasting(t_data *data)
 {
 	t_raycast	vars;
 	int			i;

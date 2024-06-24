@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:07:42 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/16 20:13:38 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/24 10:06:21 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	free_data(t_data *data)
 {
-	int	i;
-
 	ft_free(2, &data->player, &data->keys);
 	ft_free_matrix(1, &data->minimap->map_input);
 	ft_free_matrix(1, &data->minimap->map_output);
@@ -85,8 +83,6 @@ static bool	init_minimap(t_data *data)
 
 bool	init_data(t_data *data)
 {
-	mlx_texture_t	*texture;
-
 	ft_null(6, &data->north_image, &data->south_image, \
 		&data->west_image, &data->east_image, &data->file, &data->map);
 	data->mlx = mlx_init(WIDTH, HEIGHT, PROGRAM_NAME, false);

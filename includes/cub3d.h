@@ -2,14 +2,11 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+        
-	+:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+      
-	+#+        */
-/*                                                +#+#+#+#+#+  
-	+#+           */
-/*   Created: 2024/06/15 18:10:27 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/15 18:10:27 by mvpee            ###   ########.fr       */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/24 10:38:12 by mvpee             #+#    #+#             */
+/*   Updated: 2024/06/24 10:38:12 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +127,7 @@ void	get_map_size(t_data *data);
 int		get_correct_color(u_int8_t *pixel);
 
 // RAYCASTING
-void	draw_rays(t_data *data);
+void	raycasting(t_data *data);
 
 // MINIMAP
 void	minimap(t_data *data);

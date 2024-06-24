@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 10:37:05 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/17 06:47:22 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/24 10:32:55 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static bool	check_row(char **map, int y, int x, int *count)
 		return (ft_printf_fd(2, RED INVALID_MAP RESET, y, x, map[y][x]), true);
 	if (y == 0 && (map[y][x] == '0' || ft_ischarin(map[y][x], "NSWE")))
 		return (ft_printf_fd(2, RED INVALID_BORDER RESET), true);
-	else if (y == ft_splitlen((const char **)map) - 1 && (map[y][x] == '0'
-		|| ft_ischarin(map[y][x], "NSWE")))
+	else if (y == ((int)(ft_splitlen((const char **)map)) - 1)
+		&& (map[y][x] == '0' || ft_ischarin(map[y][x], "NSWE")))
 		return (ft_printf_fd(2, RED INVALID_BORDER RESET), true);
 	else if (map[y][x] == '0' || ft_ischarin(map[y][x], "NSWE"))
 	{
@@ -44,7 +44,7 @@ static bool	alloc_new_map(char ***map, char ***new_map)
 	x = 0;
 	while ((*map)[++y])
 	{
-		if (ft_strlen((*map)[y]) > x)
+		if ((int)ft_strlen((*map)[y]) > x)
 			x = ft_strlen((*map)[y]);
 	}
 	(*new_map) = malloc(sizeof(char *) * (y + 1));

@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:36:30 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/16 20:06:14 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/24 10:19:43 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ void	get_player_pos(t_data *data)
 	int	y;
 
 	x = -1;
-	while (++x < data->map_width)
+	while (++x < (int)data->map_width)
 	{
 		y = -1;
-		while (++y < data->map_height)
+		while (++y < (int)data->map_height)
 		{
 			if (ft_ischarin(data->map[y][x], "NSWE"))
 			{

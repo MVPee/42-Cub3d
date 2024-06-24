@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:46:41 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/18 19:48:26 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/24 10:21:22 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ static void	draw_path(t_data *data)
 		{
 			minimap->map_x = (int)data->player->x / PIXEL + i;
 			minimap->map_y = (int)data->player->y / PIXEL + j;
-			if (minimap->map_x >= 0 && minimap->map_x < data->map_width
-				&& minimap->map_y >= 0 && minimap->map_y < data->map_height
+			if (minimap->map_x >= 0 && minimap->map_x < (int)data->map_width
+				&& minimap->map_y >= 0 && minimap->map_y < (int)data->map_height
 				&& ft_ischarin(data->map[minimap->map_y][minimap->map_x],
 				"NSWE0"))
 				draw_square(minimap, minimap->x_adjust + MINIMAP_SIZE / 2 + i
