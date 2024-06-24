@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:22:06 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/24 10:30:24 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/24 10:58:18 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ static void	wall_height_and_orientation(t_data *data, t_raycast *vars)
 	else
 		vars->hit_pos = vars->hit_x / PIXEL;
 	if (data->wall_dir == 'N')
-		vars->wall_img = data->north_image;
-	else if (data->wall_dir == 'S')
 		vars->wall_img = data->south_image;
+	else if (data->wall_dir == 'S')
+		vars->wall_img = data->north_image;
 	else if (data->wall_dir == 'E')
-		vars->wall_img = data->east_image;
-	else if (data->wall_dir == 'W')
 		vars->wall_img = data->west_image;
+	else if (data->wall_dir == 'W')
+		vars->wall_img = data->east_image;
 }
 
 static void	raycaster_loop(t_raycast vars, t_data *data)
