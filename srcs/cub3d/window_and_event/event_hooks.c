@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:53 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/24 10:32:39 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/26 16:06:19 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ static void	move_player_left_right(t_data *data, char c, float *temp_x,
 {
 	if (c == 'A')
 	{
-		*temp_x = data->player->x + SPEED * sin(data->player->angle
-				* RADIANT);
+		*temp_x = data->player->x + SPEED * sin(data->player->angle * RADIANT);
 		*temp_y = data->player->y + SPEED * -1 * cos(data->player->angle
 				* RADIANT);
 	}
@@ -66,8 +65,7 @@ static void	move_player_left_right(t_data *data, char c, float *temp_x,
 	{
 		*temp_x = data->player->x + SPEED * -1 * sin(data->player->angle
 				* RADIANT);
-		*temp_y = data->player->y + SPEED * cos(data->player->angle
-				* RADIANT);
+		*temp_y = data->player->y + SPEED * cos(data->player->angle * RADIANT);
 	}
 }
 
@@ -75,21 +73,25 @@ static void	move_player(t_data *data, char c)
 {
 	float	temp_x;
 	float	temp_y;
+	float	speed;
 
 	temp_x = data->player->x;
 	temp_y = data->player->y;
+	speed = SPEED;
+	if (data->keys[MLX_KEY_SHIFT])
+		speed = SPEED * 2;
 	if (c == 'Z')
 	{
-		temp_x = data->player->x + SPEED * sin((data->player->angle + 90)
+		temp_x = data->player->x + speed * sin((data->player->angle + 90)
 				* RADIANT);
-		temp_y = data->player->y + SPEED * -1 * cos((data->player->angle + 90)
+		temp_y = data->player->y + speed * -1 * cos((data->player->angle + 90)
 				* RADIANT);
 	}
 	else if (c == 'S')
 	{
-		temp_x = data->player->x + SPEED * -1 * sin((data->player->angle + 90)
+		temp_x = data->player->x + speed * -1 * sin((data->player->angle + 90)
 				* RADIANT);
-		temp_y = data->player->y + SPEED * cos((data->player->angle + 90)
+		temp_y = data->player->y + speed * cos((data->player->angle + 90)
 				* RADIANT);
 	}
 	move_player_left_right(data, c, &temp_x, &temp_y);
