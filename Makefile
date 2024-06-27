@@ -1,23 +1,35 @@
 NAME = cub3D
 
-LIBFT = srcs/libft
+LIBFT = libft
 LIBMLX = ./MLX42/build/libmlx42.a 
 
 OBJS_DIR = .objs
-SRCS = 	main.c \
-		srcs/cub3d/init_and_unit/init_and_unit.c \
-		srcs/cub3d/parsing/check_file.c \
-		srcs/cub3d/parsing/check_map.c \
-		srcs/cub3d/window_and_event/window.c \
-		srcs/cub3d/window_and_event/event_hooks.c \
-		srcs/cub3d/utils/utils.c \
-		srcs/cub3d/rendering/raycasting/raycasting.c \
-		srcs/cub3d/rendering/raycasting/raycasting_utils.c \
-		srcs/cub3d/rendering/minimap/minimap.c \
-		srcs/cub3d/rendering/minimap/minimap_utils.c
+SRCS = 	mandatory/main.c \
+		mandatory/srcs/cub3d/init_and_unit/init_and_unit.c \
+		mandatory/srcs/cub3d/parsing/check_file.c \
+		mandatory/srcs/cub3d/parsing/check_map.c \
+		mandatory/srcs/cub3d/window_and_event/window.c \
+		mandatory/srcs/cub3d/window_and_event/event_hooks.c \
+		mandatory/srcs/cub3d/utils/utils.c \
+		mandatory/srcs/cub3d/rendering/raycasting/raycasting.c \
+		mandatory/srcs/cub3d/rendering/raycasting/raycasting_utils.c \
+		mandatory/srcs/cub3d/rendering/minimap/minimap.c \
+		mandatory/srcs/cub3d/rendering/minimap/minimap_utils.c
+
+# SRCS_BONUS = 	bonus/main.c \
+# 				bonus/srcs/cub3d/init_and_unit/init_and_unit.c \
+# 				bonus/srcs/cub3d/parsing/check_file.c \
+# 				bonus/srcs/cub3d/parsing/check_map.c \
+# 				bonus/srcs/cub3d/window_and_event/window.c \
+# 				bonus/srcs/cub3d/window_and_event/event_hooks.c \
+# 				bonus/srcs/cub3d/utils/utils.c \
+# 				bonus/srcs/cub3d/rendering/raycasting/raycasting.c \
+# 				bonus/srcs/cub3d/rendering/raycasting/raycasting_utils.c \
+# 				bonus/srcs/cub3d/rendering/minimap/minimap.c \
+# 				bonus/srcs/cub3d/rendering/minimap/minimap_utils.c
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:%.c=%.o))
-
+OBJS_BONUS = $(addprefix $(OBJS_DIR)/, $(SRCS_BONUS:%.c=%.o))
 
 OS = $(shell uname)
 FLAG_OPTI = -Ofast -ffast-math -O3
@@ -32,10 +44,6 @@ endif
 
 CFLAGS = -I $(LIBFT) -Wall -Werror -Wextra -g -ggdb3 -fsanitize=address 
 LDFLAGS = -lft -L $(LIBFT) -Wall -Werror -Wextra -g -ggdb3 -fsanitize=address
-FLAG = $(LIBMLX) -Iinclude
-LINUXFLAG2 = -lglfw -lm -lGL $(FLAG_OPTI)
-MACOSFLAG = -L "/Users/$(USER)/.brew/opt/glfw/lib/" -lglfw -lm -O3 -Ofast -ffast-math -framework Cocoa -framework OpenGL -framework IOKit $(FLAG_OPTI)
-FLAG_OPTI = -Ofast -ffast-math -O3
 
 RED=\033[0;31m
 GREEN=\033[0;32m
@@ -56,6 +64,21 @@ $(OBJS_DIR)/%.o: %.c | $(OBJS_DIR)
 $(OBJS_DIR):
 	mkdir -p $(dir $(OBJS))
 
+# bonus: $(NAME)
+
+# $(LIBFT)/libft.a:
+# 	$(MAKE) -C $(LIBFT)
+
+# $(NAME): $(OBJS_BONUS) $(LIBFT)/libft.a
+# 	@gcc $(OBJS_BONUS) $(LDFLAGS) $(FLAG) $(PROJECT_FLAGS) -o $(NAME)
+# 	@echo   "${GREEN}./${NAME} ${RED}map${NC}"
+
+# $(OBJS_DIR)/%.o: %.c | $(OBJS_DIR)
+# 	@gcc $(CFLAGS) $(FLAG_OPTI) $ -c $< -o $@
+
+# $(OBJS_DIR):
+# 	mkdir -p $(dir $(OBJS_BONUS))
+
 clean:
 	$(MAKE) -C $(LIBFT) clean
 	@rm -rf $(OBJS_DIR)
@@ -67,6 +90,6 @@ fclean: clean
 re: fclean all
 
 run: all
-	./$(NAME) maps/cub.cub
+	./$(NAME) rsrcs/maps/cub.cub
 
 .PHONY: all clean fclean re run

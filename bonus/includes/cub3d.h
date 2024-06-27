@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 # include "../MLX42/include/MLX42/MLX42.h"
-# include "../srcs/libft/includes/libft.h"
+# include "../libft/includes/libft.h"
 # include "macros.h"
 # include <errno.h>
 # include <limits.h>
