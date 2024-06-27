@@ -1,7 +1,7 @@
 NAME = cub3D
 
 LIBFT = libft
-LIBMLX = ./MLX42/build/libmlx42.a 
+LIBMLX = MLX42/build/libmlx42.a 
 
 OBJS_DIR = .objs
 SRCS = 	mandatory/main.c \
@@ -42,8 +42,8 @@ else
     $(error "Unsupported OS")
 endif
 
-CFLAGS = -I $(LIBFT) -Wall -Werror -Wextra -g -ggdb3 -fsanitize=address 
-LDFLAGS = -lft -L $(LIBFT) -Wall -Werror -Wextra -g -ggdb3 -fsanitize=address
+CFLAGS = -I $(LIBFT) #-Wall -Werror -Wextra -g -ggdb3 -fsanitize=address 
+LDFLAGS = -lft -L $(LIBFT) #-Wall -Werror -Wextra -g -ggdb3 -fsanitize=address
 
 RED=\033[0;31m
 GREEN=\033[0;32m
