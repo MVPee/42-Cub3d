@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@19.be>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:08:42 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/16 19:41:12 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/29 07:56:08 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ bool	check_extension(char *str)
 static bool	find_error(t_data *data)
 {
 	if (!data->north_image || !data->south_image || !data->west_image
-		|| !data->east_image)
+		|| !data->east_image || !data->door_image)
 	{
 		if (!data->north_image)
 			ft_printf_fd(2, RED "Error\nPut a valid north texture\n" RESET);
@@ -39,6 +39,8 @@ static bool	find_error(t_data *data)
 			ft_printf_fd(2, RED "Error\nPut a valid west texture\n" RESET);
 		if (!data->east_image)
 			ft_printf_fd(2, RED "Error\nPut a valid east texture\n" RESET);
+		if (!data->door_image)
+			ft_printf_fd(2, RED "Error\nPut a valid door texture\n" RESET);
 		return (true);
 	}
 	return (false);
@@ -54,6 +56,7 @@ static void	get_texture(t_data *data, t_img **image, char *line)
 	temp = NULL;
 	temp = ft_substr(line, 3, ft_strlen(line) - 4);
 	str = ft_strtrim(temp, " ");
+	printf("%s\n", str);
 	texture = mlx_load_png(str);
 	if (!texture)
 		return ;
@@ -102,6 +105,8 @@ bool	check_file(t_data *data)
 			get_texture(data, &data->west_image, data->file[i]);
 		else if (!ft_strncmp(data->file[i], "EA ", 3))
 			get_texture(data, &data->east_image, data->file[i]);
+		else if (!ft_strncmp(data->file[i], "DO ", 3))
+			get_texture(data, &data->door_image, data->file[i]);
 		else if (!ft_strncmp(data->file[i], "F ", 2))
 			get_color(&data->floor_color, ft_substr(data->file[i], 2,
 					ft_strlen(data->file[i]) - 3));

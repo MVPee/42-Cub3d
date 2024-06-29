@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@19.be>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 10:37:05 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/24 10:32:55 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/29 08:08:48 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static bool	check_row(char **map, int y, int x, int *count)
 {
 	if (map[y][x] != '1' && map[y][x] != '0' && map[y][x] != ' '
-		&& !ft_ischarin(map[y][x], "NSWE") && !ft_isspace(map[y][x]))
+		&& !ft_ischarin(map[y][x], "NSWED") && !ft_isspace(map[y][x]))
 		return (ft_printf_fd(2, RED INVALID_MAP RESET, y, x, map[y][x]), true);
 	if (y == 0 && (map[y][x] == '0' || ft_ischarin(map[y][x], "NSWE")))
 		return (ft_printf_fd(2, RED INVALID_BORDER RESET), true);
@@ -76,7 +76,7 @@ static bool	get_new_map(char ***map)
 	{
 		x = -1;
 		while ((*map)[y][++x])
-			if ((*map)[y][x] == '0' || ft_ischarin((*map)[y][x], "NSWE"))
+			if ((*map)[y][x] == '0' || ft_ischarin((*map)[y][x], "NSWED"))
 				new_map[y][x] = (*map)[y][x];
 	}
 	ft_free_matrix(1, map);

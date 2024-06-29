@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@19.be>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:22:06 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/24 10:58:18 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/29 08:31:24 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,11 @@ static void	wall_height_and_orientation(t_data *data, t_raycast *vars)
 		vars->wall_img = data->west_image;
 	else if (data->wall_dir == 'W')
 		vars->wall_img = data->east_image;
+	if (data->door == 1)
+	{
+		vars->wall_img = data->door_image;
+		data->door = 0;
+	}
 }
 
 static void	raycaster_loop(t_raycast vars, t_data *data)

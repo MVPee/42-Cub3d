@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@19.be>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 21:59:10 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/24 10:32:17 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/29 08:30:44 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,9 @@ float	get_distance(t_data *data, float rotation, float *hit_x, float *hit_y)
 	vars.step_x = cos(vars.angle_rad);
 	vars.step_y = sin(vars.angle_rad);
 	while ((int)vars.y / PIXEL < (int)data->map_height && (int)vars.x \
-		/ PIXEL < (int)data->map_width && data->map[(int)vars.y \
-		/ PIXEL][(int)vars.x / PIXEL] != '1')
+		/ PIXEL < (int)data->map_width && \
+		data->map[(int)vars.y / PIXEL][(int)vars.x / PIXEL] != '1' && \
+		data->map[(int)vars.y / PIXEL][(int)vars.x / PIXEL] != 'D')
 	{
 		vars.prev_x = vars.x;
 		vars.prev_y = vars.y;
@@ -62,5 +63,7 @@ float	get_distance(t_data *data, float rotation, float *hit_x, float *hit_y)
 		vars.y += vars.step_y;
 	}
 	compute_dist(&vars, data, hit_x, hit_y);
+	if (data->map[(int)vars.y / PIXEL][(int)vars.x / PIXEL] == 'D')
+		data->door = 1;
 	return (vars.distance);
 }

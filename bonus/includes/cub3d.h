@@ -93,6 +93,7 @@ typedef struct s_data
 	t_img			*south_image;
 	t_img			*west_image;
 	t_img			*east_image;
+	t_img			*door_image;
 	int				floor_color;
 	int				ceiling_color;
 	char			**file;
@@ -107,6 +108,7 @@ typedef struct s_data
 	t_player_pos	*player;
 	t_minimap		*minimap;
 	bool			*keys;
+	bool			door;
 }	t_data;
 
 // PARSING
