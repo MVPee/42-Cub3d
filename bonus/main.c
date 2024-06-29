@@ -35,11 +35,8 @@ int	main(int ac, char **av)
 		return (free_data(&data), 1);
 	get_map_size(&data);
 	get_player_pos(&data);
-	int i;
-	i = -1;
-	while(data.map[++i])
-		printf("%s\n", data.map[i]);
 	if (game_loop(&data))
 		return (free_data(&data), 1);
+	
 	return (free_data(&data), 0);
 }
