@@ -21,7 +21,8 @@
 # include <math.h>
 # include <stdbool.h>
 # include <stdio.h>
-#include <signal.h>
+# include <sys/wait.h>
+# include <sys/types.h>
 
 typedef mlx_image_t		t_img;
 typedef mlx_key_data_t	t_mlx_key;

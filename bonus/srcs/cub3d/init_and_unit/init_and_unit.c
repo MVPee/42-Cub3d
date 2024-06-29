@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@19.be>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:07:42 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/29 21:50:15 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/29 22:13:04 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 
 void	free_data(t_data *data)
 {
+	pid_t pid;
+
 	ft_free(2, &data->player, &data->keys);
 	ft_free_matrix(1, &data->minimap->map_input);
 	ft_free_matrix(1, &data->minimap->map_output);
 	ft_free(1, &data->minimap);
 	mlx_terminate(data->mlx);
-	pthread_join(data->thread, NULL);
-	pid_t pid;
 	pid = fork();
 	if (pid == 0)
 		execlp("pkill", "pkill", "mpg123", NULL);
+	pthread_kill(data->thread, SIGTERM);
 }
 
 static void	init_minimap_color(t_minimap *minimap)

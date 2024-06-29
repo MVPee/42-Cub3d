@@ -16,9 +16,13 @@ static void *play_mp3(void)
 {
 	pid_t music;
 
-	music = fork();
-	if (music == 0)
-		execlp("mpg123", "mpg123", "rsrcs/sounds/music.mp3", NULL);
+	while(1)
+	{
+		music = fork();
+		if (music == 0)
+			execlp("mpg123", "mpg123", "rsrcs/sounds/music.mp3", NULL);
+		waitpid(music, NULL, 0);
+	}
 	return (NULL);
 }
 
