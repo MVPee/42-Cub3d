@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@19.be>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:46:41 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/29 09:46:02 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/29 18:23:37 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static void	draw_path(t_data *data)
 	int			i;
 	int			j;
 	t_minimap	*minimap;
+	char c;
 
 	minimap = data->minimap;
 	i = ((MINIMAP_SIZE / 40 + 1) * -1) - 1;
@@ -73,13 +74,18 @@ static void	draw_path(t_data *data)
 		{
 			minimap->map_x = (int)data->player->x / PIXEL + i;
 			minimap->map_y = (int)data->player->y / PIXEL + j;
+			c = 'W';
 			if (minimap->map_x >= 0 && minimap->map_x < (int)data->map_width
 				&& minimap->map_y >= 0 && minimap->map_y < (int)data->map_height
 				&& ft_ischarin(data->map[minimap->map_y][minimap->map_x],
-				"NSWE0OP"))
+				"NSWE0DO"))
+			{
+				if (ft_ischarin(data->map[minimap->map_y][minimap->map_x], "D"))
+					c = 'D';
 				draw_square(minimap, minimap->x_adjust + MINIMAP_SIZE / 2 + i
 					* WALL_SIZE, minimap->y_adjust + MINIMAP_SIZE / 2 + j
-					* WALL_SIZE, 'F');
+					* WALL_SIZE, c);
+			}
 		}
 	}
 }

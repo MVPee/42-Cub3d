@@ -81,6 +81,7 @@ typedef struct s_minimap
 	int		transparent;
 	int		transparent_black;
 	int		transparent_white;
+	int 	door;
 	int		x_adjust;
 	int		y_adjust;
 	int		map_x;

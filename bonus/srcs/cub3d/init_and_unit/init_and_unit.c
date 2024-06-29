@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_and_unit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@19.be>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:07:42 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/24 10:06:21 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/29 18:26:58 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ void	free_data(t_data *data)
 static void	init_minimap_color(t_minimap *minimap)
 {
 	minimap->white = get_rgba(255, 255, 255, 255);
+	minimap->door = get_rgba(255, 255, 255, 75);
+	minimap->door = \
+		get_correct_color((u_int8_t *)&(minimap->door));
 	minimap->transparent_white = get_rgba(255, 255, 255, 50);
 	minimap->transparent_white = \
 		get_correct_color((u_int8_t *)&(minimap->transparent_white));

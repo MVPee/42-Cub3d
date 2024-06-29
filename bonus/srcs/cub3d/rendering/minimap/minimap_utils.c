@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@19.be>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:43:10 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/18 19:47:51 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/06/29 18:26:58 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,11 @@ void	draw_square(t_minimap *minimap, int x, int y, char c)
 	{
 		color = minimap->white;
 		size = PLAYER_SIZE;
+	}
+	else if (c == 'D')
+	{
+		color = minimap->door;
+		size = WALL_SIZE;
 	}
 	else
 	{
