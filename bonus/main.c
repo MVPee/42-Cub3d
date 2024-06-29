@@ -12,6 +12,16 @@
 
 #include "includes/cub3d.h"
 
+static void *play_mp3(void)
+{
+	pid_t music;
+
+	music = fork();
+	if (music == 0)
+		execlp("mpg123", "mpg123", "rsrcs/sounds/music.mp3", NULL);
+	return (NULL);
+}
+
 int	main(int ac, char **av)
 {
 	t_data	data;
@@ -35,8 +45,8 @@ int	main(int ac, char **av)
 		return (free_data(&data), 1);
 	get_map_size(&data);
 	get_player_pos(&data);
+	pthread_create(&data.thread, NULL, play_mp3, NULL);
 	if (game_loop(&data))
 		return (free_data(&data), 1);
-	
 	return (free_data(&data), 0);
 }

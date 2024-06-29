@@ -21,6 +21,7 @@
 # include <math.h>
 # include <stdbool.h>
 # include <stdio.h>
+#include <signal.h>
 
 typedef mlx_image_t		t_img;
 typedef mlx_key_data_t	t_mlx_key;
@@ -110,6 +111,7 @@ typedef struct s_data
 	t_minimap		*minimap;
 	bool			*keys;
 	bool			door;
+	pthread_t		thread;
 }	t_data;
 
 // PARSING
