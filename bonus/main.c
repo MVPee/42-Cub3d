@@ -49,7 +49,8 @@ int	main(int ac, char **av)
 		return (free_data(&data), 1);
 	get_map_size(&data);
 	get_player_pos(&data);
-	pthread_create(&data.thread, NULL, play_mp3, NULL);
+	if (pthread_create(&data.thread, NULL, play_mp3, NULL))
+		return (free_data(&data), 1);
 	if (game_loop(&data))
 		return (free_data(&data), 1);
 	return (free_data(&data), 0);
