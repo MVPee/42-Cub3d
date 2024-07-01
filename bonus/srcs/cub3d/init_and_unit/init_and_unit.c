@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_and_unit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@19.be>                        +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:07:42 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/29 22:13:04 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/01 14:15:48 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ bool	init_data(t_data *data)
 	data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	data->floor_image = mlx_new_image(data->mlx, WIDTH, HEIGHT / 2);
 	data->ceiling_image = mlx_new_image(data->mlx, WIDTH, HEIGHT / 2);
+	data->weapon_img = mlx_new_image(data->mlx, WEAPON_SIZE, WEAPON_SIZE);
 	if (!data->image || !data->floor_image || !data->ceiling_image)
 		return (true);
 	data->player = (t_player_pos *)malloc(sizeof(t_player_pos));
@@ -114,5 +115,16 @@ bool	init_data(t_data *data)
 	ft_memset(data->keys, false, 512);
 	if (init_minimap(data))
 		return (true);
+	data->weapon = malloc(sizeof(t_img *) * 5);
+	for (int i = 0; i < 5; i++)
+	{
+		char *str = ft_strjoin(ft_strjoin("rsrcs/sprites/weapons/weapon", ft_itoa(i + 1)), ".png");
+		printf("%s\n", str);
+		mlx_texture_t *texture = mlx_load_png(str);
+		data->weapon[i] = mlx_texture_to_image(data->mlx, texture);
+		mlx_delete_texture(texture);
+		if (!data->weapon[i])
+			return (true);
+	}
 	return (false);
 }

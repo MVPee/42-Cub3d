@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:08:32 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/26 15:59:30 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/01 14:15:19 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@
 # define WALL_SIZE 20
 # define PLAYER_SIZE 10
 
+//WEAPON
+# define WEAPON_SIZE 132
+
 // KEY
 # define MLX_KEY_Z 87
 # define MLX_KEY_S 83
@@ -65,5 +68,6 @@
 # define MLX_KEY_LEFT 263
 # define MLX_KEY_ESCAPE 256
 # define MLX_KEY_SHIFT 340
+# define MLX_KEY_SPACE 32
 
 #endif
