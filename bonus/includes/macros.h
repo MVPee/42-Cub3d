@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:08:32 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/01 14:15:19 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/01 14:46:43 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@
 # define PLAYER_SIZE 10
 
 //WEAPON
-# define WEAPON_SIZE 132
+# define WEAPON_SIZE 256
+# define GUN_SPEED 20
 
 // KEY
 # define MLX_KEY_Z 87

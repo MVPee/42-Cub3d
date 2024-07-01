@@ -26,7 +26,9 @@ SRCS = 		bonus/main.c \
 				bonus/srcs/cub3d/rendering/raycasting/raycasting.c \
 				bonus/srcs/cub3d/rendering/raycasting/raycasting_utils.c \
 				bonus/srcs/cub3d/rendering/minimap/minimap.c \
-				bonus/srcs/cub3d/rendering/minimap/minimap_utils.c
+				bonus/srcs/cub3d/rendering/minimap/minimap_utils.c \
+				bonus/srcs/cub3d/rendering/door/door.c \
+				bonus/srcs/cub3d/rendering/gun/gun.c
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:%.c=%.o))
 OBJS_BONUS = $(addprefix $(OBJS_DIR)/, $(SRCS_BONUS:%.c=%.o))

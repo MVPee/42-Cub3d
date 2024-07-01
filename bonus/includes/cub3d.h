@@ -2,9 +2,12 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
 /*   Created: 2024/06/24 10:38:12 by mvpee             #+#    #+#             */
 /*   Updated: 2024/06/24 10:38:12 by mvpee            ###   ########.fr       */
 /*                                                                            */
@@ -21,11 +24,11 @@
 # include <math.h>
 # include <stdbool.h>
 # include <stdio.h>
-# include <sys/wait.h>
 # include <sys/types.h>
+# include <sys/wait.h>
 
-typedef mlx_image_t		t_img;
-typedef mlx_key_data_t	t_mlx_key;
+typedef mlx_image_t t_img;
+typedef mlx_key_data_t t_mlx_key;
 
 typedef enum e_move
 {
@@ -35,87 +38,87 @@ typedef enum e_move
 	GO_DOWN,
 	ROTATE_LEFT,
 	ROTATE_RIGHT
-}	t_move;
+} t_move;
 
 typedef struct s_player_pos
 {
-	double	x;
-	double	y;
-	int		angle;
-}	t_player_pos;
+	double x;
+	double y;
+	int angle;
+} t_player_pos;
 
 // RAYCAST STRUCTURES
 typedef struct s_distance
 {
-	float	x;
-	float	y;
-	float	angle_rad;
-	float	step_x;
-	float	step_y;
-	int		prev_x;
-	int		prev_y;
-	float	distance;
-}	t_distance;
+	float x;
+	float y;
+	float angle_rad;
+	float step_x;
+	float step_y;
+	int prev_x;
+	int prev_y;
+	float distance;
+} t_distance;
 
 typedef struct s_raycast
 {
-	float		distance;
-	float		rotation;
-	float		wall_height;
-	int			texture_x;
-	int			texture_y;
-	float		hit_x;
-	float		hit_y;
-	float		hit_pos;
-	int			color;
-	int			x;
-	int			y;
-	mlx_image_t	*wall_img;
-}	t_raycast;
+	float distance;
+	float rotation;
+	float wall_height;
+	int texture_x;
+	int texture_y;
+	float hit_x;
+	float hit_y;
+	float hit_pos;
+	int color;
+	int x;
+	int y;
+	mlx_image_t *wall_img;
+} t_raycast;
 
 typedef struct s_minimap
 {
-	t_img	*image;
-	int		**map_input;
-	int		**map_output;
-	int		black;
-	int		white;
-	int		transparent;
-	int		transparent_black;
-	int		transparent_white;
-	int 	door;
-	int		x_adjust;
-	int		y_adjust;
-	int		map_x;
-	int		map_y;
-}	t_minimap;
+	t_img *image;
+	int **map_input;
+	int **map_output;
+	int black;
+	int white;
+	int transparent;
+	int transparent_black;
+	int transparent_white;
+	int door;
+	int x_adjust;
+	int y_adjust;
+	int map_x;
+	int map_y;
+} t_minimap;
 
 typedef struct s_data
 {
-	mlx_t			*mlx;
-	t_img			*north_image;
-	t_img			*south_image;
-	t_img			*west_image;
-	t_img			*east_image;
-	t_img			*door_image;
-	t_img			*floor_image;
-	t_img			*ceiling_image;
-	t_img			*image;
-	t_img			*weapon_img;
-	t_img			**weapon;
-	int				floor_color;
-	int				ceiling_color;
-	char			**file;
-	char			**map;
-	size_t			map_width;
-	size_t			map_height;
-	char			wall_dir;
-	t_player_pos	*player;
-	t_minimap		*minimap;
-	bool			*keys;
-	bool			door;
-	pthread_t		thread;
-}	t_data;
+	mlx_t *mlx;
+	t_img *north_image;
+	t_img *south_image;
+	t_img *west_image;
+	t_img *east_image;
+	t_img *door_image;
+	t_img *floor_image;
+	t_img *ceiling_image;
+	t_img *image;
+	t_img *weapon_img;
+	t_img **weapon;
+	int floor_color;
+	int ceiling_color;
+	char **file;
+	char **map;
+	size_t map_width;
+	size_t map_height;
+	char wall_dir;
+	t_player_pos *player;
+	t_minimap *minimap;
+	bool *keys;
+	bool door;
+	pthread_t thread;
+} t_data;
 
 // PARSING
 bool	check_extension(char *str);
@@ -123,7 +126,7 @@ bool	check_file(t_data *data);
 bool	check_map(char ***map);
 
 // GRAPHICS
-int		game_loop(t_data *data);
+int	game_loop(t_data *data);
 
 // KEY_HOOKS
 void	move_keyhook(void *param);
@@ -147,6 +150,12 @@ void	map_init(t_data *data);
 
 // RAYCASTING UTILS
 float	get_distance(t_data *data, float rotation, float *hit_x, float *hit_y);
+
+// DOOR
+void	door(t_data *data);
+
+// GUN
+void	gun(t_data *data);
 
 // INIT AND UNIT
 bool	init_data(t_data *data);
