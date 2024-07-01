@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event_hooks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@19.be>                        +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:53 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/29 19:31:29 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/01 14:14:17 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,15 +98,6 @@ static void	move_player(t_data *data, char c)
 	is_wall(data, temp_x, temp_y);
 }
 
-static void play_door_sound()
-{
-	pid_t mpg123_pid;
-
-	mpg123_pid = fork();
-	if (mpg123_pid == 0)
-		execlp("mpg123", "mpg123", "rsrcs/sounds/door.mp3", NULL);
-}
-
 static void door(t_data *data)
 {
 	int y;
@@ -142,24 +133,84 @@ static void door(t_data *data)
 		if (data->map[pos[0] + 1][pos[1]] == 'D')
 		{
 			data->map[pos[0] + 1][pos[1]] = 'O';
-			play_door_sound();
+			play_sound("rsrcs/sounds/door.mp3");
 		}
 		if (data->map[pos[0] - 1][pos[1]] == 'D')
 		{
 			data->map[pos[0] - 1][pos[1]] = 'O';
-			play_door_sound();
+			play_sound("rsrcs/sounds/door.mp3");
 		}
 		if (data->map[pos[0]][pos[1] + 1] == 'D')
 		{
 			data->map[pos[0]][pos[1] + 1] = 'O';
-			play_door_sound();
+			play_sound("rsrcs/sounds/door.mp3");
 		}
 		if (data->map[pos[0]][pos[1] - 1] == 'D')
 		{
 			data->map[pos[0]][pos[1] - 1] = 'O';
-			play_door_sound();
+			play_sound("rsrcs/sounds/door.mp3");
 		}
 	}
+}
+
+static void copy_image_to_image(t_img *src, t_img *dst)
+{
+    for (int y = 0; y < src->height; y++)
+    {
+        for (int x = 0; x < src->width; x++)
+        {
+            int rgba = get_correct_color(&((u_int8_t *)src->pixels)[(y * src->width + x) * 4]);
+            mlx_put_pixel(dst, x, y, rgba);
+        }
+    }
+}
+
+static void fire(t_data *data)
+{
+    static int count = 0;
+    static int frame = 0;
+    static bool in = false;
+	t_img *current_weapon;
+	
+	current_weapon = data->weapon[0];
+    if (count > 20 || in)
+    {
+        if (data->keys[MLX_KEY_SPACE] || in)
+        {
+            in = true;
+            if (frame == 0)
+            {
+                play_sound("rsrcs/sounds/shot.mp3");
+                current_weapon = data->weapon[0];
+            }
+            else if (frame == 1)
+            {
+                printf("2\n");
+                current_weapon = data->weapon[1];
+            }
+            else if (frame == 2)
+            {
+                printf("3\n");
+                current_weapon = data->weapon[2];
+            }
+            else if (frame == 3)
+            {
+                printf("4\n");
+                current_weapon = data->weapon[3];
+            }
+            else if (frame == 4)
+            {
+                printf("5\n");
+                current_weapon = data->weapon[4];
+                in = false;
+                count = 0;
+                frame = -1;
+            }
+            frame++;
+        }
+    }
+	copy_image_to_image(current_weapon, data->weapon_img);
+    count++;
 }
 
 void	move_keyhook(void *param)
@@ -180,6 +231,7 @@ void	move_keyhook(void *param)
 	if (data->keys[MLX_KEY_LEFT])
 		rotate_player(data, 'L');
 	raycasting(data);
+	fire(data);
 	minimap(data);
 	door(data);
 }

@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:46 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/26 15:59:41 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/01 14:17:48 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static void	window_init(t_data *data)
 	mlx_image_to_window(data->mlx, data->image, 0, 0);
 	mlx_image_to_window(data->mlx, data->minimap->image, WIDTH - MINIMAP_SIZE
 		- 25, 25);
+	mlx_image_to_window(data->mlx, data->weapon_img, WIDTH - (WEAPON_SIZE * 3), HEIGHT - WEAPON_SIZE);
 }
 
 int	game_loop(t_data *data)

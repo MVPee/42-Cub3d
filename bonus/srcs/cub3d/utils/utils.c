@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:36:30 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/24 10:19:43 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/01 12:09:25 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,13 @@ int	get_correct_color(u_int8_t *pixel)
 	rgba += pixel[2] << 8;
 	rgba += pixel[3];
 	return (rgba);
+}
+
+void play_sound(const char *srcs)
+{
+	pid_t mpg123_pid;
+
+	mpg123_pid = fork();
+	if (mpg123_pid == 0)
+		execlp("mpg123", "mpg123", srcs, NULL);
 }

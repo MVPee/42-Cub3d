@@ -92,11 +92,17 @@ typedef struct s_minimap
 
 typedef struct s_data
 {
+	mlx_t			*mlx;
 	t_img			*north_image;
 	t_img			*south_image;
 	t_img			*west_image;
 	t_img			*east_image;
 	t_img			*door_image;
+	t_img			*floor_image;
+	t_img			*ceiling_image;
+	t_img			*image;
+	t_img			*weapon_img;
+	t_img			**weapon;
 	int				floor_color;
 	int				ceiling_color;
 	char			**file;
@@ -104,10 +110,6 @@ typedef struct s_data
 	size_t			map_width;
 	size_t			map_height;
 	char			wall_dir;
-	mlx_t			*mlx;
-	t_img			*floor_image;
-	t_img			*ceiling_image;
-	t_img			*image;
 	t_player_pos	*player;
 	t_minimap		*minimap;
 	bool			*keys;
@@ -131,6 +133,7 @@ int		get_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 void	get_player_pos(t_data *data);
 void	get_map_size(t_data *data);
 int		get_correct_color(u_int8_t *pixel);
+void	play_sound(const char *srcs);
 
 // RAYCASTING
 void	raycasting(t_data *data);
