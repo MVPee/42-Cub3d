@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:36:30 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/02 20:43:54 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/02 21:27:30 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	get_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
-	return (a << 24 | b << 16 | g << 8 | r);
+	return (r << 24 | g << 16 | b << 8 | a);
 }
 
 void	get_map_size(t_data *data)

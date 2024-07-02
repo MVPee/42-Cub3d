@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:08:42 by mvpee             #+#    #+#             */
-/*   Updated: 2024/07/02 20:43:40 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/02 21:23:03 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,29 +62,33 @@ static void	get_texture(t_data *data, t_img **image, char *line)
 	ft_free(3, &str, &line, &temp);
 }
 
-static void	get_color(int *color, char *line)
+static bool	get_color(int *color, char *line)
 {
 	char	**split;
 	int		i;
 	int		array[3];
 
-	ft_memset(array, 0, 3);
+	ft_memset(array, -1, 3);
 	i = -1;
 	split = ft_split(line, ", ");
+	if (!split)
+		return (true);
 	if (split)
 	{
-		while (++i < 3 && split[i])
+		while (++i < 3 && split[i] && ft_strlen(split[i]) < 4)
 		{
 			array[i] = ft_atoi(split[i]);
-			if (array[i] < 0)
-				array[i] = 0;
-			if (array[i] > 255)
-				array[i] = 255;
+			if (array[i] < 0 || array[i] > 255 || array[i] == -1)
+				return (true);
 		}
+		if (i != 3)
+			return (true);
 		ft_free_matrix(1, &split);
 	}
 	ft_free(1, &line);
 	*color = get_rgba(array[0], array[1], array[2], 255);
+	*color = get_correct_color((u_int8_t *)color);
+	return (false);
 }
 
 bool	check_file(t_data *data)
@@ -103,11 +107,15 @@ bool	check_file(t_data *data)
 		else if (!ft_strncmp(data->file[i], "EA ", 3))
 			get_texture(data, &data->east_image, data->file[i]);
 		else if (!ft_strncmp(data->file[i], "F ", 2))
-			get_color(&data->floor_color, ft_substr(data->file[i], 2,
-					ft_strlen(data->file[i]) - 3));
+		{
+			if (get_color(&data->floor_color, ft_substr(data->file[i], 2, ft_strlen(data->file[i]) - 3)))
+				return (ft_printf_fd(2, RED FLOOR_COLOR RESET), true);
+		}
 		else if (!ft_strncmp(data->file[i], "C ", 2))
-			get_color(&data->ceiling_color, ft_substr(data->file[i], 2,
-					ft_strlen(data->file[i]) - 3));
+		{
+			if (get_color(&data->ceiling_color, ft_substr(data->file[i], 2, ft_strlen(data->file[i]) - 3)))
+				return (ft_printf_fd(2, RED CEILING_COLOR RESET), true);
+		}
 		else if (ft_strlen(data->file[i]) > 1)
 			data->map = ft_splitjoin(data->map, data->file[i]);
 	}

@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:07:42 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/02 20:39:37 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/02 21:29:20 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,19 @@ void	free_data(t_data *data)
 static void	init_minimap_color(t_minimap *minimap)
 {
 	minimap->white = get_rgba(255, 255, 255, 255);
-	minimap->door = get_rgba(255, 255, 255, 75);
+	minimap->door = get_rgba_transparency(255, 255, 255, 75);
 	minimap->door = \
 		get_correct_color((u_int8_t *)&(minimap->door));
-	minimap->transparent_white = get_rgba(255, 255, 255, 50);
+	minimap->transparent_white = get_rgba_transparency(255, 255, 255, 50);
 	minimap->transparent_white = \
 		get_correct_color((u_int8_t *)&(minimap->transparent_white));
-	minimap->transparent = get_rgba(0, 0, 0, 0);
+	minimap->transparent = get_rgba_transparency(0, 0, 0, 0);
 	minimap->transparent = \
 		get_correct_color((u_int8_t *)&(minimap->transparent));
 	minimap->black = get_rgba(0, 0, 0, 255);
 	minimap->black = \
 		get_correct_color((u_int8_t *)&(minimap->black));
-	minimap->transparent_black = get_rgba(0, 0, 0, 100);
+	minimap->transparent_black = get_rgba_transparency(0, 0, 0, 100);
 	minimap->transparent_black = \
 		get_correct_color((u_int8_t *)&(minimap->transparent_black));
 }

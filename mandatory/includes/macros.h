@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:08:32 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/26 15:59:30 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/02 20:59:18 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # define INVALID_BORDER "Error\nBad Border\n"
 # define WRONG_PLAYER_COUNT "Error\nWrong player count\n"
 # define NUMBERS_OF_ARGUMENTS "Error\nNumber of argument(s)\n"
+# define FLOOR_COLOR "Error\nBad floor color\n"
+# define CEILING_COLOR "Error\nBad ceiling color\n"
+
 // COLOR
 # define RED     "\x1b[31m"
 # define GREEN   "\x1b[32m"

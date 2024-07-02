@@ -1,6 +1,7 @@
 .objs
 *.o
 cub3D
+cub4D
 libft.a
 Raycast
 .vscode
