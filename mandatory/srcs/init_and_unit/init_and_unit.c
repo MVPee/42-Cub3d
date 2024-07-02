@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:07:42 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/02 20:43:37 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/02 21:50:07 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	free_data(t_data *data)
 {
 	ft_free(2, &data->player, &data->keys);
+	ft_free_matrix(2, &data->file, &data->map);
 	mlx_terminate(data->mlx);
 }
 

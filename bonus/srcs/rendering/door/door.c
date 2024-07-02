@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 14:39:12 by mvpee             #+#    #+#             */
-/*   Updated: 2024/07/02 20:39:50 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/02 21:54:48 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ static void	open_door(t_data *data, int *pos)
 
 void	door(t_data *data)
 {
-	int	y;
-	int	x;
 	int	pos[2];
 
 	pos[0] = (int)data->player->y / PIXEL;

@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 14:41:25 by mvpee             #+#    #+#             */
-/*   Updated: 2024/07/02 20:39:55 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/02 21:55:05 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static void	copy_image_to_image(t_img *src, t_img *dst)
 	int	y;
 
 	y = -1;
-	while (++y < src->height)
+	while (++y < (int)src->height)
 	{
 		x = -1;
-		while (++x < src->width)
+		while (++x < (int)src->width)
 		{
 			rgba = get_correct_color(&((u_int8_t *)src->pixels)[(y * src->width
 						+ x) * 4]);

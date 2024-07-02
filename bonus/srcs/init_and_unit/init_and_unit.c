@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:07:42 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/02 21:29:20 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/02 22:09:51 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	free_data(t_data *data)
 	ft_free(2, &data->player, &data->keys);
 	ft_free_matrix(1, &data->minimap->map_input);
 	ft_free_matrix(1, &data->minimap->map_output);
-	ft_free(1, &data->minimap);
+	ft_free_matrix(2, &data->file, &data->map);
+	ft_free(2, &data->minimap, &data->weapon);
 	mlx_terminate(data->mlx);
 	pid = fork();
 	if (pid == 0)
@@ -118,9 +119,20 @@ bool	init_data(t_data *data)
 	data->weapon = malloc(sizeof(t_img *) * 5);
 	for (int i = 0; i < 5; i++)
 	{
-		char *str = ft_strjoin(ft_strjoin("rsrcs/sprites/weapons/weapon", ft_itoa(i + 1)), ".png");
-		printf("%s\n", str);
+		char *nbr = ft_itoa(i + 1);
+		if (!nbr)
+			return (true);
+		char *str = ft_strjoin("rsrcs/sprites/weapons/weapon", nbr);
+		if (!str)
+			return (ft_free(1, &nbr), true);
+		ft_free(1, &nbr);
+		str = ft_strjoin_free(&str, ".png");
+		if (!str)
+			return (true);
 		mlx_texture_t *texture = mlx_load_png(str);
+		ft_free(1, &str);
+		if (!texture)
+			return (true);
 		data->weapon[i] = mlx_texture_to_image(data->mlx, texture);
 		mlx_delete_texture(texture);
 		if (!data->weapon[i])
