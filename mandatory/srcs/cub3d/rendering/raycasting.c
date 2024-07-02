@@ -6,11 +6,11 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:22:06 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/24 10:58:18 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/02 20:24:49 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../includes/cub3d.h"
+#include "../../../includes/cub3d.h"
 
 static void	pixel_puter(t_raycast *vars, t_data *data)
 {
@@ -81,13 +81,17 @@ void	raycasting(t_data *data)
 	t_raycast	vars;
 	int			i;
 	int			j;
+	int transparent;
 
+	transparent = get_rgba(0, 0, 0, 0);
+	transparent = \
+		get_correct_color((u_int8_t *)&(transparent));
 	i = -1;
 	while (++i < WIDTH)
 	{
 		j = -1;
 		while (++j < HEIGHT)
-			mlx_put_pixel(data->image, i, j, data->minimap->transparent);
+			mlx_put_pixel(data->image, i, j, transparent);
 	}
 	raycaster_loop(vars, data);
 }

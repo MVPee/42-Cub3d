@@ -16,13 +16,13 @@ static void *play_mp3(void)
 {
 	pid_t music;
 
-	while(1)
-	{
-		music = fork();
-		if (music == 0)
-			execlp("mpg123", "mpg123", "rsrcs/sounds/music.mp3", NULL);
-		waitpid(music, NULL, 0);
-	}
+	// while(1)
+	// {
+	music = fork();
+	if (music == 0)
+		execlp("mpg123", "mpg123", "rsrcs/sounds/music.mp3", NULL);
+	//waitpid(music, NULL, 0);
+	// }
 	return (NULL);
 }
 
@@ -49,8 +49,8 @@ int	main(int ac, char **av)
 		return (free_data(&data), 1);
 	get_map_size(&data);
 	get_player_pos(&data);
-	if (pthread_create(&data.thread, NULL, play_mp3, NULL))
-		return (free_data(&data), 1);
+	//pthread_create(&data.thread, NULL, play_mp3, NULL);
+	play_sound("rsrcs/sounds/music.mp3");
 	if (game_loop(&data))
 		return (free_data(&data), 1);
 	return (free_data(&data), 0);

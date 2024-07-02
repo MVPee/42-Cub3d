@@ -6,11 +6,11 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 21:59:10 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/24 10:32:17 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/02 20:22:54 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../includes/cub3d.h"
+#include "../../../includes/cub3d.h"
 
 static void	compute_dist(t_distance *vars, t_data *data, float *hit_x,
 		float *hit_y)

@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:53 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/26 16:06:19 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/02 20:10:44 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,4 @@ void	move_keyhook(void *param)
 	if (data->keys[MLX_KEY_LEFT])
 		rotate_player(data, 'L');
 	raycasting(data);
-	minimap(data);
 }

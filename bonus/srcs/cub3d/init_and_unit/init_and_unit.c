@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:07:42 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/01 14:15:48 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/02 19:54:39 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	free_data(t_data *data)
 	pid = fork();
 	if (pid == 0)
 		execlp("pkill", "pkill", "mpg123", NULL);
-	pthread_kill(data->thread, SIGTERM);
+	//pthread_kill(data->thread, SIGTERM);
 }
 
 static void	init_minimap_color(t_minimap *minimap)

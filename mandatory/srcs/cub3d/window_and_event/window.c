@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:46 by nechaara          #+#    #+#             */
-/*   Updated: 2024/06/26 15:59:41 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/02 20:10:37 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ static void	window_init(t_data *data)
 	mlx_image_to_window(data->mlx, data->ceiling_image, 0, 0);
 	mlx_image_to_window(data->mlx, data->floor_image, 0, HEIGHT / 2);
 	mlx_image_to_window(data->mlx, data->image, 0, 0);
-	mlx_image_to_window(data->mlx, data->minimap->image, WIDTH - MINIMAP_SIZE
-		- 25, 25);
 }
 
 int	game_loop(t_data *data)
