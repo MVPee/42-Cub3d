@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:22:06 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/02 20:43:52 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/02 21:34:03 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ static void	pixel_puter(t_raycast *vars, t_data *data)
 			if ((uint32_t)(vars->y + (HEIGHT - (int)vars->wall_height)
 				/ 2) < data->image->height)
 			{
-				vars->color = \
-					get_correct_color(&((u_int8_t *)vars->wall_img->pixels) \
-					[(vars->texture_y * \
+				vars->color = get_correct_color(&((u_int8_t *) \
+					vars->wall_img->pixels)[(vars->texture_y * \
 					vars->wall_img->width + vars->texture_x) * 4]);
 				mlx_put_pixel(data->image, vars->x, (float)vars->y
 					+ ((float)HEIGHT - vars->wall_height) / 2, vars->color);
@@ -81,11 +80,10 @@ void	raycasting(t_data *data)
 	t_raycast	vars;
 	int			i;
 	int			j;
-	int transparent;
+	int			transparent;
 
 	transparent = get_rgba(0, 0, 0, 0);
-	transparent = \
-		get_correct_color((u_int8_t *)&(transparent));
+	transparent = get_correct_color((u_int8_t *)&(transparent));
 	i = -1;
 	while (++i < WIDTH)
 	{

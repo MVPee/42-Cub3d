@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:36:30 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/02 21:27:30 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/02 21:32:28 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,18 @@ int	get_correct_color(u_int8_t *pixel)
 	rgba += pixel[2] << 8;
 	rgba += pixel[3];
 	return (rgba);
+}
+
+bool	check_extension(char *str)
+{
+	char	*temp;
+
+	temp = ft_substr(str, ft_strlen(str) - 4, ft_strlen(str));
+	if (!temp)
+		return (perror("Malloc"), true);
+	if (ft_strlen(str) < 5 || ft_strcmp(temp, ".cub"))
+		return (ft_free(1, &temp), ft_printf_fd(2,
+				RED "Error\nInvalid map extension\n" RESET), true);
+	ft_free(1, &temp);
+	return (false);
 }

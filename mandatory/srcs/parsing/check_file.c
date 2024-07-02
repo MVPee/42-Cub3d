@@ -6,25 +6,11 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:08:42 by mvpee             #+#    #+#             */
-/*   Updated: 2024/07/02 21:23:03 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/02 21:36:38 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-bool	check_extension(char *str)
-{
-	char	*temp;
-
-	temp = ft_substr(str, ft_strlen(str) - 4, ft_strlen(str));
-	if (!temp)
-		return (perror("Malloc"), true);
-	if (ft_strlen(str) < 5 || ft_strcmp(temp, ".cub"))
-		return (ft_free(1, &temp), ft_printf_fd(2,
-				RED "Error\nInvalid map extension\n" RESET), true);
-	ft_free(1, &temp);
-	return (false);
-}
 
 static bool	find_error(t_data *data)
 {
@@ -91,6 +77,25 @@ static bool	get_color(int *color, char *line)
 	return (false);
 }
 
+static bool	check_file2(t_data *data, int i)
+{
+	if (!ft_strncmp(data->file[i], "F ", 2))
+	{
+		if (get_color(&data->floor_color, ft_substr(data->file[i], 2,
+					ft_strlen(data->file[i]) - 3)))
+			return (ft_printf_fd(2, RED FLOOR_COLOR RESET), true);
+	}
+	else if (!ft_strncmp(data->file[i], "C ", 2))
+	{
+		if (get_color(&data->ceiling_color, ft_substr(data->file[i], 2,
+					ft_strlen(data->file[i]) - 3)))
+			return (ft_printf_fd(2, RED CEILING_COLOR RESET), true);
+	}
+	else if (ft_strlen(data->file[i]) > 1)
+		data->map = ft_splitjoin(data->map, data->file[i]);
+	return (false);
+}
+
 bool	check_file(t_data *data)
 {
 	int	i;
@@ -106,18 +111,8 @@ bool	check_file(t_data *data)
 			get_texture(data, &data->west_image, data->file[i]);
 		else if (!ft_strncmp(data->file[i], "EA ", 3))
 			get_texture(data, &data->east_image, data->file[i]);
-		else if (!ft_strncmp(data->file[i], "F ", 2))
-		{
-			if (get_color(&data->floor_color, ft_substr(data->file[i], 2, ft_strlen(data->file[i]) - 3)))
-				return (ft_printf_fd(2, RED FLOOR_COLOR RESET), true);
-		}
-		else if (!ft_strncmp(data->file[i], "C ", 2))
-		{
-			if (get_color(&data->ceiling_color, ft_substr(data->file[i], 2, ft_strlen(data->file[i]) - 3)))
-				return (ft_printf_fd(2, RED CEILING_COLOR RESET), true);
-		}
-		else if (ft_strlen(data->file[i]) > 1)
-			data->map = ft_splitjoin(data->map, data->file[i]);
+		else if (check_file2(data, i))
+			return (true);
 	}
 	return (find_error(data));
 }
