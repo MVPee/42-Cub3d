@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:08:42 by mvpee             #+#    #+#             */
-/*   Updated: 2024/07/02 21:53:27 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/03 15:27:55 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static bool	get_color(int *color, char *line)
 		ft_free_matrix(1, &split);
 	}
 	ft_free(1, &line);
-	*color = get_rgba(array[0], array[1], array[2], 255);
+	*color = get_rgba_transparency(array[0], array[1], array[2], 255);
 	*color = get_correct_color((u_int8_t *)color);
 	return (false);
 }

@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:22:06 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/02 20:40:12 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/03 15:28:09 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,15 +84,22 @@ static void	raycaster_loop(t_raycast vars, t_data *data)
 void	raycasting(t_data *data)
 {
 	t_raycast	vars;
-	int			i;
-	int			j;
+	int			x;
+	int			y;
 
-	i = -1;
-	while (++i < WIDTH)
+	x = -1;
+	while (++x < HEIGHT/2)
 	{
-		j = -1;
-		while (++j < HEIGHT)
-			mlx_put_pixel(data->image, i, j, data->minimap->transparent);
+		y = -1;
+		while (++y < WIDTH)
+			mlx_put_pixel(data->image, y, x, data->ceiling_color);
+	}
+	x = HEIGHT/2 - 1;
+	while (++x < HEIGHT)
+	{
+		y = -1;
+		while (++y < WIDTH)
+			mlx_put_pixel(data->image, y, x, data->floor_color);
 	}
 	raycaster_loop(vars, data);
 }
