@@ -6,27 +6,11 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:07:42 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/02 22:09:51 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/03 17:47:28 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-void	free_data(t_data *data)
-{
-	pid_t pid;
-
-	ft_free(2, &data->player, &data->keys);
-	ft_free_matrix(1, &data->minimap->map_input);
-	ft_free_matrix(1, &data->minimap->map_output);
-	ft_free_matrix(2, &data->file, &data->map);
-	ft_free(2, &data->minimap, &data->weapon);
-	mlx_terminate(data->mlx);
-	pid = fork();
-	if (pid == 0)
-		execlp("pkill", "pkill", "mpg123", NULL);
-	//pthread_kill(data->thread, SIGTERM);
-}
 
 static void	init_minimap_color(t_minimap *minimap)
 {
@@ -74,6 +58,8 @@ static bool	init_minimap(t_data *data)
 
 	init_minimap_color(data->minimap);
 	data->minimap->image = mlx_new_image(data->mlx, MINIMAP_SIZE, MINIMAP_SIZE);
+	if (!data->minimap->image)
+		return (true);
 	data->minimap->map_input = (int **)malloc(sizeof(int *) * (MINIMAP_SIZE
 				+ 1));
 	if (!data->minimap->map_input)
@@ -91,6 +77,31 @@ static bool	init_minimap(t_data *data)
 	return (false);
 }
 
+static bool	init_weapon(t_data *data)
+{
+	int				i;
+	char			*str;
+	mlx_texture_t	*texture;
+
+	data->weapon = malloc(sizeof(t_img *) * 5);
+	i = -1;
+	while (++i < 5)
+	{
+		str = get_weapon_path(data, i);
+		if (!str)
+			return (true);
+		texture = mlx_load_png(str);
+		ft_free(1, &str);
+		if (!texture)
+			return (true);
+		data->weapon[i] = mlx_texture_to_image(data->mlx, texture);
+		mlx_delete_texture(texture);
+		if (!data->weapon[i])
+			return (true);
+	}
+	return (false);
+}
+
 bool	init_data(t_data *data)
 {
 	ft_null(6, &data->north_image, &data->south_image, \
@@ -99,10 +110,8 @@ bool	init_data(t_data *data)
 	if (!data->mlx)
 		return (true);
 	data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-	data->floor_image = mlx_new_image(data->mlx, WIDTH, HEIGHT / 2);
-	data->ceiling_image = mlx_new_image(data->mlx, WIDTH, HEIGHT / 2);
 	data->weapon_img = mlx_new_image(data->mlx, WEAPON_SIZE, WEAPON_SIZE);
-	if (!data->image || !data->floor_image || !data->ceiling_image)
+	if (!data->image || !data->weapon_img)
 		return (true);
 	data->player = (t_player_pos *)malloc(sizeof(t_player_pos));
 	if (!data->player)
@@ -116,27 +125,7 @@ bool	init_data(t_data *data)
 	ft_memset(data->keys, false, 512);
 	if (init_minimap(data))
 		return (true);
-	data->weapon = malloc(sizeof(t_img *) * 5);
-	for (int i = 0; i < 5; i++)
-	{
-		char *nbr = ft_itoa(i + 1);
-		if (!nbr)
-			return (true);
-		char *str = ft_strjoin("rsrcs/sprites/weapons/weapon", nbr);
-		if (!str)
-			return (ft_free(1, &nbr), true);
-		ft_free(1, &nbr);
-		str = ft_strjoin_free(&str, ".png");
-		if (!str)
-			return (true);
-		mlx_texture_t *texture = mlx_load_png(str);
-		ft_free(1, &str);
-		if (!texture)
-			return (true);
-		data->weapon[i] = mlx_texture_to_image(data->mlx, texture);
-		mlx_delete_texture(texture);
-		if (!data->weapon[i])
-			return (true);
-	}
+	if (init_weapon(data))
+		return (true);
 	return (false);
 }

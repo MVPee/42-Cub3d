@@ -6,20 +6,38 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:36:30 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/03 13:28:52 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/03 17:25:56 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	get_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
+void	is_wall(t_data *data, float x, float y)
 {
-	return (r << 24 | g << 16 | b << 8 | a);
-}
+	int	map_x;
+	int	map_y;
 
-int	get_rgba_transparency(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
-{
-	return (a << 24 | b << 16 | g << 8 | r);
+	map_x = (int)x / PIXEL;
+	map_y = (int)y / PIXEL;
+	if (map_x < 0 || map_x >= (int)data->map_width || map_y < 0
+		|| map_y >= (int)data->map_height)
+		return ;
+	if (data->map[(int)data->player->y / PIXEL][((int)x + PIXEL / 8)
+		/ PIXEL] == '1')
+		x = data->player->x;
+	if (data->map[((int)y + PIXEL / 8) / PIXEL][(int)data->player->x
+		/ PIXEL] == '1')
+		y = data->player->y;
+	if (data->map[(int)data->player->y / PIXEL][((int)x - PIXEL / 8)
+		/ PIXEL] == '1')
+		x = data->player->x;
+	if (data->map[((int)y - PIXEL / 8) / PIXEL][(int)data->player->x
+		/ PIXEL] == '1')
+		y = data->player->y;
+	if (data->map[(int)data->player->y / PIXEL][(int)x / PIXEL] != '1')
+		data->player->x = x;
+	if (data->map[(int)y / PIXEL][(int)data->player->x / PIXEL] != '1')
+		data->player->y = y;
 }
 
 void	get_map_size(t_data *data)
@@ -73,9 +91,9 @@ int	get_correct_color(u_int8_t *pixel)
 	return (rgba);
 }
 
-void play_sound(const char *srcs)
+void	play_sound(const char *srcs)
 {
-	pid_t mpg123_pid;
+	pid_t	mpg123_pid;
 
 	if (PLAY == 1)
 	{
@@ -83,5 +101,4 @@ void play_sound(const char *srcs)
 		if (mpg123_pid == 0)
 			execlp("mpg123", "mpg123", srcs, NULL);
 	}
-		
 }

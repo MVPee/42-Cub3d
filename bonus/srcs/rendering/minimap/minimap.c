@@ -6,32 +6,11 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:46:41 by mvpee             #+#    #+#             */
-/*   Updated: 2024/07/02 20:40:05 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/03 17:36:57 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
-
-static void	adjust_rotated_image(t_minimap *minimap)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	while (++y < MINIMAP_SIZE - 1)
-	{
-		x = 0;
-		while (++x < MINIMAP_SIZE - 1)
-		{
-			if (minimap->map_output[y][x] == minimap->transparent)
-			{
-				minimap->map_output[y][x] = minimap->map_output[y - 1][x];
-				if (minimap->map_output[y][x] == minimap->transparent)
-					minimap->map_output[y][x] = minimap->map_output[y][x - 1];
-			}
-		}
-	}
-}
 
 static void	rotate_image(t_minimap *minimap, double cos_angle, double sin_angle)
 {
@@ -58,12 +37,33 @@ static void	rotate_image(t_minimap *minimap, double cos_angle, double sin_angle)
 	adjust_rotated_image(minimap);
 }
 
+static void	draw_path2(t_data *data, int j, int i, char c)
+{
+	t_minimap	*minimap;
+
+	minimap = data->minimap;
+	minimap->map_x = (int)data->player->x / PIXEL + i;
+	minimap->map_y = (int)data->player->y / PIXEL + j;
+	c = 'W';
+	if (minimap->map_x >= 0 && minimap->map_x < (int)data->map_width
+		&& minimap->map_y >= 0 && minimap->map_y < (int)data->map_height
+		&& ft_ischarin(data->map[minimap->map_y][minimap->map_x],
+		"NSWE0DO"))
+	{
+		if (ft_ischarin(data->map[minimap->map_y][minimap->map_x], "D"))
+			c = 'D';
+		draw_square(minimap, minimap->x_adjust + MINIMAP_SIZE / 2 + i
+			* WALL_SIZE, minimap->y_adjust + MINIMAP_SIZE / 2 + j
+			* WALL_SIZE, c);
+	}
+}
+
 static void	draw_path(t_data *data)
 {
 	int			i;
 	int			j;
 	t_minimap	*minimap;
-	char c;
+	char		c;
 
 	minimap = data->minimap;
 	i = ((MINIMAP_SIZE / 40 + 1) * -1) - 1;
@@ -71,22 +71,7 @@ static void	draw_path(t_data *data)
 	{
 		j = ((MINIMAP_SIZE / 40 + 1) * -1) - 1;
 		while (++j <= (MINIMAP_SIZE / 40 + 1))
-		{
-			minimap->map_x = (int)data->player->x / PIXEL + i;
-			minimap->map_y = (int)data->player->y / PIXEL + j;
-			c = 'W';
-			if (minimap->map_x >= 0 && minimap->map_x < (int)data->map_width
-				&& minimap->map_y >= 0 && minimap->map_y < (int)data->map_height
-				&& ft_ischarin(data->map[minimap->map_y][minimap->map_x],
-				"NSWE0DO"))
-			{
-				if (ft_ischarin(data->map[minimap->map_y][minimap->map_x], "D"))
-					c = 'D';
-				draw_square(minimap, minimap->x_adjust + MINIMAP_SIZE / 2 + i
-					* WALL_SIZE, minimap->y_adjust + MINIMAP_SIZE / 2 + j
-					* WALL_SIZE, c);
-			}
-		}
+			draw_path2(data, i, j, c);
 	}
 }
 
@@ -121,7 +106,19 @@ static void	draw_minimap(t_data *data)
 
 void	minimap(t_data *data)
 {
+	int	i;
+	int	j;
+
 	get_adjust_coord(data);
-	map_init(data);
+	i = -1;
+	while (++i < MINIMAP_SIZE)
+	{
+		j = -1;
+		while (++j < MINIMAP_SIZE)
+		{
+			data->minimap->map_input[i][j] = data->minimap->transparent_black;
+			data->minimap->map_output[i][j] = 0;
+		}
+	}
 	draw_minimap(data);
 }

@@ -18,11 +18,13 @@ SRCS = 	mandatory/main.c \
 
 SRCS_BONUS = 	bonus/main.c \
 				bonus/srcs/init_and_unit/init_and_unit.c \
+				bonus/srcs/init_and_unit/init_and_unit2.c \
 				bonus/srcs/parsing/check_file.c \
 				bonus/srcs/parsing/check_map.c \
 				bonus/srcs/window_and_event/window.c \
 				bonus/srcs/window_and_event/event_hooks.c \
 				bonus/srcs/utils/utils.c \
+				bonus/srcs/utils/utils2.c \
 				bonus/srcs/rendering/raycasting/raycasting.c \
 				bonus/srcs/rendering/raycasting/raycasting_utils.c \
 				bonus/srcs/rendering/minimap/minimap.c \

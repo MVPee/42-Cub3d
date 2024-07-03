@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 10:37:05 by mvpee             #+#    #+#             */
-/*   Updated: 2024/07/03 17:12:59 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/03 17:22:58 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static bool	check_row(char **map, int y, int x, int *count)
 		return (ft_printf_fd(2, RED INVALID_MAP RESET, y, x, map[y][x]), true);
 	if ((y == 0 || x == 0) && ft_ischarin(map[y][x], "NSWED0"))
 		return (ft_printf_fd(2, RED INVALID_BORDER RESET), true);
-	else if (y == ((int)(ft_splitlen((const char **)map)) - 1) && (ft_ischarin(map[y][x], "NSWED0")))
+	else if (y == ((int)(ft_splitlen((const char **)map)) - 1) && \
+		(ft_ischarin(map[y][x], "NSWED0")))
 		return (ft_printf_fd(2, GREEN INVALID_BORDER RESET), true);
 	else if (ft_ischarin(map[y][x], "NSWED0"))
 	{

@@ -6,25 +6,29 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:43:10 by mvpee             #+#    #+#             */
-/*   Updated: 2024/07/02 20:39:58 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/03 17:37:01 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-void	map_init(t_data *data)
+void	adjust_rotated_image(t_minimap *minimap)
 {
-	int	i;
-	int	j;
+	int	y;
+	int	x;
 
-	i = -1;
-	while (++i < MINIMAP_SIZE)
+	y = 0;
+	while (++y < MINIMAP_SIZE - 1)
 	{
-		j = -1;
-		while (++j < MINIMAP_SIZE)
+		x = 0;
+		while (++x < MINIMAP_SIZE - 1)
 		{
-			data->minimap->map_input[i][j] = data->minimap->transparent_black;
-			data->minimap->map_output[i][j] = 0;
+			if (minimap->map_output[y][x] == minimap->transparent)
+			{
+				minimap->map_output[y][x] = minimap->map_output[y - 1][x];
+				if (minimap->map_output[y][x] == minimap->transparent)
+					minimap->map_output[y][x] = minimap->map_output[y][x - 1];
+			}
 		}
 	}
 }
@@ -45,6 +49,25 @@ bool	is_in_circle(int x, int y)
 	return ((dx * dx + dy * dy) < (MINIMAP_SIZE / 2) * (MINIMAP_SIZE / 2));
 }
 
+static void	get_square_color(t_minimap *minimap, int *color, int *size, int c)
+{
+	if (c == 'P')
+	{
+		*color = minimap->white;
+		*size = PLAYER_SIZE;
+	}
+	else if (c == 'D')
+	{
+		*color = minimap->door;
+		*size = WALL_SIZE;
+	}
+	else
+	{
+		*color = minimap->transparent_white;
+		*size = WALL_SIZE;
+	}
+}
+
 void	draw_square(t_minimap *minimap, int x, int y, char c)
 {
 	int	color;
@@ -52,21 +75,7 @@ void	draw_square(t_minimap *minimap, int x, int y, char c)
 	int	i;
 	int	j;
 
-	if (c == 'P')
-	{
-		color = minimap->white;
-		size = PLAYER_SIZE;
-	}
-	else if (c == 'D')
-	{
-		color = minimap->door;
-		size = WALL_SIZE;
-	}
-	else
-	{
-		color = minimap->transparent_white;
-		size = WALL_SIZE;
-	}
+	get_square_color(minimap, &color, &size, c);
 	i = -1;
 	while (++i < size)
 	{

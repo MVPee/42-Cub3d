@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:22:06 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/03 15:28:09 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/03 17:37:51 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,13 @@ void	raycasting(t_data *data)
 	int			y;
 
 	x = -1;
-	while (++x < HEIGHT/2)
+	while (++x < HEIGHT / 2)
 	{
 		y = -1;
 		while (++y < WIDTH)
 			mlx_put_pixel(data->image, y, x, data->ceiling_color);
 	}
-	x = HEIGHT/2 - 1;
+	x = HEIGHT / 2 - 1;
 	while (++x < HEIGHT)
 	{
 		y = -1;

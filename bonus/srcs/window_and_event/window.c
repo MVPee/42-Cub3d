@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:46 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/03 15:32:25 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/03 17:23:15 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,11 @@ static void	window_init(t_data *data)
 		HEIGHT - WEAPON_SIZE);
 }
 
-// static void *raycast(void *arg)
-// {
-// 	t_data *data = (t_data *)arg;
-
-// 	while(1)
-// 	{
-// 		raycasting(data);
-// 	}
-// }
-
 int	game_loop(t_data *data)
 {
 	if (!data)
 		return (EXIT_FAILURE);
 	window_init(data);
-	//pthread_create(&data->thread, NULL, raycast, data);
 	mlx_key_hook(data->mlx, key_callback, data);
 	mlx_loop_hook(data->mlx, move_keyhook, data);
 	mlx_loop(data->mlx);
