@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:36:30 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/02 21:28:49 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/03 13:28:52 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,11 @@ void play_sound(const char *srcs)
 {
 	pid_t mpg123_pid;
 
-	mpg123_pid = fork();
-	if (mpg123_pid == 0)
-		execlp("mpg123", "mpg123", srcs, NULL);
+	if (PLAY == 1)
+	{
+		mpg123_pid = fork();
+		if (mpg123_pid == 0)
+			execlp("mpg123", "mpg123", srcs, NULL);
+	}
+		
 }

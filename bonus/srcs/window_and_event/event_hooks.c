@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 14:50:53 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/02 20:40:24 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/03 13:29:04 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,20 @@ static void	move_player(t_data *data, char c)
 	is_wall(data, temp_x, temp_y);
 }
 
+void	mouse_move(t_data *data)
+{
+	int32_t			x;
+	int32_t			y;
+	static int32_t	old_x = WIDTH / 2;
+
+	mlx_get_mouse_pos(data->mlx, &x, &y);
+	if (x < old_x)
+		rotate_player(data, 'L');
+	else if (x > old_x)
+		rotate_player(data, 'R');
+	old_x = x;
+}
+
 void	move_keyhook(void *param)
 {
 	t_data	*data;
@@ -115,6 +129,7 @@ void	move_keyhook(void *param)
 		rotate_player(data, 'R');
 	if (data->keys[MLX_KEY_LEFT])
 		rotate_player(data, 'L');
+	mouse_move(data);
 	raycasting(data);
 	gun(data);
 	minimap(data);

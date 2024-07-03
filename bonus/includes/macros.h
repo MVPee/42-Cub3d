@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:08:32 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/02 21:20:01 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/03 13:28:56 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,8 @@
 # define MLX_KEY_ESCAPE 256
 # define MLX_KEY_SHIFT 340
 # define MLX_KEY_SPACE 32
+
+// MUSIC
+#define PLAY 0
 
 #endif
