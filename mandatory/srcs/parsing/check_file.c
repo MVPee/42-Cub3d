@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:08:42 by mvpee             #+#    #+#             */
-/*   Updated: 2024/07/03 16:46:31 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/03 17:58:25 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ static void	get_texture(t_data *data, t_img **image, char *line)
 	str = ft_strtrim(temp, " ");
 	texture = mlx_load_png(str);
 	if (!texture)
+	{
+		ft_free(2, &str, &temp);
 		return ;
+	}
 	*image = mlx_texture_to_image(data->mlx, texture);
 	mlx_delete_texture(texture);
 	ft_free(2, &str, &temp);
