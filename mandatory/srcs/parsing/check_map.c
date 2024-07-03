@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 10:37:05 by mvpee             #+#    #+#             */
-/*   Updated: 2024/07/03 16:58:29 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/03 17:11:19 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,23 @@ static bool	check_row(char **map, int y, int x, int *count)
 	return (false);
 }
 
+static void	alloc_new_map2(char ***map, char ***new_map, int *x, int *y)
+{
+	*y = -1;
+	*x = 0;
+	while ((*map)[++(*y)])
+	{
+		if ((int)ft_strlen((*map)[*y]) > *x)
+			*x = ft_strlen((*map)[*y]);
+	}
+}
+
 static bool	alloc_new_map(char ***map, char ***new_map)
 {
 	int	y;
 	int	x;
 
-	y = -1;
-	x = 0;
-	while ((*map)[++y])
-	{
-		if ((int)ft_strlen((*map)[y]) > x)
-			x = ft_strlen((*map)[y]);
-	}
+	alloc_new_map2(map, new_map, &x, &y);
 	if (y > 100 || x > 100)
 		return (ft_printf_fd(2, RED MAP_TOO_BIG RESET), true);
 	(*new_map) = malloc(sizeof(char *) * (y + 1));

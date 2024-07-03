@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/11 09:16:29 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/11 09:16:29 by mvpee            ###   ########.fr       */
+/*   Created: 2024/07/03 17:06:28 by mvpee             #+#    #+#             */
+/*   Updated: 2024/07/03 17:06:28 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (ft_printf_fd(2, RED NUMBERS_OF_ARGUMENTS RESET), 1);
 	if (init_data(&data))
-		return (ft_printf_fd(2, RED WIN_INIT_FAILED RESET), free_data(&data), 1);
+		return (ft_printf_fd(2, RED WIN_INIT_FAILED RESET), \
+		free_data(&data), 1);
 	if (check_extension(av[1]))
 		return (free_data(&data), 1);
 	temp = ft_read(open(av[1], O_RDONLY));
