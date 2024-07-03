@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 10:37:05 by mvpee             #+#    #+#             */
-/*   Updated: 2024/07/02 20:39:44 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/03 16:58:37 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static bool	alloc_new_map(char ***map, char ***new_map)
 		if ((int)ft_strlen((*map)[y]) > x)
 			x = ft_strlen((*map)[y]);
 	}
+	if (y > 100 || x > 100)
+		return (ft_printf_fd(2, RED MAP_TOO_BIG RESET), true);
 	(*new_map) = malloc(sizeof(char *) * (y + 1));
 	if (!(*new_map))
 		return (true);

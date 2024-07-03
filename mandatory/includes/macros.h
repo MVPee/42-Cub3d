@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:08:32 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/02 20:59:18 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/03 16:58:03 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define NUMBERS_OF_ARGUMENTS "Error\nNumber of argument(s)\n"
 # define FLOOR_COLOR "Error\nBad floor color\n"
 # define CEILING_COLOR "Error\nBad ceiling color\n"
+# define MAP_TOO_BIG "Error\nMap too big\n"
 
 // COLOR
 # define RED     "\x1b[31m"
