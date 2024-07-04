@@ -1,7 +1,7 @@
-NO ./rsrcs/wall/flower.png
-SO ./rsrcs/wall/iron2.png
-WE ./rsrcs/wall/brick4.png
-EA ./rsrcs/wall/red_brick.png
+NO ./rsrcs/walls/flower.png
+SO ./rsrcs/walls/iron2.png
+WE ./rsrcs/walls/brick4.png
+EA ./rsrcs/walls/red_brick.png
 
 F  58 , 157 , 35
 C  119 , 181 , 254

@@ -1,9 +1,9 @@
-NO ./rsrcs/sprites/wall/flower.png
-SO ./rsrcs/sprites/wall/iron2.png
-WE ./rsrcs/sprites/wall/brick4.png
-EA ./rsrcs/sprites/wall/red_brick.png
+NO ./rsrcs/sprites/walls/flower.png
+SO ./rsrcs/sprites/walls/iron2.png
+WE ./rsrcs/sprites/walls/brick4.png
+EA ./rsrcs/sprites/walls/red_brick.png
 
-DO ./rsrcs/sprites/door/iron_door.png
+DO ./rsrcs/sprites/doors/iron_door.png
 
 F  58 , 157 , 35
 C  119 , 181 , 254
