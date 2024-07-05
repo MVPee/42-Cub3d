@@ -6,7 +6,7 @@
 /*   By: mvan-pee <mvan-pee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:08:32 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/05 13:05:00 by mvan-pee         ###   ########.fr       */
+/*   Updated: 2024/07/05 13:30:38 by mvan-pee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 # define PIXEL 128
 # define SPEED 8
 # define SPEED_ROTATION 5
-# define DEGREE 0.0833333333333333
+# define DEGREE 0.03125
 # define FOV 60
 # define F_PI 57.2957795131
 
