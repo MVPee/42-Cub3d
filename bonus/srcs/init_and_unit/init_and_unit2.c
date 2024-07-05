@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_and_unit2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mvan-pee <mvan-pee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 17:41:53 by mvpee             #+#    #+#             */
-/*   Updated: 2024/07/03 17:48:36 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/05 13:06:33 by mvan-pee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ void	free_data(t_data *data)
 	mlx_terminate(data->mlx);
 	pid = fork();
 	if (pid == 0)
-		execlp("pkill", "pkill", "mpg123", NULL);
+		execlp("pkill", "pkill", "afplay", NULL);
 	exit(0);
 }
 
-char	*get_weapon_path(t_data *data, int i)
+char	*get_weapon_path(int i)
 {
 	char	*str;
 	char	*nbr;

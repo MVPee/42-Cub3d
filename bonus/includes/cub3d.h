@@ -2,14 +2,11 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+        
-	+:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+      
-	+#+        */
-/*                                                +#+#+#+#+#+  
-	+#+           */
-/*   Created: 2024/06/24 10:38:12 by mvpee             #+#    #+#             */
-/*   Updated: 2024/06/24 10:38:12 by mvpee            ###   ########.fr       */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mvan-pee <mvan-pee@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/05 12:57:05 by mvan-pee          #+#    #+#             */
+/*   Updated: 2024/07/05 12:57:05 by mvan-pee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +133,7 @@ void	get_map_size(t_data *data);
 int		get_correct_color(u_int8_t *pixel);
 void	play_sound(const char *srcs);
 void	is_wall(t_data *data, float x, float y);
+char	*get_weapon_path(int i);
 
 // RAYCASTING
 void	raycasting(t_data *data);
@@ -159,5 +157,4 @@ void	gun(t_data *data);
 // INIT AND UNIT
 bool	init_data(t_data *data);
 void	free_data(t_data *data);
-char	*get_weapon_path(t_data *data, int i);
 #endif

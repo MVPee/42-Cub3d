@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mvan-pee <mvan-pee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:46:41 by mvpee             #+#    #+#             */
-/*   Updated: 2024/07/03 17:36:57 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/05 12:56:55 by mvan-pee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,10 @@ static void	rotate_image(t_minimap *minimap, double cos_angle, double sin_angle)
 	adjust_rotated_image(minimap);
 }
 
-static void	draw_path2(t_data *data, int j, int i, char c)
+static void	draw_path2(t_data *data, int j, int i)
 {
 	t_minimap	*minimap;
+	char		c;
 
 	minimap = data->minimap;
 	minimap->map_x = (int)data->player->x / PIXEL + i;
@@ -63,7 +64,6 @@ static void	draw_path(t_data *data)
 	int			i;
 	int			j;
 	t_minimap	*minimap;
-	char		c;
 
 	minimap = data->minimap;
 	i = ((MINIMAP_SIZE / 40 + 1) * -1) - 1;
@@ -71,7 +71,7 @@ static void	draw_path(t_data *data)
 	{
 		j = ((MINIMAP_SIZE / 40 + 1) * -1) - 1;
 		while (++j <= (MINIMAP_SIZE / 40 + 1))
-			draw_path2(data, i, j, c);
+			draw_path2(data, i, j);
 	}
 }
 

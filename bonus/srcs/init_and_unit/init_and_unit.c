@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_and_unit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mvan-pee <mvan-pee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:07:42 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/03 17:47:28 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/05 12:56:10 by mvan-pee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static bool	init_weapon(t_data *data)
 	i = -1;
 	while (++i < 5)
 	{
-		str = get_weapon_path(data, i);
+		str = get_weapon_path(i);
 		if (!str)
 			return (true);
 		texture = mlx_load_png(str);

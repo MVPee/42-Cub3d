@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mvan-pee <mvan-pee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:08:42 by mvpee             #+#    #+#             */
-/*   Updated: 2024/07/03 17:58:05 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/05 12:49:23 by mvan-pee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ static bool	check_line(t_data *data, int i)
 	}
 	else if (ft_strlen(data->file[i]) > 1)
 		data->map = ft_splitjoin(data->map, data->file[i]);
+	return (false);
 }
 
 bool	check_file(t_data *data)

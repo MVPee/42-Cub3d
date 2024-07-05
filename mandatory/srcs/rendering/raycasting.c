@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mvan-pee <mvan-pee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:22:06 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/02 21:34:03 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/05 12:58:35 by mvan-pee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	raycasting(t_data *data)
 	int			j;
 	int			transparent;
 
+	vars.x = -1;
 	transparent = get_rgba(0, 0, 0, 0);
 	transparent = get_correct_color((u_int8_t *)&(transparent));
 	i = -1;
