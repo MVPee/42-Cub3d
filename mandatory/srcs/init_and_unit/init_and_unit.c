@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:07:42 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/16 17:54:56 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/16 17:59:40 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	free_data(t_data *data)
 bool	init_data(t_data *data)
 {
 	ft_null(9, &data->north_image, &data->south_image, &data->keys, &data->mlx, \
-		&data->west_image, &data->east_image, &data->file, &data->map, &data->player);
+		&data->west_image, &data->east_image, &data->file, &data->map, \
+		&data->player);
 	data->mlx = mlx_init(WIDTH, HEIGHT, PROGRAM_NAME, false);
 	if (!data->mlx)
 		return (true);
