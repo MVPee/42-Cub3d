@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_and_unit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mvan-pee <mvan-pee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:07:42 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/02 21:50:07 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/16 15:06:33 by mvan-pee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,7 @@ bool	init_data(t_data *data)
 	if (!data->keys)
 		return (true);
 	ft_memset(data->keys, false, 512);
+	data->ceiling_color = -1;
+	data->floor_color = -1;
 	return (false);
 }

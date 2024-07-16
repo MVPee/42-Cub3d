@@ -6,7 +6,7 @@
 /*   By: mvan-pee <mvan-pee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:07:42 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/05 12:56:10 by mvan-pee         ###   ########.fr       */
+/*   Updated: 2024/07/16 15:07:16 by mvan-pee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ static bool	init_minimap(t_data *data)
 	}
 	if (init_minimap2(data))
 		return (true);
+	data->ceiling_color = -1;
+	data->floor_color = -1;
 	return (false);
 }
 

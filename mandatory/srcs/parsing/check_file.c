@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_file copy.c                                  :+:      :+:    :+:   */
+/*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvan-pee <mvan-pee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:08:42 by mvpee             #+#    #+#             */
-/*   Updated: 2024/07/16 15:03:29 by mvan-pee         ###   ########.fr       */
+/*   Updated: 2024/07/16 15:12:12 by mvan-pee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 static bool	find_error(t_data *data)
 {
 	if (!data->north_image || !data->south_image || !data->west_image
-		|| !data->east_image || data->ceiling_color == -1 || data->floor_color == -1)
+		|| !data->east_image || data->ceiling_color == -1
+		|| data->floor_color == -1)
 	{
 		if (!data->north_image)
 			ft_printf_fd(2, RED "Error\nPut a valid north texture\n" RESET);
@@ -70,7 +71,8 @@ static bool	get_color(int *color, char *line)
 		return (true);
 	if (split)
 	{
-		while (++i < 3 && split[i] && ft_strlen(split[i]) < 4)
+		while (++i < 3 && split[i] && ft_splitlen((const char **)split) == 3 \
+		&& ft_strlen(split[i]) < 4)
 		{
 			array[i] = ft_atoi(split[i]);
 			if (array[i] < 0 || array[i] > 255 || array[i] == -1)
@@ -80,10 +82,9 @@ static bool	get_color(int *color, char *line)
 			return (true);
 		ft_free_matrix(1, &split);
 	}
-	ft_free(1, &line);
 	*color = get_rgba(array[0], array[1], array[2], 255);
 	*color = get_correct_color((u_int8_t *)color);
-	return (false);
+	return (ft_free(1, &line), false);
 }
 
 static bool	check_file2(t_data *data, int i)
@@ -93,7 +94,6 @@ static bool	check_file2(t_data *data, int i)
 		if (get_color(&data->floor_color, ft_substr(data->file[i], 2,
 					ft_strlen(data->file[i]) - 3)))
 			return (ft_printf_fd(2, RED FLOOR_COLOR RESET), true);
-		
 	}
 	else if (!ft_strncmp(data->file[i], "C ", 2))
 	{
