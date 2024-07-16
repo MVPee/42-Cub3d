@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:08:32 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/16 17:26:34 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/16 17:29:43 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@
 
 // MUSIC
 # define PLAY 1
-# define AUDIO "mpg123"
-//# define AUDIO "afplay"
+// # define AUDIO "mpg123"
+# define AUDIO "afplay"
 
 #endif
