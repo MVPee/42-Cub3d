@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvan-pee <mvan-pee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:08:42 by mvpee             #+#    #+#             */
-/*   Updated: 2024/07/16 15:12:51 by mvan-pee         ###   ########.fr       */
+/*   Updated: 2024/07/16 17:17:49 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static bool	find_error(t_data *data)
 {
 	if (!data->north_image || !data->south_image || !data->west_image
 		|| !data->east_image || data->ceiling_color == -1
-		|| data->floor_color == -1)
+		|| data->floor_color == -1 || !data->door_image)
 	{
 		if (!data->north_image)
 			ft_printf_fd(2, RED "Error\nPut a valid north texture\n" RESET);
@@ -30,6 +30,8 @@ static bool	find_error(t_data *data)
 			ft_printf_fd(2, RED "Error\nPut a valid ceiling color\n" RESET);
 		if (data->floor_color == -1)
 			ft_printf_fd(2, RED "Error\nPut a valid floor color\n" RESET);
+		if (!data->door_image)
+			ft_printf_fd(2, RED "Error\nPut a valid door texture\n" RESET);
 		return (true);
 	}
 	return (false);

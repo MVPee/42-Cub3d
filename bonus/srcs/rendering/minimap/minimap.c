@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvan-pee <mvan-pee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:46:41 by mvpee             #+#    #+#             */
-/*   Updated: 2024/07/05 12:56:55 by mvan-pee         ###   ########.fr       */
+/*   Updated: 2024/07/16 17:15:20 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,7 @@ static void	draw_path(t_data *data)
 {
 	int			i;
 	int			j;
-	t_minimap	*minimap;
 
-	minimap = data->minimap;
 	i = ((MINIMAP_SIZE / 40 + 1) * -1) - 1;
 	while (++i <= (MINIMAP_SIZE / 40 + 1))
 	{
