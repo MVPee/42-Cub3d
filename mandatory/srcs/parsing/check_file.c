@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_file.c                                       :+:      :+:    :+:   */
+/*   check_file copy.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mvan-pee <mvan-pee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:08:42 by mvpee             #+#    #+#             */
-/*   Updated: 2024/07/03 17:58:25 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/16 15:03:29 by mvan-pee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static bool	find_error(t_data *data)
 {
 	if (!data->north_image || !data->south_image || !data->west_image
-		|| !data->east_image)
+		|| !data->east_image || data->ceiling_color == -1 || data->floor_color == -1)
 	{
 		if (!data->north_image)
 			ft_printf_fd(2, RED "Error\nPut a valid north texture\n" RESET);
@@ -25,6 +25,10 @@ static bool	find_error(t_data *data)
 			ft_printf_fd(2, RED "Error\nPut a valid west texture\n" RESET);
 		if (!data->east_image)
 			ft_printf_fd(2, RED "Error\nPut a valid east texture\n" RESET);
+		if (data->ceiling_color == -1)
+			ft_printf_fd(2, RED "Error\nPut a valid ceiling color\n" RESET);
+		if (data->floor_color == -1)
+			ft_printf_fd(2, RED "Error\nPut a valid floor color\n" RESET);
 		return (true);
 	}
 	return (false);
@@ -89,6 +93,7 @@ static bool	check_file2(t_data *data, int i)
 		if (get_color(&data->floor_color, ft_substr(data->file[i], 2,
 					ft_strlen(data->file[i]) - 3)))
 			return (ft_printf_fd(2, RED FLOOR_COLOR RESET), true);
+		
 	}
 	else if (!ft_strncmp(data->file[i], "C ", 2))
 	{
