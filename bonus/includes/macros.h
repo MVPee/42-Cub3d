@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvan-pee <mvan-pee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:08:32 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/05 13:30:38 by mvan-pee         ###   ########.fr       */
+/*   Updated: 2024/07/16 17:26:34 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@
 # define PIXEL 128
 # define SPEED 8
 # define SPEED_ROTATION 5
-# define DEGREE 0.03125
+# define DEGREE 0.0833333333333333
 # define FOV 60
 # define F_PI 57.2957795131
 
 // RESOLUTION
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 1080
+# define HEIGHT 720
 
 // MINIMAP
 # define MINIMAP_SIZE 200
@@ -77,5 +77,7 @@
 
 // MUSIC
 # define PLAY 1
+# define AUDIO "mpg123"
+//# define AUDIO "afplay"
 
 #endif

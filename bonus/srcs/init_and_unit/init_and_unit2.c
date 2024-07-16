@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 17:41:53 by mvpee             #+#    #+#             */
-/*   Updated: 2024/07/16 17:17:09 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/16 17:25:35 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	free_data(t_data *data)
 	mlx_terminate(data->mlx);
 	pid = fork();
 	if (pid == 0)
-		execlp("pkill", "pkill", "afplay", NULL);
+		execlp("pkill", "pkill", AUDIO, NULL);
 	exit(0);
 }
 
