@@ -46,8 +46,8 @@ else
     $(error "Unsupported OS")
 endif
 
-CFLAGS = -I $(LIBFT) -Wall -Werror -Wextra
-LDFLAGS = -lft -L $(LIBFT) -Wall -Werror -Wextra
+CFLAGS = -I $(LIBFT) -Wall -Werror -Wextra -g -fsanitize=address
+LDFLAGS = -lft -L $(LIBFT) -Wall -Werror -Wextra -g -fsanitize=address
 
 RED=\033[0;31m
 GREEN=\033[0;32m

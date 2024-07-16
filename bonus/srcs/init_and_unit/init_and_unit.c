@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_and_unit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvan-pee <mvan-pee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:07:42 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/16 15:07:16 by mvan-pee         ###   ########.fr       */
+/*   Updated: 2024/07/16 17:53:24 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ static bool	init_minimap(t_data *data)
 	int	i;
 
 	init_minimap_color(data->minimap);
+	data->minimap->map_input = NULL;
+	data->minimap->map_output = NULL;
 	data->minimap->image = mlx_new_image(data->mlx, MINIMAP_SIZE, MINIMAP_SIZE);
 	if (!data->minimap->image)
 		return (true);
@@ -86,6 +88,8 @@ static bool	init_weapon(t_data *data)
 	mlx_texture_t	*texture;
 
 	data->weapon = malloc(sizeof(t_img *) * 5);
+	if (!data->weapon)
+		return (true);
 	i = -1;
 	while (++i < 5)
 	{
@@ -106,8 +110,8 @@ static bool	init_weapon(t_data *data)
 
 bool	init_data(t_data *data)
 {
-	ft_null(6, &data->north_image, &data->south_image, \
-		&data->west_image, &data->east_image, &data->file, &data->map);
+	ft_null(9, &data->north_image, &data->south_image, &data->keys, &data->mlx, \
+		&data->west_image, &data->east_image, &data->file, &data->map, &data->player);
 	data->mlx = mlx_init(WIDTH, HEIGHT, PROGRAM_NAME, false);
 	if (!data->mlx)
 		return (true);

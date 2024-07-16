@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_and_unit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvan-pee <mvan-pee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:07:42 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/16 15:06:33 by mvan-pee         ###   ########.fr       */
+/*   Updated: 2024/07/16 17:54:56 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,17 @@
 
 void	free_data(t_data *data)
 {
-	ft_free(2, &data->player, &data->keys);
+	ft_free(1, &data->keys, &data->keys);
+	ft_free(1, &data->player, &data->keys);
 	ft_free_matrix(2, &data->file, &data->map);
-	mlx_terminate(data->mlx);
+	if (data->mlx)
+		mlx_terminate(data->mlx);
 }
 
 bool	init_data(t_data *data)
 {
-	ft_null(6, &data->north_image, &data->south_image, \
-		&data->west_image, &data->east_image, &data->file, &data->map);
+	ft_null(9, &data->north_image, &data->south_image, &data->keys, &data->mlx, \
+		&data->west_image, &data->east_image, &data->file, &data->map, &data->player);
 	data->mlx = mlx_init(WIDTH, HEIGHT, PROGRAM_NAME, false);
 	if (!data->mlx)
 		return (true);
