@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:08:32 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/03 16:58:03 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/17 10:18:23 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define PROGRAM_NAME "CUB3D"
 
 // ERROR
-# define WIN_INIT_FAILED "Windows initialization failed, check MLX\n"
+# define WIN_INIT_FAILED "Error\nWindows initialization failed, check MLX\n"
 # define INVALID_MAP "Error\nInvalid map in y: %d x:%d c:'%c'\n"
 # define INVALID_BORDER "Error\nBad Border\n"
 # define WRONG_PLAYER_COUNT "Error\nWrong player count\n"

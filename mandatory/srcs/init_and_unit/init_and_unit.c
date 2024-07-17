@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:07:42 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/16 17:59:40 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/17 10:23:03 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,26 @@
 
 void	free_data(t_data *data)
 {
+	if (data->mlx)
+	{
+		if (data->image)
+			mlx_delete_image(data->mlx, data->image);
+		if (data->floor_image)
+			mlx_delete_image(data->mlx, data->floor_image);
+		if (data->ceiling_image)
+			mlx_delete_image(data->mlx, data->ceiling_image);
+		mlx_terminate(data->mlx);
+	}
 	ft_free(1, &data->keys, &data->keys);
 	ft_free(1, &data->player, &data->keys);
 	ft_free_matrix(2, &data->file, &data->map);
-	if (data->mlx)
-		mlx_terminate(data->mlx);
 }
 
 bool	init_data(t_data *data)
 {
-	ft_null(9, &data->north_image, &data->south_image, &data->keys, &data->mlx, \
-		&data->west_image, &data->east_image, &data->file, &data->map, \
-		&data->player);
+	ft_null(12, &data->north_image, &data->south_image, &data->keys, &data->mlx,
+		&data->west_image, &data->east_image, &data->file, &data->map,
+		&data->player, &data->image, &data->floor_image, &data->ceiling_image);
 	data->mlx = mlx_init(WIDTH, HEIGHT, PROGRAM_NAME, false);
 	if (!data->mlx)
 		return (true);
