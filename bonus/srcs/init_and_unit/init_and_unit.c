@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:07:42 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/17 09:59:58 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/17 10:10:07 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,8 @@ bool	init_data(t_data *data)
 	if (init_minimap(data))
 		return (ft_free(3, &data->player, &data->minimap, &data->keys), true);
 	if (init_weapon(data))
-		return (ft_free(3, &data->player, &data->minimap, &data->keys), true);
+		return (ft_free_matrix(2, &data->minimap->map_input, \
+		&data->minimap->map_output), ft_free(3, &data->player, \
+		&data->minimap, &data->keys), true);
 	return (false);
 }
