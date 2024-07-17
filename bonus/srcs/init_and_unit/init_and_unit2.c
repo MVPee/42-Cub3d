@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 17:41:53 by mvpee             #+#    #+#             */
-/*   Updated: 2024/07/16 17:46:58 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/17 09:47:20 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,15 @@ void	free_data(t_data *data)
 	ft_free_matrix(2, &data->file, &data->map);
 	ft_free(2, &data->minimap, &data->weapon);
 	if (data->mlx)
+	{
+		if (data->minimap->image)
+			mlx_delete_image(data->mlx, data->minimap->image);
+		if (data->image)
+			mlx_delete_image(data->mlx, data->image);
+		if (data->weapon_img)
+			mlx_delete_image(data->mlx, data->weapon_img);
 		mlx_terminate(data->mlx);
+	}
 	pid = fork();
 	if (pid == 0)
 		execlp("pkill", "pkill", AUDIO, NULL);
