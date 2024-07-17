@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:08:32 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/17 09:48:57 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/17 10:16:09 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 # define PROGRAM_NAME "CUB3D"
 
 // ERROR
-# define WIN_INIT_FAILED "Windows initialization failed, check MLX\n"
+# define WIN_INIT_FAILED "Error\nWindows initialization failed, check MLX\n"
+# define MALLOC_FAILED "Error\nMalloc failed\n"
 # define INVALID_MAP "Error\nInvalid map in y: %d x:%d c:'%c'\n"
 # define INVALID_BORDER "Error\nBad Border\n"
 # define WRONG_PLAYER_COUNT "Error\nWrong player count\n"
@@ -76,7 +77,7 @@
 # define MLX_KEY_SPACE 32
 
 // MUSIC
-# define PLAY 0
+# define PLAY 1
 // # define AUDIO "mpg123"
 # define AUDIO "afplay"
 
