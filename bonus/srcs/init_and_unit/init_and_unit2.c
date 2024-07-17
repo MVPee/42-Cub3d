@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 17:41:53 by mvpee             #+#    #+#             */
-/*   Updated: 2024/07/17 09:47:20 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/17 10:00:57 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,6 @@ void	free_data(t_data *data)
 {
 	pid_t	pid;
 
-	ft_free(2, &data->player, &data->keys);
-	ft_free_matrix(1, &data->minimap->map_input);
-	ft_free_matrix(1, &data->minimap->map_output);
-	ft_free_matrix(2, &data->file, &data->map);
-	ft_free(2, &data->minimap, &data->weapon);
 	if (data->mlx)
 	{
 		if (data->minimap->image)
@@ -31,9 +26,17 @@ void	free_data(t_data *data)
 			mlx_delete_image(data->mlx, data->weapon_img);
 		mlx_terminate(data->mlx);
 	}
-	pid = fork();
-	if (pid == 0)
-		execlp("pkill", "pkill", AUDIO, NULL);
+	ft_free(2, &data->player, &data->keys);
+	ft_free_matrix(1, &data->minimap->map_input);
+	ft_free_matrix(1, &data->minimap->map_output);
+	ft_free_matrix(2, &data->file, &data->map);
+	ft_free(2, &data->minimap, &data->weapon);
+	if (AUDIO) 
+	{
+		pid = fork();
+		if (pid == 0)
+			execlp("pkill", "pkill", AUDIO, NULL);
+	}
 	exit(0);
 }
 

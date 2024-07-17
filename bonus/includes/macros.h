@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:08:32 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/16 17:57:54 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/17 09:48:57 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@
 # define MLX_KEY_SPACE 32
 
 // MUSIC
-# define PLAY 1
+# define PLAY 0
 // # define AUDIO "mpg123"
 # define AUDIO "afplay"
 
