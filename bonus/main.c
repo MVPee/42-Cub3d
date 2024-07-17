@@ -18,7 +18,10 @@ static bool	ft_check_init(t_data *data, char **av)
 	if (!data->mlx)
 		return (ft_printf_fd(2, RED WIN_INIT_FAILED RESET), true);
 	if (init_data(data))
+	{
+		mlx_terminate(data->mlx);
 		return (ft_printf_fd(2, MALLOC_FAILED RESET), true);
+	}
 	if (check_extension(av[1]))
 		return (free_data(data), true);
 	return (false);
