@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:08:42 by mvpee             #+#    #+#             */
-/*   Updated: 2024/07/16 17:17:49 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/18 14:55:31 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,22 +68,21 @@ static bool	get_color(int *color, char *line)
 
 	ft_memset(array, -1, 3);
 	i = -1;
+	if (!line)
+		return (true);
 	split = ft_split(line, ", ");
 	if (!split)
-		return (true);
-	if (split)
+		return (ft_free(1, &line), true);
+	while (++i < 3 && split[i] && ft_splitlen((const char **)split) == 3 \
+	&& ft_strlen(split[i]) < 4)
 	{
-		while (++i < 3 && split[i] && ft_splitlen((const char **)split) == 3 \
-		&& ft_strlen(split[i]) < 4)
-		{
-			array[i] = ft_atoi(split[i]);
-			if (array[i] < 0 || array[i] > 255 || array[i] == -1)
-				return (true);
-		}
-		if (i != 3)
-			return (true);
-		ft_free_matrix(1, &split);
+		array[i] = ft_atoi(split[i]);
+		if (array[i] < 0 || array[i] > 255 || array[i] == -1)
+			return (ft_free_matrix(1, &split), ft_free(1, &line), true);
 	}
+	if (i != 3)
+		return (ft_free_matrix(1, &split), ft_free(1, &line), true);
+	ft_free_matrix(1, &split);
 	*color = get_rgba_transparency(array[0], array[1], array[2], 255);
 	*color = get_correct_color((u_int8_t *)color);
 	return (ft_free(1, &line), false);
