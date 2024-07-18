@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:08:42 by mvpee             #+#    #+#             */
-/*   Updated: 2024/07/18 14:55:31 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/18 14:58:13 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static bool	get_color(int *color, char *line)
 	&& ft_strlen(split[i]) < 4)
 	{
 		array[i] = ft_atoi(split[i]);
-		if (array[i] < 0 || array[i] > 255 || array[i] == -1)
+		if (array[i] < 0 || array[i] > 255)
 			return (ft_free_matrix(1, &split), ft_free(1, &line), true);
 	}
 	if (i != 3)
