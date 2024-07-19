@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_and_unit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mvan-pee <mvan-pee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:07:42 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/17 10:10:07 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/19 15:02:29 by mvan-pee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,9 @@ static bool	init_weapon(t_data *data)
 
 bool	init_data(t_data *data)
 {
-	ft_null(8, &data->north_image, &data->south_image, &data->keys, \
+	ft_null(9, &data->north_image, &data->south_image, &data->keys, \
 		&data->west_image, &data->east_image, &data->file, &data->map, \
-		&data->player);
+		&data->player, &data->door_image);
 	data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	data->weapon_img = mlx_new_image(data->mlx, WEAPON_SIZE, WEAPON_SIZE);
 	if (!data->image || !data->weapon_img)
