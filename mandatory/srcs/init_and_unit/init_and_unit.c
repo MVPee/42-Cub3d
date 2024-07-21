@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 20:07:42 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/17 10:23:03 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/07/21 15:17:19 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void	free_data(t_data *data)
 			mlx_delete_image(data->mlx, data->ceiling_image);
 		mlx_terminate(data->mlx);
 	}
-	ft_free(1, &data->keys, &data->keys);
-	ft_free(1, &data->player, &data->keys);
+	ft_free(2, &data->player, &data->keys);
 	ft_free_matrix(2, &data->file, &data->map);
 }
 
