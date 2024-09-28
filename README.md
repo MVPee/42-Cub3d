@@ -10,6 +10,8 @@
 </p>
 
 <h3 align="center">
+  	<a href="#-about-the-project">About</a>
+	<span> · </span>
 	<a href="#-running-the-game">Running</a>
 	<span> · </span>
 	<a href="#-configurating-the-map">Configuration</a>
@@ -26,6 +28,12 @@ make a dynamic view inside a maze, in which you’ll have to find your way.
 
 <p align="center">
 	<img src="./.images/screenshot.png" width=650>
+</p>
+
+## ⚡ How raycasting work?
+Raycasting simulates a 3D environment by casting rays from the player’s viewpoint to detect objects and walls. It calculates the distance and angle of each ray to render a corresponding vertical slice, creating the illusion of depth and perspective.
+<p align="center">
+	<img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Simple_raycasting_with_fisheye_correction.gif" width=650>
 </p>
 
 ## 🚀 Running the game
@@ -105,8 +113,14 @@ A valid map has one `player`, all `floors` and `doors` (0/D) are surrounded by `
 - **WALL COLLISION**
   -- You can't walk through a wall
 
-- **Sprites**
+- **SPRITES**
   -- Animated sprites
+
+- **MUSIC**
+  -- Handsome ambient music
+
+- **SOUND**
+  -- Handsome sound when fire
 
 ---
 This group project was done by [MVPee](https://github.com/MVPee) and [Nour Echaara](https://github.com/noureh10)
