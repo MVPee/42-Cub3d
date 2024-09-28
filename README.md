@@ -1,5 +1,5 @@
 <h1 align="center">
-	🔫 Cub3d | 42 School
+	🔫 42-Cub3d
 </h1>
 
 <p align="center">
@@ -83,17 +83,26 @@ A valid map has one `player`, all `floors` and `doors` (0/D) are surrounded by `
 - **W A S D**
   -- Used to move the player
 
-- **MOUSE / UP DOWN RIGHT UP**
+- **MOUSE / RIGHT LEFT**
   -- Used to change the direction of the player
 
 - **ESPACE**
   -- Used to fire
 
+- **ESCAPE / RED CROSS**
+  -- Quit the program cleany
+
 - **DOOR**
-  -- Open the door if the player is next to it
+  -- Door can be open and close
 
 - **MINIMAP**
-  -- Minimap follow the player and rotate in 360
+  -- Minimap follow the player and rotate in 360°
+
+- **WALL COLLISION**
+  -- You can't walk through a wall
+
+- **Sprites**
+  -- Animated sprites
 
 ---
 This group project was done by [MVPee](https://github.com/MVPee) and [Nour Echaara](https://github.com/noureh10)
