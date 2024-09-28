@@ -24,11 +24,15 @@ This project is inspired by the world-famous Wolfenstein 3D game, which
 was the first FPS ever. It will enable you to explore ray-casting. Your goal will be to
 make a dynamic view inside a maze, in which you’ll have to find your way.
 
+<p align="center">
+	<img src="./.images/screenshot.png" width=650>
+</p>
+
 ## 🚀 Running the game
 🌟We use personnaly the [MLX42](https://github.com/codam-coding-college/MLX42)🌟
 ### Linux  (you need Xlaunch or [equivalent](https://github.com/codam-coding-college/MLX42?tab=readme-ov-file#for-windows-with-windows-subsystem-for-linux-2-wsl2) if you are in wsl on windows ❗)
 ```bash
-sudo cmake MLX42 -B MLX42/build; cd MLX42/build; sudo make; cd ../..
+sudo cmake MLX42 -B MLX42/build; cd MLX42/build; sudo make; cd ../..; sudo apt-get install mpg123
 make run
 ```
 ### MacOS  (You need to use [brew](https://github.com/codam-coding-college/MLX42?tab=readme-ov-file#for-macos))
