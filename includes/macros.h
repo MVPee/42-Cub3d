@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:08:32 by nechaara          #+#    #+#             */
-/*   Updated: 2024/07/17 10:18:23 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/09/28 11:45:50 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 // ERROR
 # define WIN_INIT_FAILED "Error\nWindows initialization failed, check MLX\n"
+# define MALLOC_FAILED "Error\nMalloc failed\n"
 # define INVALID_MAP "Error\nInvalid map in y: %d x:%d c:'%c'\n"
 # define INVALID_BORDER "Error\nBad Border\n"
 # define WRONG_PLAYER_COUNT "Error\nWrong player count\n"
@@ -60,6 +61,10 @@
 # define WALL_SIZE 20
 # define PLAYER_SIZE 10
 
+//WEAPON
+# define WEAPON_SIZE 256
+# define GUN_SPEED 20
+
 // KEY
 # define MLX_KEY_Z 87
 # define MLX_KEY_S 83
@@ -69,5 +74,16 @@
 # define MLX_KEY_LEFT 263
 # define MLX_KEY_ESCAPE 256
 # define MLX_KEY_SHIFT 340
+# define MLX_KEY_SPACE 32
+
+// MUSIC
+# define PLAY 1
+# ifdef __linux__
+#   define AUDIO "mpg123"
+# elif __APPLE__
+#   define AUDIO "afplay"
+# else
+#   define AUDIO "mpg123"
+# endif
 
 #endif

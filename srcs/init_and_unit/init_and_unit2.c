@@ -6,7 +6,7 @@
 /*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 17:41:53 by mvpee             #+#    #+#             */
-/*   Updated: 2024/07/17 10:09:46 by mvpee            ###   ########.fr       */
+/*   Updated: 2024/09/28 11:46:22 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	free_data(t_data *data)
 	ft_free_matrix(1, &data->minimap->map_output);
 	ft_free_matrix(2, &data->file, &data->map);
 	ft_free(2, &data->minimap, &data->weapon);
-	if (AUDIO)
+	if (PLAY)
 	{
 		pid = fork();
 		if (pid == 0)
