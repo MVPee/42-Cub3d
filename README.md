@@ -125,4 +125,4 @@ A valid map has one `player`, all `floors` and `doors` (0/D) are surrounded by `
   -- Handsome sound when fire
 
 ---
-This group project was done by [MVPee](https://github.com/MVPee) and [Nour Echaara](https://github.com/noureh10)
+This group project was done by [MVPee (mvan-pee)](https://github.com/MVPee) and [Nour Echaara (nechaara)](https://github.com/noureh10)
